@@ -1,0 +1,75 @@
+[2020-02-16 13:37:05,753][INFO] server start......................
+[2020-02-16 13:37:06,388][INFO]  * Restarting with stat
+[2020-02-16 13:37:07,420][INFO] server start......................
+[2020-02-16 13:37:08,062][WARNING]  * Debugger is active!
+[2020-02-16 13:37:08,067][INFO]  * Debugger PIN: 238-571-924
+[2020-02-16 13:37:08,076][INFO]  * Running on http://1.232.245.14:2020/ (Press CTRL+C to quit)
+[2020-02-16 13:37:20,146][INFO] server start......................
+[2020-02-16 13:37:20,788][INFO]  * Restarting with stat
+[2020-02-16 13:37:21,829][INFO] server start......................
+[2020-02-16 13:37:22,458][WARNING]  * Debugger is active!
+[2020-02-16 13:37:22,463][INFO]  * Debugger PIN: 238-571-924
+[2020-02-16 13:37:22,473][INFO]  * Running on http://1.232.245.14:2020/ (Press CTRL+C to quit)
+[2020-02-16 13:39:23,920][INFO] 1.232.245.14 - - [16/Feb/2020 13:39:23] "GET / HTTP/1.1" 200 -
+[2020-02-16 13:39:24,948][INFO] 1.232.245.14 - - [16/Feb/2020 13:39:24] "GET /favicon.ico HTTP/1.1" 404 -
+[2020-02-16 13:39:28,832][INFO] 1.232.245.14 - - [16/Feb/2020 13:39:28] "GET /login/ HTTP/1.1" 200 -
+[2020-02-16 13:39:32,046][INFO] 1.232.245.14 - - [16/Feb/2020 13:39:32] "GET / HTTP/1.1" 200 -
+[2020-02-16 13:52:33,312][INFO]  * Detected change in 'C:\\dev\\indiPyProject\\pyflask\\app.py', reloading
+[2020-02-16 13:52:33,445][INFO]  * Restarting with stat
+[2020-02-16 13:52:34,628][INFO] server start......................
+[2020-02-16 13:52:35,264][WARNING]  * Debugger is active!
+[2020-02-16 13:52:35,270][INFO]  * Debugger PIN: 238-571-924
+[2020-02-16 13:52:35,279][INFO]  * Running on http://1.232.245.14:2020/ (Press CTRL+C to quit)
+[2020-02-16 13:52:43,854][INFO] 1.232.245.14 - - [16/Feb/2020 13:52:43] "GET / HTTP/1.1" 200 -
+[2020-02-16 13:57:31,225][INFO] 1.232.245.14 - - [16/Feb/2020 13:57:31] "GET / HTTP/1.1" 200 -
+[2020-02-16 14:03:12,782][INFO]  * Detected change in 'C:\\dev\\indiPyProject\\pyflask\\app.py', reloading
+[2020-02-16 14:03:12,850][INFO]  * Restarting with stat
+[2020-02-16 14:03:13,988][INFO] server start......................
+[2020-02-16 14:03:14,619][WARNING]  * Debugger is active!
+[2020-02-16 14:03:14,625][INFO]  * Debugger PIN: 238-571-924
+[2020-02-16 14:03:14,634][INFO]  * Running on http://1.232.245.14:2020/ (Press CTRL+C to quit)
+[2020-02-16 14:11:48,251][INFO]  * Detected change in 'C:\\dev\\indiPyProject\\pyflask\\app.py', reloading
+[2020-02-16 14:11:48,309][INFO]  * Restarting with stat
+[2020-02-16 14:11:49,484][INFO] server start......................
+[2020-02-16 14:11:50,121][WARNING]  * Debugger is active!
+[2020-02-16 14:11:50,127][INFO]  * Debugger PIN: 238-571-924
+[2020-02-16 14:11:50,136][INFO]  * Running on http://1.232.245.14:2020/ (Press CTRL+C to quit)
+[2020-02-16 15:35:58,523][INFO] 1.232.245.14 - - [16/Feb/2020 15:35:58] "POST /realTime_Price/ HTTP/1.1" 200 -
+[2020-02-16 15:36:58,415][INFO] 66.102.6.85 - - [16/Feb/2020 15:36:58] "GET / HTTP/1.1" 200 -
+[2020-02-16 15:36:58,791][INFO] 66.102.6.86 - - [16/Feb/2020 15:36:58] "GET /favicon.ico HTTP/1.1" 404 -
+[2020-02-16 15:38:15,383][INFO] 1.232.245.14 - - [16/Feb/2020 15:38:15] "POST /realTime_Price/ HTTP/1.1" 200 -
+[2020-02-16 15:39:39,183][INFO] 1.232.245.14 - - [16/Feb/2020 15:39:39] "POST /realTime_Price/ HTTP/1.1" 200 -
+[2020-02-16 15:57:18,828][INFO]  * Detected change in 'C:\\dev\\indiPyProject\\pyflask\\app.py', reloading
+[2020-02-16 15:57:18,892][INFO]  * Restarting with stat
+[DEBUG|app.py:43]2020-02-16 15:58:56,520>debug
+[INFO|app.py:44]2020-02-16 15:58:56,520>info
+[WARNING|app.py:45]2020-02-16 15:58:56,520>warning
+[ERROR|app.py:46]2020-02-16 15:58:56,520>error
+[CRITICAL|app.py:47]2020-02-16 15:58:56,520>critical
+[DEBUG|app.py:43]2020-02-16 15:58:58,376>debug
+[INFO|app.py:44]2020-02-16 15:58:58,376>info
+[WARNING|app.py:45]2020-02-16 15:58:58,376>warning
+[ERROR|app.py:46]2020-02-16 15:58:58,376>error
+[CRITICAL|app.py:47]2020-02-16 15:58:58,377>critical
+[WARNING|_internal.py:122]2020-02-16 16:02:56,083> * Debugger is active!
+[INFO|_internal.py:122]2020-02-16 16:02:56,088> * Debugger PIN: 238-571-924
+[INFO|_internal.py:122]2020-02-16 16:02:56,098> * Running on http://1.232.245.14:2020/ (Press CTRL+C to quit)
+[INFO|_internal.py:122]2020-02-16 16:02:58,083>1.232.245.14 - - [16/Feb/2020 16:02:58] "GET / HTTP/1.1" 200 -
+[INFO|_internal.py:122]2020-02-16 16:03:07,015>1.232.245.14 - - [16/Feb/2020 16:03:07] "GET / HTTP/1.1" 200 -
+[INFO|_internal.py:122]2020-02-16 16:03:07,782>1.232.245.14 - - [16/Feb/2020 16:03:07] "GET / HTTP/1.1" 200 -
+[INFO|_internal.py:122]2020-02-16 16:03:08,925>1.232.245.14 - - [16/Feb/2020 16:03:08] "GET / HTTP/1.1" 200 -
+[INFO|_internal.py:122]2020-02-16 16:03:09,626>1.232.245.14 - - [16/Feb/2020 16:03:09] "GET / HTTP/1.1" 200 -
+[INFO|_internal.py:122]2020-02-16 16:03:09,853>1.232.245.14 - - [16/Feb/2020 16:03:09] "GET / HTTP/1.1" 200 -
+[INFO|_internal.py:122]2020-02-16 16:03:10,147>1.232.245.14 - - [16/Feb/2020 16:03:10] "GET / HTTP/1.1" 200 -
+[INFO|_internal.py:122]2020-02-16 16:03:10,820>1.232.245.14 - - [16/Feb/2020 16:03:10] "GET / HTTP/1.1" 200 -
+[INFO|_internal.py:122]2020-02-16 16:03:11,151>1.232.245.14 - - [16/Feb/2020 16:03:11] "GET / HTTP/1.1" 200 -
+[INFO|_internal.py:122]2020-02-16 16:21:21,483> * Detected change in 'C:\\dev\\indiPyProject\\pyflask\\app.py', reloading
+[INFO|_internal.py:122]2020-02-16 16:22:02,260> * Restarting with stat
+[WARNING|_internal.py:122]2020-02-16 16:22:04,063> * Debugger is active!
+[INFO|_internal.py:122]2020-02-16 16:22:04,068> * Debugger PIN: 238-571-924
+[INFO|_internal.py:122]2020-02-16 16:22:04,078> * Running on http://1.232.245.14:2020/ (Press CTRL+C to quit)
+[INFO|_internal.py:122]2020-02-16 16:22:09,898>1.232.245.14 - - [16/Feb/2020 16:22:09] "GET / HTTP/1.1" 200 -
+[INFO|_internal.py:122]2020-02-16 16:22:29,719> * Detected change in 'C:\\dev\\indiPyProject\\pyflask\\app.py', reloading
+[INFO|_internal.py:122]2020-02-16 16:22:29,824> * Restarting with stat
+[INFO|_internal.py:122]2020-02-16 17:13:44,161> * Restarting with stat
+[INFO|_internal.py:122]2020-02-16 17:14:45,931> * Restarting with stat

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>seo python shinhan indi project</title>
+</head>
+<body>
+
+<h1>this is buy_sell page</h1>
+<form method = "POST" action = "http://1.232.245.14:2020/buy_process/">
+<div>
+<p>종목 코드를 입력 하세요</p>
+<input type = "text" name = "stockCode">
+</div>
+
+<div>
+<p>주문금액을 입력 하세요</p>
+<input type = "text" name = "stockPrice">
+</div>
+
+<div>
+<p>주문 수량을 입력 하세요</p>
+<input type = "text" name = "stockQty">
+</div>
+
+<div>
+<p>매도 1 매수 2</p>
+<input type = "text" name = "flag">
+</div>
+
+<div>
+<p>정규 시간외 구분코드 1:정규장               2:장개시전시간외
+3:장종료후시간외종가   4:장종료후시간외단일가
+5:장종료후시간외대량
+</p>
+<input value= '1' type = "text" name = "marketCode">
+</div>
+
+
+<div>
+<p>호가유형코드 1:시장가    2:지정가    I:조건부지정가       X:최유리    Y:최우선    Z.변동없음(정정주문시)  </p>
+<input value= '2' type = "text" name ="priceCode">
+</div>
+
+<p><input type = "submit" value = "submit" /></p>
+</form>
+
+<div>
+<p> 매수/매도 결과 : {{testDataHtml}}
+</p>
+</div>
+<p>modify page</p>
+<a href = "/modify/">click for modify</a>
+
+<p>go back to index</p>
+<a href = "/">click for index</a>
+</body>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>seo python shinhan indi project</title>
+</head>
+<body>
+
+<h1>this is buy_sell_modify page</h1>
+<form method = "POST" action = "http://1.232.245.14:2020/modify_order/">
+{% for result in my_list %}
+    <li >
+    {% for key  in result.keys() %}
+    <tr>
+        <td>
+            {{key}}
+        </td>
+        <td id= "{{key}}">
+            {{result[key]}}
+        </td>
+    </tr>
+    {% endfor %}
+    </li>
+    {% endfor %}
+
+
+<div>
+<p>정정3 취소 4 </p>
+<input type = "text" name = "flag">
+</div>
+
+<div>
+<p>종목코드 </p>
+<input type = "text" name = "stockCode">
+</div>
+<div>
+<p>주문수량 </p>
+<input type = "text" name = "stockQty">
+</div>
+ <div>
+<p>주문가격 </p>
+<input type = "text" name = "stockPrice">
+</div>
+ <div>
+<p>정규 시간외 구분코드  1 정규장, 2 장개시전시간외 3 장종료후 시간외 종가 4 장종료후 시간외단일가 5 장종료후 시간외 대량</p>
+<input type = "text" name = "marketCode">
+</div>
+ <div>
+<p>호가 유형코드 1 시장가 2지정가 1 조건부지정가 X 최유리 Y 최우선 Z 변동없음(정정주문시)</p>
+<input type = "text" name = "priceCode">
+</div>
+ <div>
+<p>원 주문 코드</p>
+<input type = "text" name = "orderCode">
+</div>
+<p><input type = "submit" value = "submit" /></p>
+</form>
+
+<p>buy page</p>
+<a href = "/buy_sell/">click for modify</a>
+
+<p>go back to index</p>
+<a href = "/">click for index</a>
+</body>
+</body>
+</html>

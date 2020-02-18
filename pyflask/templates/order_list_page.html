@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>seo python shinhan indi project</title>
+</head>
+<body>
+
+<h1>this is buy_sell_modify page</h1>
+{% for result in my_list %}
+    <li >
+    <form method = "POST" action = "http://1.232.245.14:2020/modify_order2/">
+    <div>
+    <p>정정3 취소 4 </p>
+    <input type = "text" name = "flag"/>
+    </div>
+    {% for key  in result.keys() %}
+    <tr>
+        {% if (key =="종목명") or (key =="주문단가") or  (key =="미체결수량") or  (key =="주문수량")  %}
+        <td>
+            {{key}}
+        </td>
+        <input type="text" value ="{{result[key]}}" name= "{{key}}">
+        {% else %}
+        <input type="text" value ="{{result[key]}}" name= "{{key}}" style="display:none;">
+        {% endif %}
+    </tr>
+    {% endfor %}
+    <p><input type = "submit" value = "submit" /></p>
+    </form>
+    </li>
+    {% endfor %}
+<p>buy page</p>
+<a href = "/buy_sell/">click for modify</a>
+<p>go back to index</p>
+<a href = "/">click for index</a>
+</body>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>seo python shinhan indi project</title>
+</head>
+<body>
+<div data-role="page" id="index" data-url="{{ url_for('index') }}">
+
+    <h1>this is front page</h1>
+    <p>로그인 버튼</p>
+    <a href = "/login/">click for login</a>
+
+    <p>매수 매도 페이지</p>
+    <a href = "/buy_sell/">click for buy</a>
+
+    <p>컴 끄기</p>
+    <a href = "/power_off/">click for power_off</a>
+
+    <p>취소 / 정정 화면</p>
+    <a href = "/modify/">click for modify</a>
+    
+    <form method = "POST" action = "/realTimeProgram_input_page/">
+        <div>
+            <p>실시간 모니터링을 위한 종목 추가 화면</p>
+            <input type = "text" name = "date">
+        </div>
+        <p><input type = "submit" value = "일 기준" /></p>
+    </form>
+    <form method = "POST" action = "/realTimeProgram_input2/">
+        <div>
+            <p>실시간 모니터링을 위한 종목 인풋 자동 다넣기</p>
+            <input type = "text" name = "date">
+        </div>
+        <p><input type = "submit" value = "일 기준" /></p>
+    </form>
+
+    <p>프로그램 수급 실시간 모니터링 함수</p>
+    <a href = "/realTimeProgram/">click for realTimeProgram</a>
+
+    <p>외국인 수급 실시간 모니터링 함수</p>
+    <a href = "/realTimeForeign/">click for realTimeForeign</a>
+    <p>현재가 실시간 모니터링 함수</p>
+    <a href = "/realTime_Price/">click for realTime_Price</a>
+
+    <form method = "POST" action = "/realTime_Price/">
+        <div>
+            <p>현재가  모니터링 함수</p>
+            <input type = "text" name = "date">
+        </div>
+        <p><input type = "submit" value = "일 기준" /></p>
+    </form>
+
+    <form method = "POST" action = "/monitoring3/">
+        <div>
+            <p>외국인/ 프로그램 현재가 매수 현황 그래프</p>
+            <input type = "text" name = "date">
+        </div>
+        <p><input type = "submit" value = "일 기준" /></p>
+    </form>
+
+        <p>외국인/기관 매수 종목검색</p>
+    <a href = "/foreign_company/">click for foreign_company</a>
+
+        <p>외국인/기관 종목 3일 연속 순매수 리스트</p>
+    <a href = "/get_stock_list/">click for get_stock_list</a>
+
+
+    <p>현황 페이지</p>
+    <a href = "/status_page/">click for status_page</a>
+       <p>현황 getPriceBy5Min</p>
+    <a href = "/getPriceBy5Min/">click for status_page</a>
+</div>
+</body>
+</html>

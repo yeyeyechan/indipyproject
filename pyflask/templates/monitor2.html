@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+</head>
+<body>
+<script>
+    var id_value = "myChart";
+    var key_length= {{key |length }}
+    for (var i =0 ; i < key_length ; i++){
+        id_value = id_value+i
+        var newForm = $('<div></div>');
+        newForm.attr("style", "width:800px");
+        newForm.append($('<canvas></canvas>', {id: id_value}));
+        newForm.appendTo('body');
+    }
+
+</script>
+<script>
+id_value = "myChart";
+var index = 0;
+{% for stock_code in key %}
+    id_value = id_value+index
+    var ctx = document.getElementById(id_value).getContext('2d');
+    index++;
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: [
+                {% for item in time_line %}
+                "{{item}}",
+                {% endfor %}
+            ],
+            datasets: [{
+
+              label : "Program",
+              data : [
+                {% for item in values[stock_code]['프로그램'] %}
+                   {{ item }},
+                  {% endfor %}
+                ],
+                backgroundColor:
+                    'rgba(255, 99, 132, 0.2)'
+                ,
+                borderColor:
+                    'rgba(255, 99, 132, 0.2)'
+                ,
+                borderWidth: 1
+            },
+            {
+              label : "foreign",
+              data : [
+                {% for item in values2[stock_code]['외국계순매수수량'] %}
+                   {{ item }},
+                  {% endfor %}
+                ],
+                backgroundColor:
+                'rgba(75, 192, 192, 0.2)',
+
+                borderColor:
+                'rgba(75, 192, 192, 0.2)',
+
+                borderWidth: 1
+            }]
+        },
+        options: {
+            title:{
+                display:true,
+                text:'{{values2[stock_code]['korName']}}' +'{{values2[stock_code]['gubun']}}'
+            },
+            maintainAspectRatio: true,
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero:true
+                    }
+                }]
+            }
+        }
+    });
+{% endfor %}
+</script>
+
+</body>
+</html>
