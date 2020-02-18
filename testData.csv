@@ -1,0 +1,40 @@
+﻿,korName,dayEndPrice,curPrice,diff,diffPrice,diffPercent,Enddiff,EnddiffPrice,EnddiffPercent,conDay,exStr,cumVol,busiIndex,sellPriceAllCount,buyPriceAllCount,sellPrice,buyPrice,sellPriceCount,buyPriceCount
+0,대성엘텍                                ,1145,961,5,54,-5.32,1,262,29.67,1,113.54,2763483,1,40618,72421,965,961,780,15516
+1,SM C&C                                  ,1850,1620,5,50,-2.99,1,425,29.82,1,80.21,667694,1,27413,74345,1630,1620,4089,1293
+2,SM Life Design                          ,2340,2345,5,50,-2.09,1,540,30.00,1,48.14,12792109,1,205395,98722,2350,2345,24654,44939
+3,디에이테크놀로지                        ,2180,2215,5,55,-2.42,1,500,29.76,1,33.84,1329683,1,20732,47799,2215,2200,2469,4048
+4,에스퓨얼셀                              ,20050,18650,5,100,-0.53,1,4600,29.77,1,54.11,352914,1,7373,12721,18650,18600,48,2396
+,korName,dayEndPrice,curPrice,diff,diffPrice,diffPercent,Enddiff,EnddiffPrice,EnddiffPercent,conDay,exStr,cumVol,busiIndex,sellPriceAllCount,buyPriceAllCount,sellPrice,buyPrice,sellPriceCount,buyPriceCount,date
+0,나노메딕스                              ,10700,12300,2,1600,14.95,1,2450,29.70,1,362.62,33113413,0,532624,202917,12350,12300,50274,13201,20191101
+,korName,dayEndPrice,curPrice,diff,diffPrice,diffPercent,Enddiff,EnddiffPrice,EnddiffPercent,conDay,exStr,cumVol,busiIndex,sellPriceAllCount,buyPriceAllCount,sellPrice,buyPrice,sellPriceCount,buyPriceCount,date
+0,비티원                                  ,4405,4405,1,1015,29.94,1,1015,29.94,1,201.47,6182112,0,0,134011,0,4405,0,119801,20191101
+,korName,dayEndPrice,curPrice,diff,diffPrice,diffPercent,Enddiff,EnddiffPrice,EnddiffPercent,conDay,exStr,cumVol,busiIndex,sellPriceAllCount,buyPriceAllCount,sellPrice,buyPrice,sellPriceCount,buyPriceCount,date
+0,이월드                                  ,4585,4565,2,65,1.44,1,1055,29.89,1,62.71,6855432,0,111560,90416,4570,4565,16042,17002,20191101
+1,두산솔루스2우B                          ,22150,34000,2,5250,18.26,1,5100,29.91,1,0.00,480639,0,1893,2659,34700,34000,17,484,20191101
+,korName,dayEndPrice,curPrice,diff,diffPrice,diffPercent,Enddiff,EnddiffPrice,EnddiffPercent,conDay,exStr,cumVol,busiIndex,sellPriceAllCount,buyPriceAllCount,sellPrice,buyPrice,sellPriceCount,buyPriceCount,date
+0,이월드                                  ,4585,4565,2,65,1.44,1,1055,29.89,1,62.71,6855432,0,111560,90416,4570,4565,16042,17002,20191101
+1,두산솔루스2우B                          ,22150,34000,2,5250,18.26,1,5100,29.91,1,0.00,480639,0,1893,2659,34700,34000,17,484,20191101
+,korName,dayEndPrice,curPrice,diff,diffPrice,diffPercent,Enddiff,EnddiffPrice,EnddiffPercent,conDay,exStr,cumVol,busiIndex,sellPriceAllCount,buyPriceAllCount,sellPrice,buyPrice,sellPriceCount,buyPriceCount,date
+,korName,dayEndPrice,curPrice,diff,diffPrice,diffPercent,Enddiff,EnddiffPrice,EnddiffPercent,conDay,exStr,cumVol,busiIndex,sellPriceAllCount,buyPriceAllCount,sellPrice,buyPrice,sellPriceCount,buyPriceCount,date
+0,롯데리츠                                ,6500,6360,5,140,-2.15,1,1500,30.00,1,17.40,6700382,0,434033,416215,6360,6350,41192,14626,20191101
+1,두산퓨얼셀1우                           ,5460,5900,2,100,1.72,1,1260,30.00,1,38.56,2263992,0,5590,18907,5900,5890,3918,6293,20191101
+2,두산솔루스2우B                          ,28750,34000,2,5250,18.26,1,6600,29.80,2,0.00,480639,0,1893,2659,34700,34000,17,484,20191101
+,korName,dayEndPrice,curPrice,diff,diffPrice,diffPercent,Enddiff,EnddiffPrice,EnddiffPercent,conDay,exStr,cumVol,busiIndex,sellPriceAllCount,buyPriceAllCount,sellPrice,buyPrice,sellPriceCount,buyPriceCount,date
+0,나노메딕스                              ,10700,12300,2,1600,14.95,1,2450,29.70,1,362.62,33113413,0,532624,202917,12350,12300,50274,13201,20191101
+,korName,dayEndPrice,curPrice,diff,diffPrice,diffPercent,Enddiff,EnddiffPrice,EnddiffPercent,conDay,exStr,cumVol,busiIndex,sellPriceAllCount,buyPriceAllCount,sellPrice,buyPrice,sellPriceCount,buyPriceCount,date
+0,비티원                                  ,4405,4405,1,1015,29.94,1,1015,29.94,1,201.47,6182112,0,0,134011,0,4405,0,119801,20191101
+,korName,dayEndPrice,curPrice,diff,diffPrice,diffPercent,Enddiff,EnddiffPrice,EnddiffPercent,conDay,exStr,cumVol,busiIndex,sellPriceAllCount,buyPriceAllCount,sellPrice,buyPrice,sellPriceCount,buyPriceCount,date
+0,이월드                                  ,4585,4565,2,65,1.44,1,1055,29.89,1,62.71,6855432,0,111560,90416,4570,4565,16042,17002,20191028
+1,두산솔루스2우B                          ,22150,34000,2,5250,18.26,1,5100,29.91,1,0.00,480639,0,1893,2659,34700,34000,17,484,20191028
+,korName,dayEndPrice,curPrice,diff,diffPrice,diffPercent,Enddiff,EnddiffPrice,EnddiffPercent,conDay,exStr,cumVol,busiIndex,sellPriceAllCount,buyPriceAllCount,sellPrice,buyPrice,sellPriceCount,buyPriceCount,date
+,korName,dayEndPrice,curPrice,diff,diffPrice,diffPercent,Enddiff,EnddiffPrice,EnddiffPercent,conDay,exStr,cumVol,busiIndex,sellPriceAllCount,buyPriceAllCount,sellPrice,buyPrice,sellPriceCount,buyPriceCount,date
+0,이월드                                  ,4585,4565,2,65,1.44,1,1055,29.89,1,62.71,6855432,0,111560,90416,4570,4565,16042,17002,20191030
+1,두산솔루스2우B                          ,22150,34000,2,5250,18.26,1,5100,29.91,1,0.00,480639,0,1893,2659,34700,34000,17,484,20191030
+,korName,dayEndPrice,curPrice,diff,diffPrice,diffPercent,Enddiff,EnddiffPrice,EnddiffPercent,conDay,exStr,cumVol,busiIndex,sellPriceAllCount,buyPriceAllCount,sellPrice,buyPrice,sellPriceCount,buyPriceCount,date
+0,롯데리츠                                ,6500,6360,5,140,-2.15,1,1500,30.00,1,17.40,6700382,0,434033,416215,6360,6350,41192,14626,20191031
+1,두산퓨얼셀1우                           ,5460,5900,2,100,1.72,1,1260,30.00,1,38.56,2263992,0,5590,18907,5900,5890,3918,6293,20191031
+2,두산솔루스2우B                          ,28750,34000,2,5250,18.26,1,6600,29.80,2,0.00,480639,0,1893,2659,34700,34000,17,484,20191031
+,korName,dayEndPrice,curPrice,diff,diffPrice,diffPercent,Enddiff,EnddiffPrice,EnddiffPercent,conDay,exStr,cumVol,busiIndex,sellPriceAllCount,buyPriceAllCount,sellPrice,buyPrice,sellPriceCount,buyPriceCount,date
+0,나노메딕스                              ,10700,12300,2,1600,14.95,1,2450,29.70,1,362.62,33113413,0,532624,202917,12350,12300,50274,13201,20191101
+,korName,dayEndPrice,curPrice,diff,diffPrice,diffPercent,Enddiff,EnddiffPrice,EnddiffPercent,conDay,exStr,cumVol,busiIndex,sellPriceAllCount,buyPriceAllCount,sellPrice,buyPrice,sellPriceCount,buyPriceCount,date
+0,비티원                                  ,4405,4405,1,1015,29.94,1,1015,29.94,1,201.47,6182112,0,0,134011,0,4405,0,119801,20191101
