@@ -165,8 +165,11 @@ class realTimePrice(QMainWindow):
             stock_data['Trading_Value'].append(DATA['Trading_Value'])
             print(DATA)
 
-
-            self.collection.insert(DATA)
+            if self.collection.find_one({'stock_code':  self.stock_code, 'TIME':  DATA['TIME'] }):
+                self.collection.update(self.collection.find_one({'stock_code':  self.stock_code, 'TIME':  DATA['TIME'] }), DATA, upsert=True)
+            else:
+                self.collection.insert(DATA)
+            #self.collection.insert(DATA)
             #time.sleep(0.3)
             #db = client["20200206"]
             #collection_name = "TR_SCHART_20200206"

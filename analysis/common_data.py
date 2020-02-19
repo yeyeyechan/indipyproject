@@ -45,7 +45,7 @@ class common_min_shortTime():
                 self.timeline.append("0"+(str)(next_input))
             else:
                 self.timeline.append((str)(next_input))
-            if input >1525:
+            if input >1520:
                 break
             else:
                 input = next_input

@@ -18,17 +18,19 @@ class monitoring3():
         self.timeline = common_min_timeline(5).timeline
         self.date = date
         db_name = self.date
-        #db_name = "20200211"
+
         collection_name1 = db_name+"_pr_input"
         collection_name2 = "SP_"+db_name
         collection_name3 = "SK_"+db_name
         collection_name4 = "TR_SCHART_"+db_name
+
         client = MongoClient('127.0.0.1', 27017)
+
         db = client[db_name]
-        collection1 = db[collection_name1]
-        collection2 = db[collection_name2]
-        collection3 = db[collection_name3]
-        collection4 = db[collection_name4]
+        collection1 = db[collection_name1] #인풋 컬렉션
+        collection2 = db[collection_name2] #프로그램 매수 매도 컬렉션
+        collection3 = db[collection_name3] #외국인 매수 매도 컬렉션
+        collection4 = db[collection_name4] #현재가  컬렉션
 
         map_name = ""
         data_map ={
@@ -39,9 +41,12 @@ class monitoring3():
 
         data_list2 = {}
         self.sorted_data_list2 = {}
+
         data_list3 = {}
         self.sorted_data_list3 = {}
+
         self.check_list = []
+
         self.final_data={
 
         }
@@ -64,39 +69,53 @@ class monitoring3():
                     "gubun": i["gubun"]
                 }
                 self.final_data3[map_name]={
-
+                    "korName": i["korName"],
+                    "gubun": i["gubun"]
                 }
             else:
                 continue
+
             data_list1[map_name]= []
+
             self.sorted_data_list1[map_name]= []
+
             for j in collection2.find({'단축코드': map_name}):
                 j['시간']= int(j['시간'])
                 data_list1[map_name].append(j)
-                print(j)
+
             self.sorted_data_list1[map_name] = sorted(data_list1[map_name], key = lambda  x: x['시간'])
+
             print(self.sorted_data_list1[map_name])
+
             data_list2[map_name]= []
+
             self.sorted_data_list2[map_name]= []
+
             for j in collection3.find({'단축코드': map_name}):
                 j['시간']= int(j['시간'])
                 j['외국계순매수수량']= int(j['외국계순매수수량'])
+
                 data_list2[map_name].append(j)
-                print(j)
+
             self.sorted_data_list2[map_name] = sorted(data_list2[map_name], key = lambda  x: x['시간'])
-            print("test before")
+
             print(self.sorted_data_list1[map_name])
 
 
             data_list3[map_name]= []
+
             self.sorted_data_list3[map_name]= []
+
             for j in collection4.find({'stock_code': map_name, 'DATE':db_name }):
+
                 j['시간']= int(j['TIME'])
                 j['종가']= int(j['Close'])
                 data_list3[map_name].append(j)
-                print(j['종가'])
+
             self.sorted_data_list3[map_name] = sorted(data_list3[map_name], key = lambda  x: x['시간'])
+
             print("sorted")
+
             print(self.sorted_data_list3)
             map_name = ""
     def preprocessPresent(self):
@@ -114,8 +133,7 @@ class monitoring3():
             data_list1 = self.sorted_data_list1[i]
             x_value = [d['시간'] for d in data_list1]
             y_value = [d['비차익매수위탁체결수량'] - d['비차익매도위탁체결수량'] for d in data_list1]
-            print(x_value)
-            print(y_value)
+
             indexcheck = 0
             standard_length = len(self.timeline)
             real_time_length = len(x_value)

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+</head>
+<body>
+<p> program / foreign 따로 상승 가격 하락 시점</p>
+<script>
+    var id_value = "myChart";
+    var key_length= {{key |length }}
+    for (var i =0 ; i < key_length ; i++){
+        id_value = id_value+i
+        var newForm = $('<div></div>');
+        newForm.attr("style", "width:800px");
+        newForm.append($('<canvas></canvas>', {id: id_value}));
+        newForm.appendTo('body');
+    }
+
+</script>
+<script>
+id_value = "myChart";
+var index = 0;
+{% for stock_code in key %}
+    id_value = id_value+index
+    var ctx = document.getElementById(id_value).getContext('2d');
+    index++;
+    var data =  {
+            labels: [
+                {% for item in time_line %}
+                "{{item}}",
+                {% endfor %}
+            ],
+            datasets: [{
+                label : "Program",
+                yAxisID: 'first-y-axis',
+                data : [
+                {% for item in values[stock_code]['프로그램'][:length] %}
+                   {{ item }},
+                  {% endfor %}
+                ],
+                backgroundColor:
+                    'rgba(255, 99, 132, 0.2)'
+                ,
+                borderColor:
+                    'rgba(255, 99, 132, 0.2)'
+                            },
+            {
+
+                label : "foreign",
+                yAxisID: 'first-y-axis',
+                data : [
+                {% for item in values2[stock_code]['외국계순매수수량'][:length] %}
+                   {{ item }},
+                  {% endfor %}
+                ],
+                backgroundColor:
+                'rgba(75, 192, 192, 0.2)',
+
+                borderColor:
+                'rgba(75, 192, 192, 0.2)',
+
+                borderWidth: 1
+            },
+
+            {
+                type: 'line',
+                label : "price",
+                yAxisID: 'second-y-axis',
+              data : [
+                {% for item in values3[stock_code]['종가'][:length]  %}
+                   {{ item }},
+                  {% endfor %}
+                ],
+                backgroundColor:
+                'rgba(75, 192, 192, 0.2)',
+
+                borderColor:
+                'rgba(75, 192, 192, 0.2)',
+            }]
+        };
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data :data,
+        options: {
+            title:{
+                display:true,
+                text:'{{values2[stock_code]['korName']}}' +'{{values2[stock_code]['gubun']}}'
+            },
+            responsive: true,
+            scales: {
+                 yAxes: [{
+                        id: 'first-y-axis',
+                        position: 'left'
+                    }, {
+                        id: 'second-y-axis',
+                        position: 'right'
+                    }]
+        }
+                    }
+    });
+{% endfor %}
+</script>
+
+</body>
+</html>

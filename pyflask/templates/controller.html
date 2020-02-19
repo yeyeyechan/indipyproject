@@ -6,6 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>seo python shinhan indi project</title>
 </head>
+    <script>
+        var date = new Date()
+        date = String(date.getFullYear())+String(date.getMonth()+1)+String(date.getDate());
+    </script>
 <body>
 <div data-role="page" id="index" data-url="{{ url_for('index') }}">
 
@@ -58,15 +62,14 @@
 
     <form method = "POST" action = "/monitoring3/">
         <div>
-            <p>외국인/ 프로그램 현재가 매수 현황 그래프</p>
-            <input type = "text" name = "date">
+            <p>외국인/ 프로그램 현재가 매수 현황 하이라이트 추가 버전(거래 금액 / 수급 변화 조건있음)</p>
+            <input type = "text" name = "date" value = {{date}}>
         </div>
         <p><input type = "submit" value = "일 기준" /></p>
-    </form>
- <form method = "POST" action = "/monitoring4/">
+
         <div>
-            <p>외국인/ 프로그램 현재가 매수 현황 그래프 기본</p>
-            <input type = "text" name = "date">
+            <p>외국인/ 프로그램 현재가 매수 현황 그래프 기본 버전</p>
+            <input type = "text" name = "date" value = {{date}}>
         </div>
         <p><input type = "submit" value = "일 기준" /></p>
     </form>
