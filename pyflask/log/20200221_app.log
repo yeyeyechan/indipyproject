@@ -1,0 +1,6 @@
+[INFO|_internal.py:122]2020-02-21 00:00:29,445> * Restarting with stat
+[WARNING|_internal.py:122]2020-02-21 00:00:31,365> * Debugger is active!
+[INFO|_internal.py:122]2020-02-21 00:00:31,370> * Debugger PIN: 238-571-924
+[INFO|_internal.py:122]2020-02-21 00:00:31,381> * Running on http://1.232.245.14:2020/ (Press CTRL+C to quit)
+[INFO|_internal.py:122]2020-02-21 00:00:57,552> * Detected change in 'C:\\dev\\indiPyProject\\pyflask\\app.py', reloading
+[INFO|_internal.py:122]2020-02-21 00:00:57,618> * Restarting with stat

@@ -1,0 +1,32 @@
+[INFO|_internal.py:122]2020-02-20 23:05:13,932> * Restarting with stat
+[WARNING|_internal.py:122]2020-02-20 23:05:15,740> * Debugger is active!
+[INFO|_internal.py:122]2020-02-20 23:05:15,745> * Debugger PIN: 238-571-924
+[INFO|_internal.py:122]2020-02-20 23:05:15,755> * Running on http://1.232.245.14:2020/ (Press CTRL+C to quit)
+[INFO|_internal.py:122]2020-02-20 23:05:46,021>1.232.245.14 - - [20/Feb/2020 23:05:46] "GET /login/ HTTP/1.1" 200 -
+[INFO|_internal.py:122]2020-02-20 23:05:54,082>1.232.245.14 - - [20/Feb/2020 23:05:54] "GET / HTTP/1.1" 200 -
+[INFO|_internal.py:122]2020-02-20 23:05:59,687>1.232.245.14 - - [20/Feb/2020 23:05:59] "GET /modify/ HTTP/1.1" 200 -
+[INFO|_internal.py:122]2020-02-20 23:06:01,774>1.232.245.14 - - [20/Feb/2020 23:06:01] "POST /order_list/ HTTP/1.1" 200 -
+[INFO|_internal.py:122]2020-02-20 23:06:07,260>1.232.245.14 - - [20/Feb/2020 23:06:07] "GET / HTTP/1.1" 200 -
+[INFO|_internal.py:122]2020-02-20 23:06:51,918>1.232.245.14 - - [20/Feb/2020 23:06:51] "GET /realTimeConclusion/ HTTP/1.1" 200 -
+[INFO|_internal.py:122]2020-02-20 23:07:11,277>1.232.245.14 - - [20/Feb/2020 23:07:11] "GET /realTime_Price/ HTTP/1.1" 405 -
+[INFO|_internal.py:122]2020-02-20 23:07:14,612>1.232.245.14 - - [20/Feb/2020 23:07:14] "GET /realTime_Price/ HTTP/1.1" 405 -
+[INFO|_internal.py:122]2020-02-20 23:07:19,206>1.232.245.14 - - [20/Feb/2020 23:07:19] "GET /realTimeForeign/ HTTP/1.1" 302 -
+[INFO|_internal.py:122]2020-02-20 23:07:19,211>1.232.245.14 - - [20/Feb/2020 23:07:19] "GET / HTTP/1.1" 200 -
+[INFO|_internal.py:122]2020-02-20 23:08:21,874> * Detected change in 'C:\\dev\\indiPyProject\\process\\realTimeConclusion.py', reloading
+[INFO|_internal.py:122]2020-02-20 23:08:22,434> * Restarting with stat
+[WARNING|_internal.py:122]2020-02-20 23:08:24,425> * Debugger is active!
+[INFO|_internal.py:122]2020-02-20 23:08:24,431> * Debugger PIN: 238-571-924
+[INFO|_internal.py:122]2020-02-20 23:08:24,441> * Running on http://1.232.245.14:2020/ (Press CTRL+C to quit)
+[INFO|_internal.py:122]2020-02-20 23:09:06,814>1.232.245.14 - - [20/Feb/2020 23:09:06] "POST /base_monitor/ HTTP/1.1" 200 -
+[INFO|_internal.py:122]2020-02-20 23:09:20,712>1.232.245.14 - - [20/Feb/2020 23:09:20] "POST /monitoring_test/ HTTP/1.1" 200 -
+[INFO|_internal.py:122]2020-02-20 23:09:28,847>1.232.245.14 - - [20/Feb/2020 23:09:28] "POST /monitoring_real/ HTTP/1.1" 302 -
+[INFO|_internal.py:122]2020-02-20 23:09:28,852>1.232.245.14 - - [20/Feb/2020 23:09:28] "GET / HTTP/1.1" 200 -
+[INFO|_internal.py:122]2020-02-20 23:11:17,332> * Running on http://1.232.245.14:2020/ (Press CTRL+C to quit)
+[INFO|_internal.py:122]2020-02-20 23:11:19,250>1.232.245.14 - - [20/Feb/2020 23:11:19] "GET / HTTP/1.1" 200 -
+[INFO|_internal.py:122]2020-02-20 23:11:22,879>1.232.245.14 - - [20/Feb/2020 23:11:22] "GET /login/ HTTP/1.1" 200 -
+[INFO|_internal.py:122]2020-02-21 00:00:34,839>1.232.245.14 - - [21/Feb/2020 00:00:34] "GET / HTTP/1.1" 200 -
+[INFO|_internal.py:122]2020-02-21 00:01:12,729>1.232.245.14 - - [21/Feb/2020 00:01:12] "GET / HTTP/1.1" 200 -
+[INFO|_internal.py:122]2020-02-21 00:01:17,180>1.232.245.14 - - [21/Feb/2020 00:01:17] "GET /foreign_company/ HTTP/1.1" 302 -
+[INFO|_internal.py:122]2020-02-21 00:01:17,183>1.232.245.14 - - [21/Feb/2020 00:01:17] "GET / HTTP/1.1" 200 -
+[INFO|_internal.py:122]2020-02-21 00:01:28,031>1.232.245.14 - - [21/Feb/2020 00:01:28] "GET /login/ HTTP/1.1" 200 -
+[INFO|_internal.py:122]2020-02-21 00:01:30,167>1.232.245.14 - - [21/Feb/2020 00:01:30] "GET /login/ HTTP/1.1" 200 -

@@ -51,6 +51,8 @@
     <a href = "/realTimeForeign/">click for realTimeForeign</a>
     <p>현재가 실시간 모니터링 함수</p>
     <a href = "/realTime_Price/">click for realTime_Price</a>
+        <p>실시간 체결 모니터링 텔레그램</p>
+    <a href = "/realTimeConclusion/">click for realTime_Price</a>
 
     <form method = "POST" action = "/realTime_Price/">
         <div>
@@ -60,7 +62,7 @@
         <p><input type = "submit" value = "일 기준" /></p>
     </form>
 
-    <form method = "POST" action = "/monitoring3/">
+    <form method = "POST" action = "/monitoring_real/">
         <div>
             <p>외국인/ 프로그램 현재가 매수 현황 하이라이트 추가 버전(거래 금액 / 수급 변화 조건있음)</p>
             <input type = "text" name = "date" >
@@ -68,10 +70,19 @@
         <p><input type = "submit" value = "일 기준" /></p>
             </form>
 
-    <form method = "POST" action = "/monitoring1/">
+    <form method = "POST" action = "/monitoring_test/">
 
         <div>
             <p>외국인/ 프로그램 현재가 매수 현황 그래프 기본 버전</p>
+            <input type = "text" name = "date" >
+        </div>
+        <p><input type = "submit" value = "일 기준" /></p>
+
+    </form>
+        <form method = "POST" action = "/base_monitor/">
+
+        <div>
+            <p>외국인/ 프로그램 현재가 매수 현황 그래프 업글 전 버전</p>
             <input type = "text" name = "date" >
         </div>
         <p><input type = "submit" value = "일 기준" /></p>

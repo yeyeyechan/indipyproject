@@ -113,6 +113,8 @@ class monitoring3():
                 data_list3[map_name].append(j)
 
             self.sorted_data_list3[map_name] = sorted(data_list3[map_name], key = lambda  x: x['시간'])
+            print(data_list3[map_name])
+            print(self.sorted_data_list3[map_name])
 
             print("sorted")
 
@@ -121,9 +123,14 @@ class monitoring3():
     def preprocessPresent(self):
         for i in self.check_list:
             self.final_data3[i]['종가'] = []
-            for j in self.sorted_data_list3[i]:
-                print(j)
-                self.final_data3[i]['종가'].append(j['종가'])
+            if  not self.final_data3[i]['종가'] :
+                for j in range(78):
+                    self.final_data3[i]['종가'].append(0)
+            else:
+                for j in self.sorted_data_list3[i]:
+                    print(j)
+                    self.final_data3[i]['종가'].append(j['종가'])
+                    print(self.final_data3[i]['종가'])
 
 
 

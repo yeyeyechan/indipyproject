@@ -20,10 +20,13 @@ from process.realTimeProgram import realTimeProgram
 from process.realTimePrice import realTimePrice
 from data.TR_1206 import TR_1206
 from data.TR_1314_3 import TR_1314_3
-
+from process.realTimeConclusion import realTimeConclusion
 import logging
 import logging.handlers
 from PyQt5.QtCore import *
+'''logging_name = str(datetime.datetime.today().strftime("%Y%m%d"))+"_app.log"
+logging.basicConfig(filename='./log/'+logging_name, filemode='a', level= logging.DEBUG, format='[%(levelname)s|%(filename)s:%(lineno)s]%(asctime)s>%(message)s')'''
+
 '''logging_name = str(datetime.datetime.today().strftime("%Y%m%d"))+"_app.log"
 
 logger = logging.getLogger("crumbs")
@@ -35,13 +38,14 @@ log_formatter = logging.Formatter('%(asctime)s %(levelname)s %(funcName)s(%(line
                                   datefmt='%d/%m/%Y %H:%M:%S')
 fileHandler = logging.FileHandler('./log/'+logging_name)
 streamHandler = logging.StreamHandler()
-
+fileHandler.setLevel(logging.DEBUG)
+streamHandler.setLevel(logging.DEBUG)
 fileHandler.setFormatter(log_formatter)
 streamHandler.setFormatter(log_formatter)
 
 logger.addHandler(fileHandler)
-logger.addHandler(streamHandler)
-'''
+logger.addHandler(streamHandler)'''
+
 '''logger.debug("debug")
 logger.info("info")
 logger.warning("warning")
@@ -53,8 +57,46 @@ print(sys.argv)
 @app.route('/')
 def index():
     return render_template('controller.html')
-@app.route('/monitoring1/', methods= ['POST'])
-def monitoring_function1():
+
+
+@app.route('/base_monitor/', methods=['POST'])
+def base_monitor():
+    try:
+        date = request.form['date']
+        py_time = datetime.datetime.now()
+        hour = py_time.hour
+        min = py_time.minute
+        if (hour == 15 and min >= 30) or hour > 15:
+            hour = 15
+            min = 30
+        # hour = 15
+        # min = 35
+
+        total_time = (int)((hour * 60 + min - 9 * 60 - 5) / 5)
+        if total_time <= 0:
+            total_time = 78
+        else:
+            total_time += 1
+        monitoring3_var = monitoring3(date)
+        print("test1")
+        monitoring3_var.preprocessProgram()
+        time.sleep(2)
+        monitoring3_var.preprocessForeign()
+        monitoring3_var.preprocessPresent()
+        print("test2")
+        final_data = monitoring3_var.final_data
+        final_data2 = monitoring3_var.final_data2
+        final_data3 = monitoring3_var.final_data3
+        print("final_data3")
+        print(final_data3)
+        # total_time = 75
+        common_min_timeline_var2 = common_min_shortTime(5).timeline[:total_time]
+    except Exception:
+        return redirect(url_for('index'))
+    return render_template('base_monitor.html', key=final_data.keys(), time_line=common_min_timeline_var2,values=final_data, values2=final_data2, values3=final_data3, length=total_time)
+
+@app.route('/monitoring_test/', methods= ['POST'])
+def monitoring_test():
     try:
         py_day = datetime.datetime.today().strftime("%Y%m%d")
         date = request.form['date']
@@ -87,49 +129,15 @@ def monitoring_function1():
         final_data= monitoring3_var.final_data
         final_data2= monitoring3_var.final_data2
         final_data3= monitoring3_var.final_data3
+        print("final_data3")
+        print(final_data3)
         #total_time = 75
         common_min_timeline_var2 = common_min_shortTime(5).timeline[:total_time]
     except Exception:
         return redirect(url_for('index'))
-    return render_template('monitor1.html' , key = final_data.keys() , time_line = common_min_timeline_var2 ,  values= final_data, values2= final_data2, values3 = final_data3 , length = total_time)
-@app.route('/monitoring4/', methods= ['POST'])
-def monitoring_function4():
-    try:
-        py_day = datetime.datetime.today().strftime("%Y%m%d")
-        date = request.form['date']
-
-        py_time = datetime.datetime.now()
-        hour = py_time.hour
-        min = py_time.minute
-        if (hour == 15 and min >= 30) or hour > 15:
-            hour = 15
-            min = 30
-        if py_day != date:
-            hour = 15
-            min = 30
-        # 78개임(날) 905-1530
-        total_time = (int)((hour * 60 + min - 9 * 60 - 5) / 5)
-        if total_time <= 0:
-            total_time = 1
-        else:
-            total_time += 1
-        monitoring3_var = monitoring3(date)
-        print("test1")
-        monitoring3_var.preprocessProgram()
-        time.sleep(2)
-        monitoring3_var.preprocessForeign()
-        monitoring3_var.preprocessPresent()
-        print("test2")
-        final_data = monitoring3_var.final_data
-        final_data2 = monitoring3_var.final_data2
-        final_data3 = monitoring3_var.final_data3
-        # total_time = 75
-        common_min_timeline_var2 = common_min_shortTime(5).timeline[:total_time]
-    except Exception:
-        return redirect(url_for('index'))
-    return render_template('monitor4.html', key=final_data.keys(), time_line=common_min_timeline_var2,values=final_data, values2=final_data2, values3=final_data3, length=total_time)
-@app.route('/monitoring3/', methods= ['POST'])
-def monitoring_function3():
+    return render_template('monitoring_test.html' , key = final_data.keys() , time_line = common_min_timeline_var2 ,  values= final_data, values2= final_data2, values3 = final_data3 , length = total_time)
+@app.route('/monitoring_real/', methods= ['POST'])
+def monitoring_real():
     try:
         py_day = datetime.datetime.today().strftime("%Y%m%d")
         date = request.form['date']
@@ -168,13 +176,26 @@ def monitoring_function3():
         highlight = {
 
         }
+        print(total_time)
+        print("total")
         for i in final_data.keys():
+            print("ssibal1")
             program_vol = (int)(final_data[i]['프로그램'][total_time-1])
+            print("ssibal2")
+            print(final_data[i]['프로그램'])
             foreign_vol = (int)(final_data2[i]['외국계순매수수량'][total_time-1])
+            print("ssibal20")
+            print(final_data2[i]['외국계순매수수량'])
+            print("ssibal3")
+            print(final_data3[i]['종가'])
             current_value = (int)(final_data3[i]['종가'][total_time-1])
+            print("ssibal3")
+            print(final_data3[i]['종가'])
+
             if ((int)(program_vol)>0 and  (int)(foreign_vol)>0 ) and ((int)(program_vol)*(int)(current_value)>20000000 or (int)(foreign_vol)*(int)(current_value)> 20000000):
             #if ((int)(program_vol) > 0 and (int)(foreign_vol) > 0) and ((int)(program_vol) * (int)(current_value) > 2000000 or (int)(foreign_vol) * (int)(current_value) > 2000000):
                 final_stock_list.append(i)
+                print("sssibballll4")
                 if total_time >1 :
                     highlight[i]={
 
@@ -193,10 +214,24 @@ def monitoring_function3():
                     print("len(highlight[i]['하이라이트'])")
                     print(len(highlight[i]['하이라이트']))
                     print("len(highlight[i]['하이라이트'])")
+                else:
+                    print("ssssaaaabbbb")
 
     except Exception:
         return redirect(url_for('index'))
-    return render_template('monitor3.html' , key = final_stock_list, time_line = common_min_timeline_var2 ,  values= final_data, values2= final_data2, values3 = final_data3 , length = total_time ,highlight=highlight)
+    return render_template('monitoring_real.html' , key = final_stock_list, time_line = common_min_timeline_var2 ,  values= final_data, values2= final_data2, values3 = final_data3 , length = total_time ,highlight=highlight)
+
+
+@app.route('/realTimeConclusion/')
+def realTimeConclusion_function():
+    try:
+        realTimeConclusionEvent = QApplication(sys.argv)
+        realTimeConclusion_var = realTimeConclusion()
+        realTimeConclusionEvent.exec()
+    except Exception:
+        return  render_template('process_result.html' , message="realTimeConclusion_function 실패")
+    return render_template('process_result.html', message="realTimeConclusion_function 실패")
+
 @app.route('/realTime_Price/',  methods = ['POST'])
 def realTime_Price():
     date = request.form['date']
@@ -551,7 +586,7 @@ def get_stock_list():
                 TR_1206Event.exit(0)
                 break
             print(True)
-            TR_1206Event_vari = TR_1206(i['단축코드'], '20200217', '20200219','1','0', i['종목명'],  i['구분'], i['구분코드'])
+            TR_1206Event_vari = TR_1206(i['단축코드'], '20200218', '20200220','1','0', i['종목명'],  i['구분'], i['구분코드'])
             time.sleep(0.3)
             checkindex +=1
         print(True)

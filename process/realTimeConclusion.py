@@ -1,23 +1,21 @@
 import sys
-from datetime import timedelta
 
-from PyQt5.QtGui import *
-from PyQt5.QtCore import *
 from PyQt5.QAxContainer import *
-from PyQt5.QtWidgets import *
 from PyQt5.QtWidgets import QApplication
 from PyQt5.QtWidgets import QMainWindow
 
 
 from pymongo import MongoClient
 from datetime import datetime
-from data.common import weekday_check
-
+import telegram
+#chat id 813531834
 class realTimeConclusion(QMainWindow):
 
     def __init__(self):
         super().__init__()
 
+        telgm_token = '1013576743:AAFkCdmafOY61N-I1FAEIEsOdFZwR47_ZQ8'
+        self.bot = telegram.Bot(token=telgm_token)
 
         self.indiReal = QAxWidget("GIEXPERTCONTROL.GiExpertControlCtrl.1")
         # Indi API event
@@ -25,72 +23,50 @@ class realTimeConclusion(QMainWindow):
 
         db_name = str(datetime.today().strftime("%Y%m%d"))
         client = MongoClient('127.0.0.1', 27017)
-        db = client[db_name]
-        collection_name = "AA"+db_name
-        collection = db[collection_name]
+        self.db = client[db_name]
+        self.collection_name = "AA"+db_name
+        self.collection = self.db[self.collection_name]
+        ret1 = self.indiReal.dynamicCall("RequestRTReg(QString, QString)", "AA", '*')
+        if ret1 :
+            print("AA 등록성공")
 
-
-        ret1= self.indiReal.dynamicCall("UnRequestRTReg(QString, QString)", "SP", i['종목코드'].strip())
-            if not ret1:
-                print("종목코드 "+i['종목코드']+ " 에 대한 SP 실시간 등록 해제 실패!!!")
-            else:
-                print("종목코드 "+i['종목코드']+ " 에 대한 SP 실시간 등록 해제 성공!!!")
-            ret1 = self.indiReal.dynamicCall("RequestRTReg(QString, QString)", "SP", i['종목코드'].strip())
-            if not ret1:
-                print("종목코드 "+i['종목코드']+ " 에 대한 SP 실시간 등록 실패!!!")
-            else:
-                print("종목코드 "+i['종목코드']+ " 에 대한 SP 실시간 등록 성공!!!")
-
-            #ret1 = self.indiReal.dynamicCall("RequestRTReg(QString, QString)", "SK", i)
-
+        if not ret1:
+            print("AA 등록실패")
 
     # 요청한 TR로 부터 데이터를 받는 함수입니다.
     def ReceiveRTData(self, realType):
         # TR을 날릴때 ID를 통해 TR이름을 가져옵니다.
-        client = MongoClient('127.0.0.1', 27017)
-        collection_title = "SP_" + str(datetime.today().strftime("%Y%m%d"))
-        db = client[str(datetime.today().strftime("%Y%m%d"))]
-        collection = db[collection_title]
-        print(True)
-        print(realType)
-        if realType == "SP":
-            DATA = {}
-            # 데이터 받기
-            DATA['단축코드'] = self.indiReal.dynamicCall("GetSingleData(int)", 1)
-            DATA['일자'] = self.indiReal.dynamicCall("GetSingleData(int)", 2)
-            DATA['시간'] = self.indiReal.dynamicCall("GetSingleData(int)", 3)
-            DATA['매도위탁체결수량'] = int(self.indiReal.dynamicCall("GetSingleData(int)", 12))
-            DATA['매도자기체결수량'] = int(self.indiReal.dynamicCall("GetSingleData(int)", 13))
-            DATA['매수위탁체결수량'] = int(self.indiReal.dynamicCall("GetSingleData(int)", 14))
-            DATA['매수자기체결수량'] = int(self.indiReal.dynamicCall("GetSingleData(int)", 15))
-            DATA['매도위탁체결금액'] = int(self.indiReal.dynamicCall("GetSingleData(int)", 16))
-            DATA['매도자기체결금액'] = int(self.indiReal.dynamicCall("GetSingleData(int)", 17))
-            DATA['매수위탁체결금액'] = int(self.indiReal.dynamicCall("GetSingleData(int)", 18))
-            DATA['매수자기체결금액'] = int(self.indiReal.dynamicCall("GetSingleData(int)", 19))
-            DATA['차익매도위탁체결수량'] = int(self.indiReal.dynamicCall("GetSingleData(int)", 27))
-            DATA['차익매수위탁체결수량'] = int(self.indiReal.dynamicCall("GetSingleData(int)", 28))
-            DATA['차익매수자기체결수량'] = int(self.indiReal.dynamicCall("GetSingleData(int)", 29))
-            DATA['비차익매도위탁체결수량'] = int(self.indiReal.dynamicCall("GetSingleData(int)", 30))
-            DATA['비차익매도자기체결수량'] = int(self.indiReal.dynamicCall("GetSingleData(int)", 31))
-            DATA['비차익매수위탁체결수량'] = int(self.indiReal.dynamicCall("GetSingleData(int)", 32))
-            DATA['비차익매수자기체결수량'] = int(self.indiReal.dynamicCall("GetSingleData(int)", 33))
-            print("realtime")
-            print(DATA)
-            print(collection.insert(DATA))
+        DATA = {}
+        # 데이터 받기
+        DATA['처리구분'] = self.indiReal.dynamicCall("GetSingleData(int)", 0)
+        DATA['매수매도구분'] = self.indiReal.dynamicCall("GetSingleData(int)", 8)
+        DATA['상태'] = self.indiReal.dynamicCall("GetSingleData(int)", 10)
+        DATA['종목코드'] = self.indiReal.dynamicCall("GetSingleData(int)", 11)
+        DATA['종목명'] = self.indiReal.dynamicCall("GetSingleData(int)", 12)
+        DATA['주문수량'] = self.indiReal.dynamicCall("GetSingleData(int)", 14)
+        DATA['주문가격'] = self.indiReal.dynamicCall("GetSingleData(int)", 15)
+        DATA['미체결수량'] = self.indiReal.dynamicCall("GetSingleData(int)", 20)
+        DATA['체결수량'] = self.indiReal.dynamicCall("GetSingleData(int)", 23)
+        DATA['체결단가'] = self.indiReal.dynamicCall("GetSingleData(int)", 24)
+        DATA['체결시간'] = self.indiReal.dynamicCall("GetSingleData(int)", 25)
 
-        '''if rqid == "SK":
-            DATA = {}
-            # 데이터 받기
-            DATA['단축코드'] = self.IndiTR.dynamicCall("GetSingleData(int)", 1)
-            DATA['체결시간'] = self.IndiTR.dynamicCall("GetSingleData(int)", 2)
-            DATA['시간'] = self.IndiTR.dynamicCall("GetSingleData(int)", 3)
-            DATA['국내총순매수수량'] = int(self.IndiTR.dynamicCall("GetSingleData(int)", 41))
-            DATA['외국계순매수수량'] = int(self.IndiTR.dynamicCall("GetSingleData(int)", 47))
-            DATA['전체순매수수량'] = int(self.IndiTR.dynamicCall("GetSingleData(int)", 53))
-            print(collection.insert(DATA))'''
+        if DATA['매수매도구분'] == "01":
+            gubun = " 매도   "
+        if DATA['매수매도구분'] == "02":
+            gubun = " 매수    "
+
+        if DATA['처리구분'] == "00":
+            DATA['상태메세지'] =  "종목명:  "+DATA['종목명'] +"  주문가격: "+DATA['주문가격']  +"  주문수량: "+  DATA['주문수량']  + gubun + "정상 주문 됨"
+        elif DATA['처리구분'] == "03":
+            DATA['상태메세지'] =  "종목명:  "+DATA['종목명'] +"  체결단가: "+DATA['체결단가']  +"  체결수량: "+  DATA['체결수량']  + gubun + "체결 됨" + "  미체결 수량 :   "+ DATA['미체결수량']
+        else:
+            DATA['상태메세지'] = "작업필요"
+        self.bot.sendMessage(chat_id='813531834', text=DATA['상태메세지'])
+        self.collection.insert(DATA)
+
     def ReceiveSysMsg(self, MsgID):
         print("System Message Received = ", MsgID)
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    realTimeProgramVar = realTimeProgram()
+    realTimeConclusion_test = realTimeConclusion()
     app.exec_()
