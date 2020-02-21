@@ -2,18 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="527f0741-aa5a-4cea-8768-d45c93f32a4a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/indiPyProject.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/indiPyProject.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/analysis/monitoring3.py" beforeDir="false" afterPath="$PROJECT_DIR$/analysis/monitoring3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/analysis/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/analysis/test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/data/test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/process/realTimeConclusion.py" beforeDir="false" afterPath="$PROJECT_DIR$/process/realTimeConclusion.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pyflask/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/pyflask/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pyflask/templates/controller.html" beforeDir="false" afterPath="$PROJECT_DIR$/pyflask/templates/controller.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pyflask/templates/monitor1.html" beforeDir="false" afterPath="$PROJECT_DIR$/pyflask/templates/base_monitor.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pyflask/templates/monitor3.html" beforeDir="false" afterPath="$PROJECT_DIR$/pyflask/templates/monitoring_real.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pyflask/templates/monitor4.html" beforeDir="false" afterPath="$PROJECT_DIR$/pyflask/templates/monitoring_test.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -26,8 +15,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pyflask/app.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="53">
-              <caret line="167" selection-start-line="167" selection-end-line="167" />
+            <state relative-caret-position="34">
+              <caret line="172" column="14" selection-start-line="172" selection-start-column="14" selection-end-line="172" selection-end-column="14" />
               <folding>
                 <element signature="e#0#68#0" expanded="true" />
               </folding>
@@ -38,7 +27,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/process/realTimeConclusion.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-72">
+            <state relative-caret-position="456">
               <caret line="33" column="26" selection-start-line="33" selection-start-column="26" selection-end-line="33" selection-end-column="26" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
@@ -50,8 +39,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/analysis/monitoring3.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="91">
-              <caret line="119" lean-forward="true" selection-start-line="119" selection-end-line="119" />
+            <state relative-caret-position="186">
+              <caret line="124" column="42" lean-forward="true" selection-start-line="124" selection-start-column="42" selection-end-line="124" selection-end-column="42" />
               <folding>
                 <element signature="e#24#34#0" expanded="true" />
               </folding>
@@ -62,7 +51,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/analysis/test.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="216">
+            <state relative-caret-position="228">
               <caret line="19" column="38" selection-start-line="19" selection-start-column="38" selection-end-line="19" selection-end-column="38" />
               <folding>
                 <element signature="e#0#31#0" expanded="true" />
@@ -74,7 +63,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pyflask/templates/controller.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="205">
+            <state relative-caret-position="1216">
               <caret line="64" column="52" selection-start-line="64" selection-start-column="37" selection-end-line="64" selection-end-column="52" />
             </state>
           </provider>
@@ -188,16 +177,17 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-338" />
-    <option name="y" value="-18" />
-    <option name="width" value="1296" />
-    <option name="height" value="1000" />
+    <option name="x" value="484" />
+    <option name="y" value="-8" />
+    <option name="width" value="864" />
+    <option name="height" value="946" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -236,7 +226,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -330,7 +319,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="realTimePrice" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="monitoring3" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="indiPyProject" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -338,11 +327,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/process" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/analysis" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/process/realTimePrice.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/analysis/monitoring3.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -375,10 +364,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.app" />
+        <item itemvalue="Python.monitoring3" />
         <item itemvalue="Python.test" />
         <item itemvalue="Python.autoLogin (1)" />
         <item itemvalue="Python.5minCurrentPrice" />
-        <item itemvalue="Python.realTimePrice" />
       </list>
     </recent_temporary>
   </component>
@@ -408,13 +397,13 @@
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49852508" visible="true" weight="0.18914647" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49852508" visible="true" weight="0.12486828" />
       <window_info id="Structure" order="1" sideWeight="0.5014749" side_tool="true" weight="0.21917808" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.054171182" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49051633" weight="0.2407809" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.49841937" visible="true" weight="0.26030368" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49051633" visible="true" weight="0.22559653" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49841937" weight="0.26030368" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32936078" />
@@ -1018,19 +1007,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/analysis/test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="19" column="38" selection-start-line="19" selection-start-column="38" selection-end-line="19" selection-end-column="38" />
-          <folding>
-            <element signature="e#0#31#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/process/realTimeConclusion.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-72">
+        <state relative-caret-position="456">
           <caret line="33" column="26" selection-start-line="33" selection-start-column="26" selection-end-line="33" selection-end-column="26" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
@@ -1038,17 +1017,27 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/analysis/test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="19" column="38" selection-start-line="19" selection-start-column="38" selection-end-line="19" selection-end-column="38" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/pyflask/templates/controller.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="205">
+        <state relative-caret-position="1216">
           <caret line="64" column="52" selection-start-line="64" selection-start-column="37" selection-end-line="64" selection-end-column="52" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/pyflask/app.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="53">
-          <caret line="167" selection-start-line="167" selection-end-line="167" />
+        <state relative-caret-position="34">
+          <caret line="172" column="14" selection-start-line="172" selection-start-column="14" selection-end-line="172" selection-end-column="14" />
           <folding>
             <element signature="e#0#68#0" expanded="true" />
           </folding>
@@ -1057,8 +1046,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/analysis/monitoring3.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="91">
-          <caret line="119" lean-forward="true" selection-start-line="119" selection-end-line="119" />
+        <state relative-caret-position="186">
+          <caret line="124" column="42" lean-forward="true" selection-start-line="124" selection-start-column="42" selection-end-line="124" selection-end-column="42" />
           <folding>
             <element signature="e#24#34#0" expanded="true" />
           </folding>
