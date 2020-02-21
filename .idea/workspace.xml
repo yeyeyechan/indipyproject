@@ -220,7 +220,14 @@
       <option name="project" value="LOCAL" />
       <updated>1582245749133</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="test">
+      <created>1582246685566</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1582246685566</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TodoView">
@@ -237,18 +244,18 @@
     <option name="LAST_COMMIT_MESSAGE" value="test" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="500" y="11" key="CommitChangelistDialog2" timestamp="1582246662671">
+    <state x="500" y="11" key="CommitChangelistDialog2" timestamp="1582246683460">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="500" y="11" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1582246662671" />
+    <state x="500" y="11" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1582246683460" />
     <state x="277" y="54" key="SettingsEditor" timestamp="1582242493367">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="277" y="54" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1582242493367" />
-    <state x="443" y="150" key="Vcs.Push.Dialog.v2" timestamp="1582245756148">
+    <state x="443" y="150" key="Vcs.Push.Dialog.v2" timestamp="1582246687589">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="443" y="150" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1582245756148" />
+    <state x="443" y="150" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1582246687589" />
     <state x="459" y="236" key="com.intellij.ide.util.TipDialog" timestamp="1582242101244">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

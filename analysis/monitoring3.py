@@ -125,10 +125,10 @@ class monitoring3():
             self.final_data3[i]['종가'] = []
             for j in range(78):
                 self.final_data3[i]['종가'].append(0)
-        index = 0
-        for j in self.sorted_data_list3[i]:
-            self.final_data3[i]['종가'][index] = (int)(j['종가'])
-            index +=1
+            index = 0
+            for k in self.sorted_data_list3[i]:
+                self.final_data3[i]['종가'][index] = (int)(k['종가'])
+                index +=1
 
 
 
