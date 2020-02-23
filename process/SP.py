@@ -24,14 +24,14 @@ class SP(QMainWindow):
         collection = db[collection_name]
         for i in collection.find():
             ret1= self.indiReal.dynamicCall("UnRequestRTReg(QString, QString)", "SP", i['종목코드'].strip())
-            self.realTimeLogger.info("ret1 " + ret1)
+            self.realTimeLogger.info("ret1 " + str(ret1))
             if not ret1:
                 self.realTimeLogger.info("종목코드 "+i['종목코드']+ " 에 대한 SP 실시간 등록 해제 실패!!!")
             else:
                 self.realTimeLogger.info("종목코드 "+i['종목코드']+ " 에 대한 SP 실시간 등록 해제 성공!!!")
         for i in collection.find():
             ret1 = self.indiReal.dynamicCall("RequestRTReg(QString, QString)", "SP", i['종목코드'].strip())
-            self.realTimeLogger.info("ret1 " + ret1)
+            self.realTimeLogger.info("ret1 " + str(ret1))
             if not ret1:
                 self.realTimeLogger.info("종목코드 "+i['종목코드']+ " 에 대한 SP 실시간 등록 실패!!!")
             else:
