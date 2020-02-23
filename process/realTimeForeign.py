@@ -1,24 +1,10 @@
 import sys
-from datetime import timedelta
 
-from PyQt5.QtGui import *
-from PyQt5.QtCore import *
 from PyQt5.QAxContainer import *
-from PyQt5.QtWidgets import *
 from PyQt5.QtWidgets import QApplication
 from PyQt5.QtWidgets import QMainWindow
-from PyQt5.QtWidgets import QPushButton
-from PyQt5.QtWidgets import QLineEdit
-from pandas import Series, DataFrame
-import pandas as pd
-from time import sleep
-import threading
-import numpy as np
-
-from pytimekr import pytimekr
 from pymongo import MongoClient
 from datetime import datetime
-from data.common import weekday_check
 
 class realTimeForeign(QMainWindow):
 
@@ -44,8 +30,6 @@ class realTimeForeign(QMainWindow):
                 print("종목코드 "+i['종목코드']+ " 에 대한 SK 실시간 등록 실패!!!")
             else:
                 print("종목코드 "+i['종목코드']+ " 에 대한 SK 실시간 등록 성공!!!")
-
-            #ret1 = self.indiReal.dynamicCall("RequestRTReg(QString, QString)", "SK", i)
 
 
     # 요청한 TR로 부터 데이터를 받는 함수입니다.

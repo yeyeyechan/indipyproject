@@ -123,14 +123,12 @@ class monitoring3():
     def preprocessPresent(self):
         for i in self.check_list:
             self.final_data3[i]['종가'] = []
-            if  not self.final_data3[i]['종가'] :
-                for j in range(78):
-                    self.final_data3[i]['종가'].append(0)
-            else:
-                for j in self.sorted_data_list3[i]:
-                    print(j)
-                    self.final_data3[i]['종가'].append(j['종가'])
-                    print(self.final_data3[i]['종가'])
+            for j in range(78):
+                self.final_data3[i]['종가'].append(0)
+            index = 0
+            for k in self.sorted_data_list3[i]:
+                self.final_data3[i]['종가'][index] = (int)(k['종가'])
+                index +=1
 
 
 

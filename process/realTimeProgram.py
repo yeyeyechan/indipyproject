@@ -84,16 +84,6 @@ class realTimeProgram(QMainWindow):
             print(DATA)
             print(collection.insert(DATA))
 
-        '''if rqid == "SK":
-            DATA = {}
-            # 데이터 받기
-            DATA['단축코드'] = self.IndiTR.dynamicCall("GetSingleData(int)", 1)
-            DATA['체결시간'] = self.IndiTR.dynamicCall("GetSingleData(int)", 2)
-            DATA['시간'] = self.IndiTR.dynamicCall("GetSingleData(int)", 3)
-            DATA['국내총순매수수량'] = int(self.IndiTR.dynamicCall("GetSingleData(int)", 41))
-            DATA['외국계순매수수량'] = int(self.IndiTR.dynamicCall("GetSingleData(int)", 47))
-            DATA['전체순매수수량'] = int(self.IndiTR.dynamicCall("GetSingleData(int)", 53))
-            print(collection.insert(DATA))'''
     def ReceiveSysMsg(self, MsgID):
         print("System Message Received = ", MsgID)
 if __name__ == "__main__":

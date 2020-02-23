@@ -7,13 +7,14 @@ from PyQt5.QtWidgets import QMainWindow
 import time
 import datetime
 from pymongo import MongoClient
-
+from log.logger_pyflask import logging_instance
 '''
     신한아이 인디 자동로그인 예제
 '''
 
 class autoLogin(QMainWindow):
     def __init__(self):
+        loginLogger = logging_instance("autoLogin.py").mylogger
         super().__init__()
         self.flag= False
         start = time.time()
@@ -42,18 +43,19 @@ class autoLogin(QMainWindow):
                     print(Exception)
                     QCoreApplication.exit(0)
         try:
-
-        # 일반 TR OCX
+            # 일반 TR OCX
             self.Indi_login = QAxWidget("GIEXPERTCONTROL.GiExpertControlCtrl.1")
-
+            loginLogger.info("OCX call")
             # 신한i Indi 자동로그인
             while True:
                 if time.time() - start >=100:
                     break
+                loginLogger.info("Login Trying" )
                 login = self.Indi_login.StartIndi('xamevh123', 'florida1!23', 'florida1!23', 'C:\SHINHAN-i\indi\giexpertstarter.exe')
                 print(login)
                 if login == True :
                     self.flag = True
+                    loginLogger.info("Login Success")
                     collection.update({
                         "status": "Processing"
                     }, {
@@ -62,6 +64,7 @@ class autoLogin(QMainWindow):
                     break
             #QCoreApplication.exit(0)
         except Exception:
+            loginLogger.info("Login Failure Exception occur")
             print(Exception)
             # QCoreApplication.exit(0)
         # QCoreApplication.exit(0)

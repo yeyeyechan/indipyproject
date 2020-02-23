@@ -1,0 +1,344 @@
+2020-02-23 00:06:29,544 - index_00:06:29.544028 - INFO - index function success
+2020-02-23 00:07:15,150 - app.py_00:07:15.150037 - INFO - Server Start!!!!!!!!!!!!!!!!!!!!!!
+2020-02-23 00:07:15,787 - werkzeug - WARNING -  * Debugger is active!
+2020-02-23 00:07:15,793 - werkzeug - INFO -  * Debugger PIN: 238-571-924
+2020-02-23 00:07:15,803 - werkzeug - INFO -  * Running on http://1.232.245.14:2020/ (Press CTRL+C to quit)
+2020-02-23 00:07:17,364 - index_00:07:17.364144 - INFO - index function success
+2020-02-23 00:07:53,794 - app.py_00:07:53.794667 - INFO - Server Start!!!!!!!!!!!!!!!!!!!!!!
+2020-02-23 00:07:54,453 - werkzeug - WARNING -  * Debugger is active!
+2020-02-23 00:07:54,459 - werkzeug - INFO -  * Debugger PIN: 238-571-924
+2020-02-23 00:07:54,468 - werkzeug - INFO -  * Running on http://1.232.245.14:2020/ (Press CTRL+C to quit)
+2020-02-23 00:07:54,792 - realTimeProgram_00:07:54.734182 - INFO - 종목코드 086980 에 대한 SP 실시간 등록 해제 실패!!!
+2020-02-23 00:07:54,793 - realTimeProgram_00:07:54.734182 - INFO - 종목코드 148150 에 대한 SP 실시간 등록 해제 실패!!!
+2020-02-23 00:07:54,793 - realTimeProgram_00:07:54.734182 - INFO - 종목코드 012280 에 대한 SP 실시간 등록 해제 실패!!!
+2020-02-23 00:07:54,793 - realTimeProgram_00:07:54.734182 - INFO - 종목코드 039860 에 대한 SP 실시간 등록 해제 실패!!!
+2020-02-23 00:07:54,793 - realTimeProgram_00:07:54.734182 - INFO - 종목코드 131390 에 대한 SP 실시간 등록 해제 실패!!!
+2020-02-23 00:07:54,793 - realTimeProgram_00:07:54.734182 - INFO - 종목코드 001210 에 대한 SP 실시간 등록 해제 실패!!!
+2020-02-23 00:07:54,793 - realTimeProgram_00:07:54.734182 - INFO - 종목코드 010050 에 대한 SP 실시간 등록 해제 실패!!!
+2020-02-23 00:07:54,793 - realTimeProgram_00:07:54.734182 - INFO - 종목코드 049720 에 대한 SP 실시간 등록 해제 실패!!!
+2020-02-23 00:07:54,793 - realTimeProgram_00:07:54.734182 - INFO - 종목코드 144620 에 대한 SP 실시간 등록 해제 실패!!!
+2020-02-23 00:07:54,793 - realTimeProgram_00:07:54.734182 - INFO - 종목코드 018500 에 대한 SP 실시간 등록 해제 실패!!!
+2020-02-23 00:07:54,793 - realTimeProgram_00:07:54.734182 - INFO - 종목코드 001040 에 대한 SP 실시간 등록 해제 실패!!!
+2020-02-23 00:07:54,793 - realTimeProgram_00:07:54.734182 - INFO - 종목코드 003800 에 대한 SP 실시간 등록 해제 실패!!!
+2020-02-23 00:07:54,793 - realTimeProgram_00:07:54.734182 - INFO - 종목코드 297090 에 대한 SP 실시간 등록 해제 실패!!!
+2020-02-23 00:07:54,793 - realTimeProgram_00:07:54.734182 - INFO - 종목코드 088130 에 대한 SP 실시간 등록 해제 실패!!!
+2020-02-23 00:07:54,794 - realTimeProgram_00:07:54.734182 - INFO - 종목코드 222080 에 대한 SP 실시간 등록 해제 실패!!!
+2020-02-23 00:07:54,794 - realTimeProgram_00:07:54.734182 - INFO - 종목코드 016380 에 대한 SP 실시간 등록 해제 실패!!!
+2020-02-23 00:07:54,794 - realTimeProgram_00:07:54.734182 - INFO - 종목코드 030720 에 대한 SP 실시간 등록 해제 실패!!!
+2020-02-23 00:07:54,794 - realTimeProgram_00:07:54.734182 - INFO - 종목코드 058730 에 대한 SP 실시간 등록 해제 실패!!!
+2020-02-23 00:07:54,794 - realTimeProgram_00:07:54.734182 - INFO - 종목코드 214450 에 대한 SP 실시간 등록 해제 실패!!!
+2020-02-23 00:07:54,796 - realTimeProgram_00:07:54.734182 - INFO - 종목코드 086980 에 대한 SP 실시간 등록 성공!!!
+2020-02-23 00:07:54,796 - realTimeProgram_00:07:54.734182 - INFO - 종목코드 148150 에 대한 SP 실시간 등록 성공!!!
+2020-02-23 00:07:54,796 - realTimeProgram_00:07:54.734182 - INFO - 종목코드 012280 에 대한 SP 실시간 등록 성공!!!
+2020-02-23 00:07:54,797 - realTimeProgram_00:07:54.734182 - INFO - 종목코드 039860 에 대한 SP 실시간 등록 성공!!!
+2020-02-23 00:07:54,797 - realTimeProgram_00:07:54.734182 - INFO - 종목코드 131390 에 대한 SP 실시간 등록 성공!!!
+2020-02-23 00:07:54,797 - realTimeProgram_00:07:54.734182 - INFO - 종목코드 001210 에 대한 SP 실시간 등록 성공!!!
+2020-02-23 00:07:54,797 - realTimeProgram_00:07:54.734182 - INFO - 종목코드 010050 에 대한 SP 실시간 등록 성공!!!
+2020-02-23 00:07:54,797 - realTimeProgram_00:07:54.734182 - INFO - 종목코드 049720 에 대한 SP 실시간 등록 성공!!!
+2020-02-23 00:07:54,797 - realTimeProgram_00:07:54.734182 - INFO - 종목코드 144620 에 대한 SP 실시간 등록 성공!!!
+2020-02-23 00:07:54,797 - realTimeProgram_00:07:54.734182 - INFO - 종목코드 018500 에 대한 SP 실시간 등록 성공!!!
+2020-02-23 00:07:54,797 - realTimeProgram_00:07:54.734182 - INFO - 종목코드 001040 에 대한 SP 실시간 등록 성공!!!
+2020-02-23 00:07:54,797 - realTimeProgram_00:07:54.734182 - INFO - 종목코드 003800 에 대한 SP 실시간 등록 성공!!!
+2020-02-23 00:07:54,797 - realTimeProgram_00:07:54.734182 - INFO - 종목코드 297090 에 대한 SP 실시간 등록 성공!!!
+2020-02-23 00:07:54,799 - realTimeProgram_00:07:54.734182 - INFO - 종목코드 088130 에 대한 SP 실시간 등록 성공!!!
+2020-02-23 00:07:54,799 - realTimeProgram_00:07:54.734182 - INFO - 종목코드 222080 에 대한 SP 실시간 등록 성공!!!
+2020-02-23 00:07:54,799 - realTimeProgram_00:07:54.734182 - INFO - 종목코드 016380 에 대한 SP 실시간 등록 성공!!!
+2020-02-23 00:07:54,799 - realTimeProgram_00:07:54.734182 - INFO - 종목코드 030720 에 대한 SP 실시간 등록 성공!!!
+2020-02-23 00:07:54,799 - realTimeProgram_00:07:54.734182 - INFO - 종목코드 058730 에 대한 SP 실시간 등록 성공!!!
+2020-02-23 00:07:54,799 - realTimeProgram_00:07:54.734182 - INFO - 종목코드 214450 에 대한 SP 실시간 등록 성공!!!
+2020-02-23 00:10:03,946 - index_00:10:03.946555 - INFO - index function success
+2020-02-23 00:13:04,455 - realTimeProgram_00:13:04.396874 - INFO - 종목코드 086980 에 대한 SP 실시간 등록 해제 실패!!!
+2020-02-23 00:13:04,455 - realTimeProgram_00:13:04.396874 - INFO - 종목코드 148150 에 대한 SP 실시간 등록 해제 실패!!!
+2020-02-23 00:13:04,455 - realTimeProgram_00:13:04.396874 - INFO - 종목코드 012280 에 대한 SP 실시간 등록 해제 실패!!!
+2020-02-23 00:13:04,455 - realTimeProgram_00:13:04.396874 - INFO - 종목코드 039860 에 대한 SP 실시간 등록 해제 실패!!!
+2020-02-23 00:13:04,455 - realTimeProgram_00:13:04.396874 - INFO - 종목코드 131390 에 대한 SP 실시간 등록 해제 실패!!!
+2020-02-23 00:13:04,456 - realTimeProgram_00:13:04.396874 - INFO - 종목코드 001210 에 대한 SP 실시간 등록 해제 실패!!!
+2020-02-23 00:13:04,456 - realTimeProgram_00:13:04.396874 - INFO - 종목코드 010050 에 대한 SP 실시간 등록 해제 실패!!!
+2020-02-23 00:13:04,456 - realTimeProgram_00:13:04.396874 - INFO - 종목코드 049720 에 대한 SP 실시간 등록 해제 실패!!!
+2020-02-23 00:13:04,456 - realTimeProgram_00:13:04.396874 - INFO - 종목코드 144620 에 대한 SP 실시간 등록 해제 실패!!!
+2020-02-23 00:13:04,456 - realTimeProgram_00:13:04.396874 - INFO - 종목코드 018500 에 대한 SP 실시간 등록 해제 실패!!!
+2020-02-23 00:13:04,456 - realTimeProgram_00:13:04.396874 - INFO - 종목코드 001040 에 대한 SP 실시간 등록 해제 실패!!!
+2020-02-23 00:13:04,457 - realTimeProgram_00:13:04.396874 - INFO - 종목코드 003800 에 대한 SP 실시간 등록 해제 실패!!!
+2020-02-23 00:13:04,457 - realTimeProgram_00:13:04.396874 - INFO - 종목코드 297090 에 대한 SP 실시간 등록 해제 실패!!!
+2020-02-23 00:13:04,457 - realTimeProgram_00:13:04.396874 - INFO - 종목코드 088130 에 대한 SP 실시간 등록 해제 실패!!!
+2020-02-23 00:13:04,457 - realTimeProgram_00:13:04.396874 - INFO - 종목코드 222080 에 대한 SP 실시간 등록 해제 실패!!!
+2020-02-23 00:13:04,457 - realTimeProgram_00:13:04.396874 - INFO - 종목코드 016380 에 대한 SP 실시간 등록 해제 실패!!!
+2020-02-23 00:13:04,457 - realTimeProgram_00:13:04.396874 - INFO - 종목코드 030720 에 대한 SP 실시간 등록 해제 실패!!!
+2020-02-23 00:13:04,458 - realTimeProgram_00:13:04.396874 - INFO - 종목코드 058730 에 대한 SP 실시간 등록 해제 실패!!!
+2020-02-23 00:13:04,458 - realTimeProgram_00:13:04.396874 - INFO - 종목코드 214450 에 대한 SP 실시간 등록 해제 실패!!!
+2020-02-23 00:13:04,459 - realTimeProgram_00:13:04.396874 - INFO - 종목코드 086980 에 대한 SP 실시간 등록 실패!!!
+2020-02-23 00:13:04,459 - realTimeProgram_00:13:04.396874 - INFO - 종목코드 148150 에 대한 SP 실시간 등록 실패!!!
+2020-02-23 00:13:04,459 - realTimeProgram_00:13:04.396874 - INFO - 종목코드 012280 에 대한 SP 실시간 등록 실패!!!
+2020-02-23 00:13:04,459 - realTimeProgram_00:13:04.396874 - INFO - 종목코드 039860 에 대한 SP 실시간 등록 실패!!!
+2020-02-23 00:13:04,460 - realTimeProgram_00:13:04.396874 - INFO - 종목코드 131390 에 대한 SP 실시간 등록 실패!!!
+2020-02-23 00:13:04,460 - realTimeProgram_00:13:04.396874 - INFO - 종목코드 001210 에 대한 SP 실시간 등록 실패!!!
+2020-02-23 00:13:04,460 - realTimeProgram_00:13:04.396874 - INFO - 종목코드 010050 에 대한 SP 실시간 등록 실패!!!
+2020-02-23 00:13:04,460 - realTimeProgram_00:13:04.396874 - INFO - 종목코드 049720 에 대한 SP 실시간 등록 실패!!!
+2020-02-23 00:13:04,460 - realTimeProgram_00:13:04.396874 - INFO - 종목코드 144620 에 대한 SP 실시간 등록 실패!!!
+2020-02-23 00:13:04,460 - realTimeProgram_00:13:04.396874 - INFO - 종목코드 018500 에 대한 SP 실시간 등록 실패!!!
+2020-02-23 00:13:04,461 - realTimeProgram_00:13:04.396874 - INFO - 종목코드 001040 에 대한 SP 실시간 등록 실패!!!
+2020-02-23 00:13:04,461 - realTimeProgram_00:13:04.396874 - INFO - 종목코드 003800 에 대한 SP 실시간 등록 실패!!!
+2020-02-23 00:13:04,461 - realTimeProgram_00:13:04.396874 - INFO - 종목코드 297090 에 대한 SP 실시간 등록 실패!!!
+2020-02-23 00:13:04,461 - realTimeProgram_00:13:04.396874 - INFO - 종목코드 088130 에 대한 SP 실시간 등록 실패!!!
+2020-02-23 00:13:04,461 - realTimeProgram_00:13:04.396874 - INFO - 종목코드 222080 에 대한 SP 실시간 등록 실패!!!
+2020-02-23 00:13:04,461 - realTimeProgram_00:13:04.396874 - INFO - 종목코드 016380 에 대한 SP 실시간 등록 실패!!!
+2020-02-23 00:13:04,462 - realTimeProgram_00:13:04.396874 - INFO - 종목코드 030720 에 대한 SP 실시간 등록 실패!!!
+2020-02-23 00:13:04,462 - realTimeProgram_00:13:04.396874 - INFO - 종목코드 058730 에 대한 SP 실시간 등록 실패!!!
+2020-02-23 00:13:04,462 - realTimeProgram_00:13:04.396874 - INFO - 종목코드 214450 에 대한 SP 실시간 등록 실패!!!
+2020-02-23 00:14:28,414 - app.py_00:14:28.414134 - INFO - Server Start!!!!!!!!!!!!!!!!!!!!!!
+2020-02-23 00:14:29,055 - werkzeug - WARNING -  * Debugger is active!
+2020-02-23 00:14:29,061 - werkzeug - INFO -  * Debugger PIN: 238-571-924
+2020-02-23 00:14:29,071 - werkzeug - INFO -  * Running on http://1.232.245.14:2020/ (Press CTRL+C to quit)
+2020-02-23 00:14:31,812 - werkzeug - INFO -  * Detected change in 'C:\\dev\\indiPyProject\\process\\SP.py', reloading
+2020-02-23 00:14:33,163 - app.py_00:14:33.163430 - INFO - Server Start!!!!!!!!!!!!!!!!!!!!!!
+2020-02-23 00:14:33,810 - werkzeug - WARNING -  * Debugger is active!
+2020-02-23 00:14:33,816 - werkzeug - INFO -  * Debugger PIN: 238-571-924
+2020-02-23 00:14:33,826 - werkzeug - INFO -  * Running on http://1.232.245.14:2020/ (Press CTRL+C to quit)
+2020-02-23 00:15:26,421 - werkzeug - INFO -  * Detected change in 'C:\\dev\\indiPyProject\\process\\SP.py', reloading
+2020-02-23 00:15:27,774 - app.py_00:15:27.774353 - INFO - Server Start!!!!!!!!!!!!!!!!!!!!!!
+2020-02-23 00:15:28,416 - werkzeug - WARNING -  * Debugger is active!
+2020-02-23 00:15:28,422 - werkzeug - INFO -  * Debugger PIN: 238-571-924
+2020-02-23 00:15:28,432 - werkzeug - INFO -  * Running on http://1.232.245.14:2020/ (Press CTRL+C to quit)
+2020-02-23 00:18:22,239 - werkzeug - INFO -  * Detected change in 'C:\\dev\\indiPyProject\\process\\realTimeForeign.py', reloading
+2020-02-23 00:18:23,594 - app.py_00:18:23.594056 - INFO - Server Start!!!!!!!!!!!!!!!!!!!!!!
+2020-02-23 00:18:24,234 - werkzeug - WARNING -  * Debugger is active!
+2020-02-23 00:18:24,239 - werkzeug - INFO -  * Debugger PIN: 238-571-924
+2020-02-23 00:18:24,249 - werkzeug - INFO -  * Running on http://1.232.245.14:2020/ (Press CTRL+C to quit)
+2020-02-23 00:24:03,099 - werkzeug - INFO -  * Detected change in 'C:\\dev\\indiPyProject\\process\\SP.py', reloading
+2020-02-23 00:24:04,516 - app.py_00:24:04.516558 - INFO - Server Start!!!!!!!!!!!!!!!!!!!!!!
+2020-02-23 00:24:05,160 - werkzeug - WARNING -  * Debugger is active!
+2020-02-23 00:24:05,165 - werkzeug - INFO -  * Debugger PIN: 238-571-924
+2020-02-23 00:24:05,175 - werkzeug - INFO -  * Running on http://1.232.245.14:2020/ (Press CTRL+C to quit)
+2020-02-23 00:27:27,313 - werkzeug - INFO -  * Detected change in 'C:\\dev\\indiPyProject\\pyflask\\app.py', reloading
+2020-02-23 00:27:28,696 - app.py_00:27:28.696437 - INFO - Server Start!!!!!!!!!!!!!!!!!!!!!!
+2020-02-23 00:27:29,331 - werkzeug - WARNING -  * Debugger is active!
+2020-02-23 00:27:29,337 - werkzeug - INFO -  * Debugger PIN: 238-571-924
+2020-02-23 00:27:29,346 - werkzeug - INFO -  * Running on http://1.232.245.14:2020/ (Press CTRL+C to quit)
+2020-02-23 00:40:19,209 - index_00:40:19.209380 - INFO - index function success
+2020-02-23 01:09:04,015 - app.py_01:09:04.015960 - INFO - Server Start!!!!!!!!!!!!!!!!!!!!!!
+2020-02-23 01:09:04,649 - werkzeug - INFO -  * Restarting with stat
+2020-02-23 01:09:06,160 - app.py_01:09:06.160225 - INFO - Server Start!!!!!!!!!!!!!!!!!!!!!!
+2020-02-23 01:09:06,788 - werkzeug - WARNING -  * Debugger is active!
+2020-02-23 01:09:06,795 - werkzeug - INFO -  * Debugger PIN: 238-571-924
+2020-02-23 01:09:06,805 - werkzeug - INFO -  * Running on http://1.232.245.14:2020/ (Press CTRL+C to quit)
+2020-02-23 01:09:13,427 - app.py_01:09:13.427777 - INFO - Server Start!!!!!!!!!!!!!!!!!!!!!!
+2020-02-23 01:09:14,065 - werkzeug - INFO -  * Restarting with stat
+2020-02-23 01:09:15,585 - app.py_01:09:15.585982 - INFO - Server Start!!!!!!!!!!!!!!!!!!!!!!
+2020-02-23 01:09:16,220 - werkzeug - WARNING -  * Debugger is active!
+2020-02-23 01:09:16,226 - werkzeug - INFO -  * Debugger PIN: 238-571-924
+2020-02-23 01:09:16,236 - werkzeug - INFO -  * Running on http://1.232.245.14:2020/ (Press CTRL+C to quit)
+2020-02-23 01:10:26,348 - werkzeug - INFO -  * Detected change in 'C:\\dev\\indiPyProject\\pyflask\\app.py', reloading
+2020-02-23 01:10:26,436 - werkzeug - INFO -  * Restarting with stat
+2020-02-23 01:10:28,003 - app.py_01:10:28.003274 - INFO - Server Start!!!!!!!!!!!!!!!!!!!!!!
+2020-02-23 01:10:28,633 - werkzeug - WARNING -  * Debugger is active!
+2020-02-23 01:10:28,638 - werkzeug - INFO -  * Debugger PIN: 238-571-924
+2020-02-23 01:10:28,648 - werkzeug - INFO -  * Running on http://1.232.245.14:2020/ (Press CTRL+C to quit)
+2020-02-23 01:13:58,472 - werkzeug - INFO -  * Detected change in 'C:\\dev\\indiPyProject\\pyflask\\app.py', reloading
+2020-02-23 01:13:58,541 - werkzeug - INFO -  * Restarting with stat
+2020-02-23 01:14:00,060 - app.py_01:14:00.060077 - INFO - Server Start!!!!!!!!!!!!!!!!!!!!!!
+2020-02-23 01:14:00,699 - werkzeug - WARNING -  * Debugger is active!
+2020-02-23 01:14:00,704 - werkzeug - INFO -  * Debugger PIN: 238-571-924
+2020-02-23 01:14:00,714 - werkzeug - INFO -  * Running on http://1.232.245.14:2020/ (Press CTRL+C to quit)
+2020-02-23 01:14:04,366 - app.py_01:14:04.366558 - INFO - Server Start!!!!!!!!!!!!!!!!!!!!!!
+2020-02-23 01:14:05,010 - werkzeug - INFO -  * Restarting with stat
+2020-02-23 01:14:06,493 - app.py_01:14:06.493868 - INFO - Server Start!!!!!!!!!!!!!!!!!!!!!!
+2020-02-23 01:14:07,123 - werkzeug - WARNING -  * Debugger is active!
+2020-02-23 01:14:07,128 - werkzeug - INFO -  * Debugger PIN: 238-571-924
+2020-02-23 01:14:07,137 - werkzeug - INFO -  * Running on http://1.232.245.14:2020/ (Press CTRL+C to quit)
+2020-02-23 01:15:20,766 - werkzeug - INFO -  * Detected change in 'C:\\dev\\indiPyProject\\pyflask\\app.py', reloading
+2020-02-23 01:15:20,844 - werkzeug - INFO -  * Restarting with stat
+2020-02-23 01:15:22,366 - app.py_01:15:22.366888 - INFO - Server Start!!!!!!!!!!!!!!!!!!!!!!
+2020-02-23 01:15:22,991 - werkzeug - WARNING -  * Debugger is active!
+2020-02-23 01:15:22,997 - werkzeug - INFO -  * Debugger PIN: 238-571-924
+2020-02-23 01:15:23,006 - werkzeug - INFO -  * Running on http://1.232.245.14:2020/ (Press CTRL+C to quit)
+2020-02-23 01:15:32,779 - index_01:15:32.779060 - INFO - index function success
+2020-02-23 01:15:35,386 - index_01:15:35.386063 - INFO - index function success
+2020-02-23 01:16:30,686 - werkzeug - INFO -  * Restarting with stat
+2020-02-23 01:16:32,237 - app.py_01:16:32.237021 - INFO - Server Start!!!!!!!!!!!!!!!!!!!!!!
+2020-02-23 01:16:32,280 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2020-02-23 01:16:32,280 - apscheduler.scheduler - INFO - Added job "TR_SCHART_function" to job store "default"
+2020-02-23 01:16:32,280 - apscheduler.scheduler - INFO - Scheduler started
+2020-02-23 01:16:32,280 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2020-02-23 01:16:32,281 - apscheduler.scheduler - DEBUG - Next wakeup is due at 2020-02-23 01:17:05+09:00 (in 32.718097 seconds)
+2020-02-23 01:17:05,001 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2020-02-23 01:17:05,001 - apscheduler.executors.default - INFO - Running job "TR_SCHART_function (trigger: cron[minute='*/1', second='5'], next run at: 2020-02-23 01:17:05 KST)" (scheduled at 2020-02-23 01:17:05+09:00)
+2020-02-23 01:17:05,002 - apscheduler.scheduler - DEBUG - Next wakeup is due at 2020-02-23 01:18:05+09:00 (in 59.998648 seconds)
+2020-02-23 01:17:05,006 - apscheduler.executors.default - ERROR - Job "TR_SCHART_function (trigger: cron[minute='*/1', second='5'], next run at: 2020-02-23 01:18:05 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\dev\anaconda\envs\py36_32\lib\site-packages\apscheduler\executors\base.py", line 125, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\dev\indiPyProject\pyflask\app.py", line 775, in TR_SCHART_function
+    date = request.form['date']
+  File "C:\dev\anaconda\envs\py36_32\lib\site-packages\werkzeug\local.py", line 348, in __getattr__
+    return getattr(self._get_current_object(), name)
+  File "C:\dev\anaconda\envs\py36_32\lib\site-packages\werkzeug\local.py", line 307, in _get_current_object
+    return self.__local()
+  File "C:\dev\anaconda\envs\py36_32\lib\site-packages\flask\globals.py", line 38, in _lookup_req_object
+    raise RuntimeError(_request_ctx_err_msg)
+RuntimeError: Working outside of request context.
+
+This typically means that you attempted to use functionality that needed
+an active HTTP request.  Consult the documentation on testing for
+information about how to avoid this problem.
+2020-02-23 01:18:05,001 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2020-02-23 01:18:05,003 - apscheduler.executors.default - INFO - Running job "TR_SCHART_function (trigger: cron[minute='*/1', second='5'], next run at: 2020-02-23 01:18:05 KST)" (scheduled at 2020-02-23 01:18:05+09:00)
+2020-02-23 01:18:05,004 - apscheduler.scheduler - DEBUG - Next wakeup is due at 2020-02-23 01:19:05+09:00 (in 59.998136 seconds)
+2020-02-23 01:18:05,006 - apscheduler.executors.default - ERROR - Job "TR_SCHART_function (trigger: cron[minute='*/1', second='5'], next run at: 2020-02-23 01:19:05 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\dev\anaconda\envs\py36_32\lib\site-packages\apscheduler\executors\base.py", line 125, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\dev\indiPyProject\pyflask\app.py", line 775, in TR_SCHART_function
+    date = request.form['date']
+  File "C:\dev\anaconda\envs\py36_32\lib\site-packages\werkzeug\local.py", line 348, in __getattr__
+    return getattr(self._get_current_object(), name)
+  File "C:\dev\anaconda\envs\py36_32\lib\site-packages\werkzeug\local.py", line 307, in _get_current_object
+    return self.__local()
+  File "C:\dev\anaconda\envs\py36_32\lib\site-packages\flask\globals.py", line 38, in _lookup_req_object
+    raise RuntimeError(_request_ctx_err_msg)
+RuntimeError: Working outside of request context.
+
+This typically means that you attempted to use functionality that needed
+an active HTTP request.  Consult the documentation on testing for
+information about how to avoid this problem.
+2020-02-23 22:54:19,802 - app.py_22:54:19.802060 - INFO - Server Start!!!!!!!!!!!!!!!!!!!!!!
+2020-02-23 22:54:19,848 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2020-02-23 22:54:19,848 - apscheduler.scheduler - INFO - Added job "TR_SCHART_function" to job store "default"
+2020-02-23 22:54:19,848 - apscheduler.scheduler - INFO - Scheduler started
+2020-02-23 22:54:19,848 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2020-02-23 22:54:19,848 - apscheduler.scheduler - DEBUG - Next wakeup is due at 2020-02-23 22:55:05+09:00 (in 45.151037 seconds)
+2020-02-23 22:55:05,014 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2020-02-23 22:55:05,014 - apscheduler.executors.default - INFO - Running job "TR_SCHART_function (trigger: cron[hour='22-23', minute='*/1', second='5'], next run at: 2020-02-23 22:56:05 KST)" (scheduled at 2020-02-23 22:55:05+09:00)
+2020-02-23 22:55:05,015 - apscheduler.scheduler - DEBUG - Next wakeup is due at 2020-02-23 22:56:05+09:00 (in 59.985623 seconds)
+2020-02-23 22:55:05,021 - apscheduler.executors.default - ERROR - Job "TR_SCHART_function (trigger: cron[hour='22-23', minute='*/1', second='5'], next run at: 2020-02-23 22:56:05 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\dev\anaconda\envs\py36_32\lib\site-packages\apscheduler\executors\base.py", line 125, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:/dev/indiPyProject/pyflask/app.py", line 775, in TR_SCHART_function
+    date = request.form['date']
+  File "C:\dev\anaconda\envs\py36_32\lib\site-packages\werkzeug\local.py", line 348, in __getattr__
+    return getattr(self._get_current_object(), name)
+  File "C:\dev\anaconda\envs\py36_32\lib\site-packages\werkzeug\local.py", line 307, in _get_current_object
+    return self.__local()
+  File "C:\dev\anaconda\envs\py36_32\lib\site-packages\flask\globals.py", line 38, in _lookup_req_object
+    raise RuntimeError(_request_ctx_err_msg)
+RuntimeError: Working outside of request context.
+
+This typically means that you attempted to use functionality that needed
+an active HTTP request.  Consult the documentation on testing for
+information about how to avoid this problem.
+2020-02-23 22:55:48,769 - app.py_22:55:48.769368 - INFO - Server Start!!!!!!!!!!!!!!!!!!!!!!
+2020-02-23 22:55:48,811 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2020-02-23 22:55:48,811 - apscheduler.scheduler - INFO - Added job "TR_SCHART_function" to job store "default"
+2020-02-23 22:55:48,811 - apscheduler.scheduler - INFO - Scheduler started
+2020-02-23 22:55:48,811 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2020-02-23 22:55:48,811 - apscheduler.scheduler - DEBUG - Next wakeup is due at 2020-02-23 22:56:05+09:00 (in 16.188745 seconds)
+2020-02-23 22:56:05,003 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2020-02-23 22:56:05,003 - apscheduler.executors.default - INFO - Running job "TR_SCHART_function (trigger: cron[hour='22-23', minute='*/1', second='5'], next run at: 2020-02-23 22:57:05 KST)" (scheduled at 2020-02-23 22:56:05+09:00)
+2020-02-23 22:56:05,004 - apscheduler.scheduler - DEBUG - Next wakeup is due at 2020-02-23 22:57:05+09:00 (in 59.996086 seconds)
+2020-02-23 22:56:45,281 - app.py_22:56:45.281204 - INFO - Server Start!!!!!!!!!!!!!!!!!!!!!!
+2020-02-23 22:56:45,323 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2020-02-23 22:56:45,323 - apscheduler.scheduler - INFO - Added job "TR_SCHART_function" to job store "default"
+2020-02-23 22:56:45,323 - apscheduler.scheduler - INFO - Scheduler started
+2020-02-23 22:56:45,323 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2020-02-23 22:56:45,323 - apscheduler.scheduler - DEBUG - Next wakeup is due at 2020-02-23 22:57:05+09:00 (in 19.676905 seconds)
+2020-02-23 22:57:05,006 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2020-02-23 22:57:05,006 - apscheduler.executors.default - INFO - Running job "TR_SCHART_function (trigger: cron[hour='22-23', minute='*/1', second='5'], next run at: 2020-02-23 22:57:05 KST)" (scheduled at 2020-02-23 22:57:05+09:00)
+2020-02-23 22:57:05,007 - apscheduler.scheduler - DEBUG - Next wakeup is due at 2020-02-23 22:58:05+09:00 (in 59.993587 seconds)
+2020-02-23 22:57:23,796 - app.py_22:57:23.796181 - INFO - Server Start!!!!!!!!!!!!!!!!!!!!!!
+2020-02-23 22:57:24,462 - werkzeug - INFO -  * Restarting with stat
+2020-02-23 22:57:25,958 - app.py_22:57:25.958400 - INFO - Server Start!!!!!!!!!!!!!!!!!!!!!!
+2020-02-23 22:57:26,600 - werkzeug - WARNING -  * Debugger is active!
+2020-02-23 22:57:26,605 - werkzeug - INFO -  * Debugger PIN: 238-571-924
+2020-02-23 22:57:26,615 - werkzeug - INFO -  * Running on http://1.232.245.14:2020/ (Press CTRL+C to quit)
+2020-02-23 22:57:28,428 - index_22:57:28.428764 - INFO - index function success
+2020-02-23 22:59:01,852 - werkzeug - INFO -  * Restarting with stat
+2020-02-23 22:59:03,382 - app.py_22:59:03.382801 - INFO - Server Start!!!!!!!!!!!!!!!!!!!!!!
+2020-02-23 22:59:04,026 - werkzeug - WARNING -  * Debugger is active!
+2020-02-23 22:59:04,032 - werkzeug - INFO -  * Debugger PIN: 238-571-924
+2020-02-23 22:59:04,041 - werkzeug - INFO -  * Running on http://1.232.245.14:2020/ (Press CTRL+C to quit)
+2020-02-23 22:59:05,495 - index_22:59:05.495151 - INFO - index function success
+2020-02-23 22:59:09,710 - autoLogin.py22:59:09.663972 - INFO - OCX call
+2020-02-23 22:59:09,711 - autoLogin.py22:59:09.663972 - INFO - Login Trying
+2020-02-23 22:59:10,014 - autoLogin.py22:59:09.663972 - INFO - Login Success
+2020-02-23 22:59:11,417 - index_22:59:11.417281 - INFO - index function success
+2020-02-23 22:59:21,976 - index_22:59:21.976039 - INFO - index function success
+2020-02-23 23:02:48,070 - index_23:02:48.070942 - INFO - index function success
+2020-02-23 23:03:21,099 - werkzeug - INFO -  * Restarting with stat
+2020-02-23 23:03:22,797 - app.py_23:03:22.797053 - INFO - Server Start!!!!!!!!!!!!!!!!!!!!!!
+2020-02-23 23:03:23,430 - werkzeug - WARNING -  * Debugger is active!
+2020-02-23 23:03:23,435 - werkzeug - INFO -  * Debugger PIN: 238-571-924
+2020-02-23 23:03:23,445 - werkzeug - INFO -  * Running on http://1.232.245.14:2020/ (Press CTRL+C to quit)
+2020-02-23 23:03:43,562 - werkzeug - INFO -  * Detected change in 'C:\\dev\\indiPyProject\\pyflask\\app.py', reloading
+2020-02-23 23:03:43,634 - werkzeug - INFO -  * Restarting with stat
+2020-02-23 23:03:45,242 - app.py_23:03:45.242015 - INFO - Server Start!!!!!!!!!!!!!!!!!!!!!!
+2020-02-23 23:03:45,895 - werkzeug - WARNING -  * Debugger is active!
+2020-02-23 23:03:45,901 - werkzeug - INFO -  * Debugger PIN: 238-571-924
+2020-02-23 23:03:45,911 - werkzeug - INFO -  * Running on http://1.232.245.14:2020/ (Press CTRL+C to quit)
+2020-02-23 23:20:24,238 - werkzeug - INFO - 1.232.245.14 - - [23/Feb/2020 23:20:24] "GET /get_stock_list/ HTTP/1.1" 200 -
+2020-02-23 23:23:01,829 - werkzeug - INFO -  * Detected change in 'C:\\dev\\indiPyProject\\pyflask\\app.py', reloading
+2020-02-23 23:23:01,955 - werkzeug - INFO -  * Restarting with stat
+2020-02-23 23:23:03,569 - app.py_23:23:03.569057 - INFO - Server Start!!!!!!!!!!!!!!!!!!!!!!
+2020-02-23 23:23:04,217 - werkzeug - WARNING -  * Debugger is active!
+2020-02-23 23:23:04,222 - werkzeug - INFO -  * Debugger PIN: 238-571-924
+2020-02-23 23:23:04,233 - werkzeug - INFO -  * Running on http://1.232.245.14:2020/ (Press CTRL+C to quit)
+2020-02-23 23:27:54,711 - index_23:27:54.711413 - INFO - index function success
+2020-02-23 23:31:23,394 - werkzeug - INFO -  * Restarting with stat
+2020-02-23 23:31:25,012 - app.py_23:31:25.012946 - INFO - Server Start!!!!!!!!!!!!!!!!!!!!!!
+2020-02-23 23:31:25,648 - werkzeug - WARNING -  * Debugger is active!
+2020-02-23 23:31:25,654 - werkzeug - INFO -  * Debugger PIN: 238-571-924
+2020-02-23 23:31:25,663 - werkzeug - INFO -  * Running on http://1.232.245.14:2020/ (Press CTRL+C to quit)
+2020-02-23 23:38:03,122 - werkzeug - INFO -  * Detected change in 'C:\\dev\\indiPyProject\\process\\TR_SCHART.py', reloading
+2020-02-23 23:38:03,226 - werkzeug - INFO -  * Restarting with stat
+2020-02-23 23:38:04,913 - app.py_23:38:04.913369 - INFO - Server Start!!!!!!!!!!!!!!!!!!!!!!
+2020-02-23 23:38:05,558 - werkzeug - WARNING -  * Debugger is active!
+2020-02-23 23:38:05,564 - werkzeug - INFO -  * Debugger PIN: 238-571-924
+2020-02-23 23:38:05,573 - werkzeug - INFO -  * Running on http://1.232.245.14:2020/ (Press CTRL+C to quit)
+2020-02-23 23:40:46,294 - werkzeug - INFO -  * Detected change in 'C:\\dev\\indiPyProject\\process\\TR_SCHART.py', reloading
+2020-02-23 23:40:46,364 - werkzeug - INFO -  * Restarting with stat
+2020-02-23 23:40:47,976 - app.py_23:40:47.976195 - INFO - Server Start!!!!!!!!!!!!!!!!!!!!!!
+2020-02-23 23:40:48,617 - werkzeug - WARNING -  * Debugger is active!
+2020-02-23 23:40:48,622 - werkzeug - INFO -  * Debugger PIN: 238-571-924
+2020-02-23 23:40:48,632 - werkzeug - INFO -  * Running on http://1.232.245.14:2020/ (Press CTRL+C to quit)
+2020-02-23 23:41:58,251 - werkzeug - INFO -  * Detected change in 'C:\\dev\\indiPyProject\\process\\TR_SCHART.py', reloading
+2020-02-23 23:41:58,319 - werkzeug - INFO -  * Restarting with stat
+2020-02-23 23:41:59,929 - app.py_23:41:59.929727 - INFO - Server Start!!!!!!!!!!!!!!!!!!!!!!
+2020-02-23 23:42:00,589 - werkzeug - WARNING -  * Debugger is active!
+2020-02-23 23:42:00,595 - werkzeug - INFO -  * Debugger PIN: 238-571-924
+2020-02-23 23:42:00,605 - werkzeug - INFO -  * Running on http://1.232.245.14:2020/ (Press CTRL+C to quit)
+2020-02-23 23:44:04,090 - werkzeug - INFO -  * Detected change in 'C:\\dev\\indiPyProject\\process\\TR_SCHART.py', reloading
+2020-02-23 23:44:04,158 - werkzeug - INFO -  * Restarting with stat
+2020-02-23 23:44:05,782 - app.py_23:44:05.782058 - INFO - Server Start!!!!!!!!!!!!!!!!!!!!!!
+2020-02-23 23:44:06,417 - werkzeug - WARNING -  * Debugger is active!
+2020-02-23 23:44:06,422 - werkzeug - INFO -  * Debugger PIN: 238-571-924
+2020-02-23 23:44:06,432 - werkzeug - INFO -  * Running on http://1.232.245.14:2020/ (Press CTRL+C to quit)
+2020-02-24 00:29:43,841 - werkzeug - INFO -  * Detected change in 'C:\\dev\\indiPyProject\\process\\TR_SCHART.py', reloading
+2020-02-24 00:29:43,927 - werkzeug - INFO -  * Restarting with stat
+2020-02-24 00:51:10,585 - werkzeug - INFO -  * Restarting with stat
+2020-02-24 00:51:48,469 - werkzeug - INFO -  * Restarting with stat
+2020-02-24 00:52:27,616 - werkzeug - INFO -  * Restarting with stat
+2020-02-24 00:52:50,424 - werkzeug - INFO -  * Restarting with stat
+2020-02-24 00:54:53,944 - werkzeug - INFO -  * Restarting with stat
+2020-02-24 00:57:45,105 - werkzeug - INFO -  * Restarting with stat
+2020-02-24 01:00:43,686 - werkzeug - INFO -  * Restarting with stat
+2020-02-24 01:00:57,685 - werkzeug - INFO -  * Restarting with stat
+2020-02-24 01:05:16,696 - werkzeug - INFO -  * Restarting with stat
+2020-02-24 01:06:28,410 - werkzeug - INFO -  * Restarting with stat
+2020-02-24 01:06:42,403 - werkzeug - INFO -  * Restarting with stat
+2020-02-24 01:06:56,379 - werkzeug - INFO -  * Restarting with stat
+2020-02-24 01:07:21,627 - werkzeug - INFO -  * Restarting with stat
+2020-02-24 01:08:04,498 - werkzeug - INFO -  * Restarting with stat
+2020-02-24 01:09:22,572 - werkzeug - INFO -  * Restarting with stat
+2020-02-24 01:13:20,599 - werkzeug - INFO -  * Restarting with stat
+2020-02-24 01:15:42,982 - werkzeug - INFO -  * Restarting with stat
+2020-02-24 01:16:56,289 - werkzeug - INFO -  * Restarting with stat
+2020-02-24 01:17:02,518 - werkzeug - INFO -  * Restarting with stat
+2020-02-24 01:17:06,516 - werkzeug - INFO -  * Restarting with stat
+2020-02-24 01:21:16,842 - werkzeug - INFO -  * Restarting with stat
+2020-02-24 01:26:05,505 - werkzeug - INFO -  * Restarting with stat
+2020-02-24 01:28:35,401 - werkzeug - INFO -  * Restarting with stat
+2020-02-24 01:28:45,634 - werkzeug - INFO -  * Restarting with stat
+2020-02-24 01:33:34,258 - werkzeug - INFO -  * Restarting with stat
+2020-02-24 01:34:54,788 - werkzeug - INFO -  * Restarting with stat
+2020-02-24 01:37:53,273 - werkzeug - INFO -  * Restarting with stat
+2020-02-24 02:18:45,340 - werkzeug - INFO -  * Restarting with stat
+2020-02-24 02:21:07,542 - werkzeug - INFO -  * Restarting with stat

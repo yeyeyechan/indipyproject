@@ -155,25 +155,7 @@ class TR_SCHART(QMainWindow):
     # 시스템 메시지를 받은 경우 출력합니다.
     def ReceiveSysMsg(self, MsgID):
         print("System Message Received = ", MsgID)
-
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    '''TR_1860_data= mongo_find("stock_data","TR_1860" )
-    delta2 = timedelta(days =60)
-    for TR_1860_single in TR_1860_data:
-        print(TR_1860_single)
-        stock_code= TR_1860_single["stock_code"]
-        market = TR_1860_single["market"]
-        end_day = TR_1860_single["date"]
-        start_day = datetime.datetime.strptime(TR_1860_single["date"], "%Y%m%d").date()
-        start_day -= delta2
-        start_day = start_day.strftime("%Y%m%d")
-        korName = TR_1860_single["korName"]
-        print(start_day)
-        print(end_day)
-        print(1)
-        print(stock_code)
-        activate_Tr= TR_SCHART(stock_code, korName,  'D', '1', start_day,end_day, '9999',market)
-        sleep(1.5)'''
     activate_Tr = TR_SCHART("012800", "대창", 'D', '5', "00000000", "99999999", '9999', "1")
     app.exec_()
