@@ -77,7 +77,7 @@ class TR_SCHART(QMainWindow):
 
         self.collection1 = self.db [self.collection_name1]
         self.collection2 = self.db [self.collection_name2]
-
+        self.realTimeLogger.info("start TR_SCHART")
         #self.market = market
         self.btn_Search()
 
