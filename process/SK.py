@@ -18,10 +18,19 @@ class SK(QMainWindow):
         # Indi API event
         self.indiReal.ReceiveRTData.connect(self.ReceiveRTData)
 
-        collection_name = str(datetime.today().strftime("%Y%m%d")) + "_pr_input"
+        #collection_name = str(datetime.today().strftime("%Y%m%d")) + "_pr_input"
+        collection_name = "20200224" + "_pr_input"
         client = MongoClient('127.0.0.1', 27017)
-        db = client[str(datetime.today().strftime("%Y%m%d"))]
+        #db = client[str(datetime.today().strftime("%Y%m%d"))]
+        db = client["20200224"]
         collection = db[collection_name]
+
+        collection_title1 = "SK_" + str(datetime.today().strftime("%Y%m%d"))
+        collection_title2 = "SK_5min_" + str(datetime.today().strftime("%Y%m%d"))
+
+        #db = client[str(datetime.today().strftime("%Y%m%d"))]
+        self.collection1 = db[collection_title1]
+        self.collection2 = db[collection_title2]
         for i in collection.find():
             ret1= self.indiReal.dynamicCall("UnRequestRTReg(QString, QString)", "SK", i['종목코드'].strip())
             self.realTimeLogger.info("ret1 " + str(ret1))
@@ -41,13 +50,8 @@ class SK(QMainWindow):
     # 요청한 TR로 부터 데이터를 받는 함수입니다.
     def ReceiveRTData(self, realType):
         # TR을 날릴때 ID를 통해 TR이름을 가져옵니다.
-        client = MongoClient('127.0.0.1', 27017)
-        collection_title1 = "SK_" + str(datetime.today().strftime("%Y%m%d"))
-        collection_title2 = "SK_5min_" + str(datetime.today().strftime("%Y%m%d"))
+        self.realTimeLogger = logging_instance("SK ReceiveRTData").mylogger
 
-        db = client[str(datetime.today().strftime("%Y%m%d"))]
-        collection1 = db[collection_title1]
-        collection2 = db[collection_title2]
         print(True)
         print(realType)
         if realType == "SK":
@@ -55,11 +59,11 @@ class SK(QMainWindow):
             # 데이터 받기
             DATA['단축코드'] = self.indiReal.dynamicCall("GetSingleData(int)", 1)
             DATA['시간'] = self.indiReal.dynamicCall("GetSingleData(int)", 2)
-            DATA['외국계순매수수량'] = self.indiReal.dynamicCall("GetSingleData(int)", 47)
+            DATA['외국계순매수수량'] = (int)(self.indiReal.dynamicCall("GetSingleData(int)", 47))
 
             self.realTimeLogger.info(DATA)
             self.realTimeLogger.info("실시간 외국인 수급 데이터 저장 전")
-            self.realTimeLogger.info(collection1.insert(DATA))
+            self.realTimeLogger.info(self.collection1.insert_one(DATA))
             self.realTimeLogger.info("실시간 외국인 수급 데이터 저장 후")
 
             data_time = (int)((int)(DATA['시간'])/100)
@@ -70,10 +74,12 @@ class SK(QMainWindow):
                 elif (int)(times) >= data_time:
                     DATA['시간'] = times
                     if self.collection2.find_one({'단축코드': DATA['단축코드'], '시간': times}):
-                        self.collection2.update( self.collection2.find_one({'단축코드': DATA['단축코드'], '시간': times}), DATA, upsert=True)
+                        data_input = self.collection2.find_one({'단축코드': DATA['단축코드'], '시간': times}).copy()
+                        DATA['_id'] = data_input['_id']
+                        self.collection2.replace_one(data_input, DATA, upsert=True)
                         break
                     else:
-                        self.collection2.insert(DATA)
+                        self.collection2.insert_one(DATA)
                         break
             self.realTimeLogger.info("5분 간격 외국인 수급 데이터 저장  후")
     def ReceiveSysMsg(self, MsgID):
