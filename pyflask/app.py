@@ -388,7 +388,7 @@ def realTime_Price():
 def SP_call_start():
     appLogger = logging_instance("SP_Call_").mylogger
     try:
-        subprocess.call(['python', 'C:\dev\indiPyProject\process\SP.py'])
+        subprocess.call(['sudo', 'python', 'C:\dev\indiPyProject\process\SP.py'])
     except Exception:
         appLogger.error("SP_Call Exception occurs")
         return render_template('process_result.html', message="SP 함수 실행 실패")
@@ -397,7 +397,7 @@ def SP_call_start():
 def SK_call_start():
     appLogger = logging_instance("SK_call_").mylogger
     try:
-        subprocess.call(['python', 'C:\dev\indiPyProject\process\SK.py'])
+        subprocess.call(['sudo','python', 'C:\dev\indiPyProject\process\SK.py'])
     except Exception:
         appLogger.error("SK_Call Exception occurs")
         return render_template('process_result.html', message="SK 함수 실행 실패")
@@ -407,7 +407,7 @@ def SK_call_start():
 def TR_SCHART_call_start():
     appLogger = logging_instance("TR_SCHART_call_").mylogger
     try:
-        subprocess.call(['python', 'C:\dev\indiPyProject\process\TR_SCHART.py'])
+        subprocess.call(['sudo','python', 'C:\dev\indiPyProject\process\TR_SCHART.py'])
     except Exception:
         appLogger.error("TR_SCHART_Call Exception occurs")
         return render_template('process_result.html', message="TR_SCHART 함수 실행 실패")
