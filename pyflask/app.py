@@ -395,6 +395,7 @@ def SP_call_start():
     return render_template('process_result.html', message="SP 함수 실행 완료")
 @app.route('/SK_call/')
 def SK_call_start():
+
     appLogger = logging_instance("SK_call_").mylogger
     try:
         subprocess.call(['sudo','python', 'C:\dev\indiPyProject\process\SK.py'])
