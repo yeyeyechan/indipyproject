@@ -388,7 +388,7 @@ def realTime_Price():
 def SP_call_start():
     appLogger = logging_instance("SP_Call_").mylogger
     try:
-        subprocess.call(['python', 'C:\dev\indiPyProject\process\SP.py'])
+        subprocess.call(['sudo', 'python', 'C:\dev\indiPyProject\process\SP.py'])
     except Exception:
         appLogger.error("SP_Call Exception occurs")
         return render_template('process_result.html', message="SP 함수 실행 실패")
@@ -398,7 +398,7 @@ def SK_call_start():
 
     appLogger = logging_instance("SK_call_").mylogger
     try:
-        subprocess.call(['python', 'C:\dev\indiPyProject\process\SK.py'])
+        subprocess.call(['sudo','python', 'C:\dev\indiPyProject\process\SK.py'])
     except Exception:
 
         appLogger.error("SK_Call Exception occurs")
@@ -409,7 +409,7 @@ def SK_call_start():
 def TR_SCHART_call_start():
     appLogger = logging_instance("TR_SCHART_call_").mylogger
     try:
-        subprocess.call(['python', 'C:\dev\indiPyProject\process\TR_SCHART.py'])
+        subprocess.call(['sudo','python', 'C:\dev\indiPyProject\process\TR_SCHART.py'])
     except Exception:
         appLogger.error("TR_SCHART_Call Exception occurs")
         return render_template('process_result.html', message="TR_SCHART 함수 실행 실패")
@@ -466,37 +466,24 @@ def realTimeProgram_input2():
             "korName"  : i["korName"],
             "gubun" :i["gubun"]
         }
-        print(data)
-        if collection.find_one({'종목코드': i['stock_code']}):
-            continue
-        else:
-            collection.insert(data)
-            time.sleep(0.3)
-            continue
+        collection.insert(data)
+        time.sleep(0.3)
     for i in collection2.find():
         data = {
             "종목코드": i['stock_code'],
             "korName"  : i["korName"],
             "gubun" :i["gubun"]
         }
-        if collection.find_one({'종목코드': i['stock_code']}):
-            continue
-        else:
-            collection.insert(data)
-            time.sleep(0.3)
-            continue
+        collection.insert(data)
+        time.sleep(0.3)
     for i in collection3.find():
         data = {
             "종목코드": i['stock_code'],
             "korName"  : i["korName"],
             "gubun" :i["gubun"]
         }
-        if collection.find_one({'종목코드': i['stock_code']}):
-            continue
-        else:
-            collection.insert(data)
-            time.sleep(0.3)
-            continue
+        collection.insert(data)
+        time.sleep(0.3)
     return render_template('program_input.html')
 
 @app.route('/realTimeProgram_input_page/' , methods = ['POST'])
@@ -751,7 +738,7 @@ def get_stock_list():
                 TR_1206Event.exit(0)
                 break
             print(True)
-            TR_1206Event_vari = TR_1206(i['단축코드'], '20200221', '20200224','1','0', i['종목명'],  i['구분'], i['구분코드'])
+            TR_1206Event_vari = TR_1206(i['단축코드'], '20200219', '20200221','1','0', i['종목명'],  i['구분'], i['구분코드'])
             time.sleep(0.3)
             checkindex +=1
         print(True)
