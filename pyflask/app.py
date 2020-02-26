@@ -400,6 +400,7 @@ def SK_call_start():
     try:
         subprocess.call(['sudo','python', 'C:\dev\indiPyProject\process\SK.py'])
     except Exception:
+
         appLogger.error("SK_Call Exception occurs")
         return render_template('process_result.html', message="SK 함수 실행 실패")
     return render_template('process_result.html', message="SK 함수 실행 완료")
