@@ -591,10 +591,11 @@ def modify():
 def order_list():
     appLogger = logging_instance("order_list_").mylogger
     try:
+        appLogger.info("order_list Event 생성")
         show_order_historyEvent = QApplication(sys.argv)
         show_order_historyVar = show_order_history(request.form['day'])
         show_order_historyEvent.exec_()
-        print(True)
+        appLogger.info("order_list Event exec")
         return render_template("order_list_page.html", my_list=show_order_historyVar.DATA_List)
     except Exception :
         appLogger.error("order_list procss Exception occur")
