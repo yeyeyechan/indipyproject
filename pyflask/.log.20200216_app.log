@@ -1,0 +1,10 @@
+[DEBUG|app.py:43]2020-02-16 15:57:22,999>debug
+[INFO|app.py:44]2020-02-16 15:57:22,999>info
+[WARNING|app.py:45]2020-02-16 15:57:22,999>warning
+[ERROR|app.py:46]2020-02-16 15:57:23,000>error
+[CRITICAL|app.py:47]2020-02-16 15:57:23,000>critical
+[DEBUG|app.py:43]2020-02-16 15:57:24,956>debug
+[INFO|app.py:44]2020-02-16 15:57:24,956>info
+[WARNING|app.py:45]2020-02-16 15:57:24,956>warning
+[ERROR|app.py:46]2020-02-16 15:57:24,956>error
+[CRITICAL|app.py:47]2020-02-16 15:57:24,956>critical
