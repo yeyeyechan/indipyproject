@@ -1,9 +1,14 @@
+import sys
 import logging
-
+sys.path.append("C:\\dev\\indiPyProject\\log")
+sys.path.append("C:\\dev\\indiPyProject\\process")
+sys.path.append("C:\\dev\\indiPyProject\\data")
+sys.path.append("C:\\dev\\indiPyProject\\analysis")
+sys.path.append("C:\\dev\\indiPyProject")
+sys.path.append("C:\\dev\\indiPyProject\\pyflask")
 from log.logger_pyflask import logging_instance
 from flask import Flask, render_template, request, redirect, url_for
 from process.buySellProcess import buySellProcess
-import sys
 from pymongo import MongoClient
 from process.autoLogin import autoLogin
 from process.autoLogin import autoLoginCheck
@@ -11,6 +16,7 @@ from process.realTimeForeign import  realTimeForeign
 from PyQt5.QtWidgets import QApplication
 from process.show_order_history import show_order_history
 from process.buySellModify import buySellModify
+from process.RealTimeAccount import RealTimeAccount
 import os
 import datetime
 import time
@@ -23,13 +29,18 @@ from data.TR_1314_3 import TR_1314_3
 from process.realTimeConclusion import realTimeConclusion
 import subprocess
 from analysis.monitoring_new import monitoring_new
-from apscheduler.schedulers.blocking import BlockingScheduler
-
+from datetime import timedelta
 from process.TR_SCHART import TR_SCHART
 from process.SP import SP
 app = Flask(__name__)
 appLogger = logging_instance("app.py_").mylogger
+
 appLogger.info("Server Start!!!!!!!!!!!!!!!!!!!!!!")
+appLogger.info("sys.path")
+appLogger.info(sys.path)
+appLogger.info("os.getcwd()")
+appLogger.info(os.getcwd())
+
 
 @app.route('/')
 def index():
@@ -113,6 +124,40 @@ def monitoring_new_test():
     except Exception:
         return redirect(url_for('index'))
     return render_template('monitoring_test.html' , key = final_data.keys() , time_line = common_min_timeline_var2 ,  values= final_data, values2= final_data2, values3 = final_data3 , length = total_time)
+@app.route('/monitoring_new_test2/', methods= ['POST'])
+def monitoring_new_test2():
+    try:
+        py_day = datetime.datetime.today().strftime("%Y%m%d")
+        date = request.form['date']
+
+        py_time = datetime.datetime.now()
+        hour = py_time.hour
+        min = py_time.minute
+        if (hour == 15 and min >= 30) or  hour > 15:
+            hour = 15
+            min = 30
+        if py_day != date:
+            hour = 15
+            min = 30
+        #78개임(날) 905-1530
+        total_time = (int)((hour*60+min - 9*60 -5)/5)
+        if total_time <=0:
+            total_time =1
+        elif total_time == 77:
+            total_time += 1
+        else:
+            total_time +=2
+        #total_time =3
+        monitoring_new_var = monitoring_new(date)
+
+        final_data= monitoring_new_var.final_data
+        final_data2= monitoring_new_var.final_data2
+        final_data3= monitoring_new_var.final_data3
+        acc_stock_code= monitoring_new_var.acc_stock_code
+        common_min_timeline_var2 = common_min_shortTime(5).timeline[:total_time]
+    except Exception:
+        return redirect(url_for('index'))
+    return render_template('monitoring_test2.html'  , time_line = common_min_timeline_var2 ,  values= final_data, values2= final_data2, values3 = final_data3 ,acc_stock_code=acc_stock_code, length = total_time)
 
 @app.route('/monitoring_test/', methods= ['POST'])
 def monitoring_test():
@@ -329,8 +374,16 @@ def realTimeConclusion_function():
         realTimeConclusionEvent.exec()
     except Exception:
         return  render_template('process_result.html' , message="realTimeConclusion_function 실패")
-    return render_template('process_result.html', message="realTimeConclusion_function 실패")
-
+    return render_template('process_result.html', message="realTimeConclusion_function 성공")
+@app.route('/realTimeAccount/')
+def realTimeAccount_function():
+    try:
+        realTimeAccountEvent = QApplication(sys.argv)
+        RealTimeAccount_var = RealTimeAccount()
+        realTimeAccountEvent.exec()
+    except Exception:
+        return  render_template('process_result.html' , message="realTimeAccount_function 실패")
+    return render_template('process_result.html', message="realTimeAccount_function 성공")
 @app.route('/realTime_Price/',  methods = ['POST'])
 def realTime_Price():
     date = request.form['date']
@@ -464,25 +517,46 @@ def realTimeProgram_input2():
         data = {
             "종목코드": i['stock_code'],
             "korName"  : i["korName"],
-            "gubun" :i["gubun"]
+            "gubun" :i["gubun"],
+            "연속일자": i["연속일자"]
+
         }
-        collection.insert(data)
+        if collection.find_one({'종목코드': data['종목코드']}):
+            data_input =  collection.find_one({'종목코드': data['종목코드']}).copy()
+            data['_id'] = data_input['_id']
+            collection.replace_one(data_input, data, upsert=True)
+        else:
+            collection.insert_one(data)
         time.sleep(0.3)
     for i in collection2.find():
         data = {
             "종목코드": i['stock_code'],
-            "korName"  : i["korName"],
-            "gubun" :i["gubun"]
+            "korName": i["korName"],
+            "gubun": i["gubun"],
+            "연속일자": i["연속일자"]
+
         }
-        collection.insert(data)
+        if collection.find_one({'종목코드': data['종목코드']}):
+            data_input = collection.find_one({'종목코드': data['종목코드']}).copy()
+            data['_id'] = data_input['_id']
+            collection.replace_one(data_input, data, upsert=True)
+        else:
+            collection.insert_one(data)
         time.sleep(0.3)
     for i in collection3.find():
         data = {
             "종목코드": i['stock_code'],
             "korName"  : i["korName"],
-            "gubun" :i["gubun"]
+            "gubun" :i["gubun"],
+            "연속일자": i["연속일자"]
+
         }
-        collection.insert(data)
+        if collection.find_one({'종목코드': data['종목코드']}):
+            data_input =  collection.find_one({'종목코드': data['종목코드']}).copy()
+            data['_id'] = data_input['_id']
+            collection.replace_one(data_input, data, upsert=True)
+        else:
+            collection.insert_one(data)
         time.sleep(0.3)
     return render_template('program_input.html')
 
@@ -676,11 +750,10 @@ def status_page():
         return render_template("status_page.html")
     except Exception:
         redirect(url_for('index'))
-@app.route('/foreign_company/' )
+@app.route('/foreign_company/'   , methods = ['POST'])
 def foreign_company():
     try:
-        db_name =str(datetime.datetime.today().strftime("%Y%m%d"))
-        #db_name = "20200224"
+        db_name= request.form['flag']
         TR_1314_3Event = QApplication(sys.argv)
         TR_1314_3_vari = TR_1314_3(db_name)
         TR_1314_3Event.exec_()
@@ -690,10 +763,10 @@ def foreign_company():
     return render_template("success.html")
 
 
-@app.route('/get_stock_list/' )
+@app.route('/get_stock_list/' , methods = ['POST'] )
 def get_stock_list():
     try:
-        db_name = str(datetime.datetime.today().strftime("%Y%m%d"))
+        db_name =request.form['date']
         #db_name = "20200224"
         client = MongoClient('127.0.0.1', 27017)
         db = client[db_name]
@@ -701,59 +774,32 @@ def get_stock_list():
         collection1 = db["TR_1314_3_2"]
         collection2 = db["TR_1314_3_3"]
         collection3 = db["TR_1314_3_5"]
-        collection_status = db["TR_1206_status"]
-        collection_status_param = {
-            "status": "Processing"
-        }
-        if collection_status.find():
-            collection_status.insert(collection_status_param)
-        else:
-            for i in collection_status.find():
-                try:
-                    if i["status"] != "":
-                        collection_status.update({
-                            "status": i["status"]
-                        }, {
-                            "status": "Processing"
-                        })
-                        break
-                    else:
-                        collection_status.insert(collection_status_param)
-                except Exception:
-                    print(Exception)
-                    return redirect(url_for('index'))
+
         for i in collection1.find():
             collection_data.append(i)
         for i in collection2.find():
             collection_data.append(i)
         for i in collection3.find():
             collection_data.append(i)
-        print("len")
-        print(len(collection_data))
         TR_1206Event = QApplication(sys.argv)
         checkindex = 0
         for  i in collection_data:
+            standard_length = 0
             if checkindex == len(collection_data):
-            #if checkindex == 10:
-                #QCoreApplication.exit()
                 TR_1206Event.exit(0)
                 break
-            print(True)
-            TR_1206Event_vari = TR_1206(i['단축코드'], '20200219', '20200221','1','0', i['종목명'],  i['구분'], i['구분코드'])
-            time.sleep(0.3)
+            while standard_length <=2 :
+                end_date = db_name
+                start_date = datetime.datetime.strptime(end_date, '%Y%m%d') - timedelta(days=standard_length)
+                TR_1206Event_vari = TR_1206(i['단축코드'], start_date, end_date,'1','0', i['종목명'],  i['구분'], i['구분코드'], db_name,standard_length)
+                time.sleep(0.3)
+                standard_length+=1
             checkindex +=1
-        print(True)
         if checkindex != len(collection_data):
             TR_1206Event.exec_()
-        print("True123")
-        collection_status.update(collection_status_param, {
-            "status": "Success"
-        })
+
         return render_template("success.html")
     except Exception:
-        collection_status.update(collection_status_param, {
-            "status": "Fail"
-        })
         return redirect(url_for('index'))
     return render_template("success.html")
 
@@ -904,6 +950,7 @@ def getPriceBy5Min():
 if __name__ == '__main__':
     host_addr = "1.232.245.14"
     port_num = "2020"
+
     app.run(host = host_addr , port = port_num, debug=True)
     print(10)
 

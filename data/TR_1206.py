@@ -17,7 +17,9 @@ Field#	항 목 명	SIZE	항 목 내 용 설 명
 
 # -*- coding: utf-8 -*-
 import sys
-
+from datetime import timedelta
+from pytimekr import pytimekr
+from analysis.common_data import get_endDay
 from PyQt5.QAxContainer import *
 from PyQt5.QtWidgets import QApplication
 from PyQt5.QtWidgets import QMainWindow
@@ -28,7 +30,7 @@ from PyQt5.QtCore import *
 
 class TR_1206(QMainWindow):
     #def __init__(self, stock_code , start_date, end_date, counts, data_type , korName , market):
-    def __init__(self, stock_code, start_date, end_date, counts, data_type, korName, gubun, gubun_code):
+    def __init__(self, stock_code, start_date, end_date, counts, data_type, korName, gubun, gubun_code,date, standard_length):
 
         super().__init__()
         print("init")
@@ -38,11 +40,17 @@ class TR_1206(QMainWindow):
         self.gubun_code  = gubun_code #  gubun_code
         self.start_date  = start_date # 시작일
         self.end_date  = end_date # 마지막일
-        #self.market  = market # market
         self.IndiTR = QAxWidget("GIEXPERTCONTROL.GiExpertControlCtrl.1")
         self.IndiTR.ReceiveData.connect(self.ReceiveData)
         self.IndiTR.ReceiveSysMsg.connect(self.ReceiveSysMsg)
+        self.standard_length = standard_length
 
+        client = MongoClient('127.0.0.1', 27017)
+        db_name = date
+        db = client[db_name]
+        collection_name = "TR_1206_"+self.gubun_code
+
+        self.collection1 = db[collection_name] #TR_1206_1
         self.columnName = {
             '1': "일자                           ",
             '2': "가격                           ",
@@ -167,21 +175,11 @@ class TR_1206(QMainWindow):
         print("btn_search")
     def ReceiveData(self, rqid):
         # TR을 날릴때 ID를 통해 TR이름을 가져옵니다.
-        client = MongoClient('127.0.0.1', 27017)
-        db_name = str(datetime.datetime.today().strftime("%Y%m%d"))
-        #db_name = "20200213"
-        db = client[db_name]
-        collection_name = "TR_1206_"+self.gubun_code
-        collection1 = db[collection_name] #TR_1206_1
-        collection_status = db["TR_1206_status"]
-        collection_status_param = {
-            "status": "Processing"
-        }
-        collection_status.insert(collection_status_param)
+
         # GetMultiRowCount()는 TR 결과값의 multi row 개수를 리턴합니다.
         nCnt = self.IndiTR.dynamicCall("GetMultiRowCount()")
         list = []
-        check =1
+        check =0
         for i in range(0, nCnt):
             # 데이터 양식
             DATA = {}
@@ -293,36 +291,93 @@ class TR_1206(QMainWindow):
 
             DATA['start_date'] = self.start_date # 시작일
             DATA['end_date'] = self.end_date  # 마지막일
+            DATA['연속일자'] = self.standard_length
 
-
+            print("개인순매수")
+            print(int(DATA[self.columnName['11'].strip()]))
+            print("외국인 순매수 ")
+            print(int(DATA[self.columnName['17'].strip()]))
+            print("기관 순매수 ")
+            print(int(DATA[self.columnName['23'].strip()] ))
+            print("프로그램 순매수 ")
+            print(int(DATA[self.columnName['83'].strip()]))
             if DATA[self.columnName['11'].strip()] is not '' and DATA[self.columnName['17'].strip()] is not '' and DATA[self.columnName['23'].strip()] is not '' and DATA[self.columnName['83'].strip()] is not '' :
                 if int(DATA[self.columnName['11'].strip()])<0 and int(DATA[self.columnName['17'].strip()])>0 and int(DATA[self.columnName['23'].strip()] )>0 and int( DATA[self.columnName['83'].strip()] )>0:
                     check +=1
+                    print("통과")
                 else:
-                    print("end")
+                    print("실패")
                     return
 
             else:
                 return
+        print("check")
+        print(check)
+        print("self.standard_length+1")
+        print(self.standard_length)
+        if check == self.standard_length+1:
+            print("최종 통과")
+            new_DATA = {
 
+            }
+            new_DATA['stock_code'] = DATA['stock_code']
+            new_DATA['gubun'] =DATA['gubun']
+            new_DATA['gubun_code'] = DATA['gubun_code']
+            new_DATA['korName'] =DATA['korName']
+            new_DATA['연속일자'] =DATA['연속일자']
+            if self.collection1.find_one({'stock_code': new_DATA['stock_code']}):
+                data_input = self.collection1.find_one({'stock_code': new_DATA['stock_code']}).copy()
+                new_DATA['_id'] = data_input['_id']
+                self.collection1.replace_one(data_input ,new_DATA, upsert=True)
+            else:
+                self.collection1.insert_one(new_DATA)
 
-        if check ==4:
-            print(True)
-            collection1.insert(DATA)
-            time.sleep(0.3)
+            #time.sleep(0.3)
             return
 
     def ReceiveSysMsg(self, MsgID):
         print("System Message Received = ", MsgID)
 
 if __name__ == "__main__":
+    db_name = "20200302"
     client = MongoClient('127.0.0.1', 27017)
-    db = client["20200207"]
-    collection1 = db["TR_1314_3_3"]
-    collection2= db["TR_1314_3_2"]
+    db = client[db_name]
+    collection_data = []
+    collection1 = db["TR_1314_3_2"]
+    collection2 = db["TR_1314_3_3"]
     collection3 = db["TR_1314_3_5"]
-    app = QApplication(sys.argv)
+
+    for i in collection1.find():
+        collection_data.append(i)
+    for i in collection2.find():
+        collection_data.append(i)
     for i in collection3.find():
-        TR_1206_vari = TR_1206(i["단축코드"], "20200204","20200206","1","0")
-        time.sleep(0.3)
-    app.exec_()
+        collection_data.append(i)
+    TR_1206Event = QApplication(sys.argv)
+    checkindex = 0
+    end_date= get_endDay("20200302")
+    for i in collection_data:
+        standard_length = 0
+        index = 0
+        if checkindex == len(collection_data):
+            TR_1206Event.exit(0)
+            break
+        while standard_length <= 2:
+            start_date = end_date - timedelta(days=index)
+            while True:
+                if pytimekr.is_red_day(start_date):
+                    index +=1
+                    start_date = end_date - timedelta(days=index)
+                else:
+                    break
+            start_date = str(start_date.strftime("%Y%m%d"))
+            new_end_date = str(end_date.strftime("%Y%m%d"))
+            TR_1206Event_vari = TR_1206(i['단축코드'], start_date, new_end_date, '1', '0', i['종목명'], i['구분'], i['구분코드'],
+                                        db_name, standard_length)
+            time.sleep(0.3)
+            standard_length += 1
+            index += 1
+        checkindex += 1
+    if checkindex != len(collection_data):
+        TR_1206Event.exec_()
+

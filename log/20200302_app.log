@@ -1,0 +1,26 @@
+2020-03-02 01:05:42,042 - app.py_01:05:42.042996 - INFO - Server Start!!!!!!!!!!!!!!!!!!!!!!
+2020-03-02 01:05:42,042 - app.py_01:05:42.042996 - INFO - sys.path
+2020-03-02 01:05:42,043 - app.py_01:05:42.042996 - INFO - ['C:\\dev\\indiPyProject\\pyflask', 'C:\\dev\\indiPyProject', 'C:\\dev\\anaconda\\envs\\py36_32\\python36.zip', 'C:\\dev\\anaconda\\envs\\py36_32\\DLLs', 'C:\\dev\\anaconda\\envs\\py36_32\\lib', 'C:\\dev\\anaconda\\envs\\py36_32', 'C:\\dev\\anaconda\\envs\\py36_32\\lib\\site-packages', 'C:\\dev\\anaconda\\envs\\py36_32\\lib\\site-packages\\win32', 'C:\\dev\\anaconda\\envs\\py36_32\\lib\\site-packages\\win32\\lib', 'C:\\dev\\anaconda\\envs\\py36_32\\lib\\site-packages\\Pythonwin', 'C:\\dev\\indiPyProject\\log', 'C:\\dev\\indiPyProject\\process', 'C:\\dev\\indiPyProject\\data', 'C:\\dev\\indiPyProject\\analysis', 'C:\\dev\\indiPyProject', 'C:\\dev\\indiPyProject\\pyflask', 'C:\\dev\\indiPyProject\\log', 'C:\\dev\\indiPyProject\\process', 'C:\\dev\\indiPyProject\\data', 'C:\\dev\\indiPyProject\\analysis', 'C:\\dev\\indiPyProject', 'C:\\dev\\indiPyProject\\pyflask', 'C:\\dev\\indiPyProject\\log', 'C:\\dev\\indiPyProject\\process', 'C:\\dev\\indiPyProject\\data', 'C:\\dev\\indiPyProject\\analysis', 'C:\\dev\\indiPyProject', 'C:\\dev\\indiPyProject\\pyflask', 'C:\\dev\\indiPyProject\\log', 'C:\\dev\\indiPyProject\\process', 'C:\\dev\\indiPyProject\\data', 'C:\\dev\\indiPyProject\\analysis', 'C:\\dev\\indiPyProject', 'C:\\dev\\indiPyProject\\pyflask', 'C:\\dev\\indiPyProject\\log', 'C:\\dev\\indiPyProject\\process', 'C:\\dev\\indiPyProject\\data', 'C:\\dev\\indiPyProject\\analysis', 'C:\\dev\\indiPyProject', 'C:\\dev\\indiPyProject\\pyflask']
+2020-03-02 01:05:42,043 - app.py_01:05:42.042996 - INFO - os.getcwd()
+2020-03-02 01:05:42,043 - app.py_01:05:42.042996 - INFO - C:\dev\indiPyProject\pyflask
+2020-03-02 01:05:42,699 - werkzeug - INFO -  * Restarting with stat
+2020-03-02 01:05:44,508 - app.py_01:05:44.508379 - INFO - Server Start!!!!!!!!!!!!!!!!!!!!!!
+2020-03-02 01:05:44,509 - app.py_01:05:44.508379 - INFO - sys.path
+2020-03-02 01:05:44,509 - app.py_01:05:44.508379 - INFO - ['C:\\dev\\indiPyProject\\pyflask', 'C:\\dev\\indiPyProject', 'C:\\dev\\anaconda\\envs\\py36_32\\python36.zip', 'C:\\dev\\anaconda\\envs\\py36_32\\DLLs', 'C:\\dev\\anaconda\\envs\\py36_32\\lib', 'C:\\dev\\anaconda\\envs\\py36_32', 'C:\\dev\\anaconda\\envs\\py36_32\\lib\\site-packages', 'C:\\dev\\anaconda\\envs\\py36_32\\lib\\site-packages\\win32', 'C:\\dev\\anaconda\\envs\\py36_32\\lib\\site-packages\\win32\\lib', 'C:\\dev\\anaconda\\envs\\py36_32\\lib\\site-packages\\Pythonwin', 'C:\\dev\\indiPyProject\\log', 'C:\\dev\\indiPyProject\\process', 'C:\\dev\\indiPyProject\\data', 'C:\\dev\\indiPyProject\\analysis', 'C:\\dev\\indiPyProject', 'C:\\dev\\indiPyProject\\pyflask', 'C:\\dev\\indiPyProject\\log', 'C:\\dev\\indiPyProject\\process', 'C:\\dev\\indiPyProject\\data', 'C:\\dev\\indiPyProject\\analysis', 'C:\\dev\\indiPyProject', 'C:\\dev\\indiPyProject\\pyflask', 'C:\\dev\\indiPyProject\\log', 'C:\\dev\\indiPyProject\\process', 'C:\\dev\\indiPyProject\\data', 'C:\\dev\\indiPyProject\\analysis', 'C:\\dev\\indiPyProject', 'C:\\dev\\indiPyProject\\pyflask', 'C:\\dev\\indiPyProject\\log', 'C:\\dev\\indiPyProject\\process', 'C:\\dev\\indiPyProject\\data', 'C:\\dev\\indiPyProject\\analysis', 'C:\\dev\\indiPyProject', 'C:\\dev\\indiPyProject\\pyflask', 'C:\\dev\\indiPyProject\\log', 'C:\\dev\\indiPyProject\\process', 'C:\\dev\\indiPyProject\\data', 'C:\\dev\\indiPyProject\\analysis', 'C:\\dev\\indiPyProject', 'C:\\dev\\indiPyProject\\pyflask']
+2020-03-02 01:05:44,509 - app.py_01:05:44.508379 - INFO - os.getcwd()
+2020-03-02 01:05:44,509 - app.py_01:05:44.508379 - INFO - C:\dev\indiPyProject\pyflask
+2020-03-02 01:05:45,168 - werkzeug - WARNING -  * Debugger is active!
+2020-03-02 01:05:45,175 - werkzeug - INFO -  * Debugger PIN: 238-571-924
+2020-03-02 01:05:45,187 - werkzeug - INFO -  * Running on http://1.232.245.14:2020/ (Press CTRL+C to quit)
+2020-03-02 01:05:46,027 - index_01:05:46.027318 - INFO - index function success
+2020-03-02 01:05:55,701 - monitoring_new.py_01:05:55.673533 - INFO - sorted
+2020-03-02 01:05:55,703 - monitoring_new.py_01:05:55.673533 - INFO - sorted
+2020-03-02 01:05:55,704 - monitoring_new.py_01:05:55.673533 - INFO - sorted
+2020-03-02 01:05:55,706 - monitoring_new.py_01:05:55.673533 - INFO - sorted
+2020-03-02 01:05:55,707 - monitoring_new.py_01:05:55.673533 - INFO - sorted
+2020-03-02 01:05:55,709 - monitoring_new.py_01:05:55.673533 - INFO - sorted
+2020-03-02 01:05:55,711 - monitoring_new.py_01:05:55.673533 - INFO - sorted
+2020-03-02 01:05:55,712 - monitoring_new.py_01:05:55.673533 - INFO - sorted
+2020-03-02 01:05:55,714 - monitoring_new.py_01:05:55.673533 - INFO - sorted
+2020-03-02 01:05:55,715 - monitoring_new.py_01:05:55.673533 - INFO - sorted
+2020-03-02 01:05:55,717 - monitoring_new.py_01:05:55.673533 - INFO - sorted

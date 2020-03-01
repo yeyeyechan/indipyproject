@@ -8,25 +8,17 @@ TR 내용 : 총자산 계좌잔고 조회
 
 # -*- coding: utf-8 -*-
 import sys
-from PyQt5.QtGui import *
+sys.path.append("C:\\dev\\indiPyProject\\log")
+sys.path.append("C:\\dev\\indiPyProject\\process")
+sys.path.append("C:\\dev\\indiPyProject\\data")
+sys.path.append("C:\\dev\\indiPyProject\\analysis")
+sys.path.append("C:\\dev\\indiPyProject")
+sys.path.append("C:\\dev\\indiPyProject\\pyflask")
 from PyQt5.QtCore import *
 from PyQt5.QAxContainer import *
-from PyQt5.QtWidgets import *
 from PyQt5.QtWidgets import QApplication
 from PyQt5.QtWidgets import QMainWindow
-from PyQt5.QtWidgets import QPushButton
-from PyQt5.QtWidgets import QLineEdit
-from pandas import Series, DataFrame
-import pandas as pd
-from time import sleep
-import threading
-import numpy as np
-from pymongo import MongoClient
-import datetime
-from data.common import  weekday_check
-from datetime import timedelta
-from data.common import mongo_find
-import time
+
 class stockAccount(QMainWindow):
     def __init__(self,date):
 

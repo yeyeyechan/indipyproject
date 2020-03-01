@@ -70,9 +70,9 @@ class show_order_history(QMainWindow):
                 self.DATA_List.append(DATA)
         else:
             self.realTimeLogger.info("SABA231Q1 data not received")
-            QCoreApplication.instance().quit(0)
+            QCoreApplication.instance().quit()
         self.realTimeLogger.info("Call Qapplication instance quit ")
-        QCoreApplication.instance().quit(0)
+        QCoreApplication.instance().quit()
         # 시스템 메시지를 받은 경우 출력합니다.
     def ReceiveSysMsg(self, MsgID):
         self.realTimeLogger = logging_instance("show_order_history.py 주문 체결/미체결 내역 조회").mylogger

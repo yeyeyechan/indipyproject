@@ -1,5 +1,10 @@
 import sys
-
+sys.path.append("C:\\dev\\indiPyProject\\log")
+sys.path.append("C:\\dev\\indiPyProject\\process")
+sys.path.append("C:\\dev\\indiPyProject\\data")
+sys.path.append("C:\\dev\\indiPyProject\\analysis")
+sys.path.append("C:\\dev\\indiPyProject")
+sys.path.append("C:\\dev\\indiPyProject\\pyflask")
 from PyQt5.QAxContainer import *
 from PyQt5.QtWidgets import QApplication
 from PyQt5.QtWidgets import QMainWindow
@@ -12,17 +17,20 @@ class SK(QMainWindow):
     def __init__(self):
         super().__init__()
         self.realTimeLogger = logging_instance("SK.py_").mylogger
+        self.realTimeLogger.info("SK 함수 실행")
+        self.realTimeLogger.info("QAxWidget Call")
         self.indiReal = QAxWidget("GIEXPERTCONTROL.GiExpertControlCtrl.1")
+        self.realTimeLogger.info("QAxWidget Call 이후")
         self.timeline = common_min_shortTime(5).timeline
 
         # Indi API event
         self.indiReal.ReceiveRTData.connect(self.ReceiveRTData)
 
-        #collection_name = str(datetime.today().strftime("%Y%m%d")) + "_pr_input"
-        collection_name = "20200224" + "_pr_input"
+        collection_name = str(datetime.today().strftime("%Y%m%d")) + "_pr_input"
+        #collection_name = "20200228" + "_pr_input"
         client = MongoClient('127.0.0.1', 27017)
-        #db = client[str(datetime.today().strftime("%Y%m%d"))]
-        db = client["20200224"]
+        db = client[str(datetime.today().strftime("%Y%m%d"))]
+        #db = client["20200228"]
         collection = db[collection_name]
 
         collection_title1 = "SK_" + str(datetime.today().strftime("%Y%m%d"))
@@ -76,10 +84,10 @@ class SK(QMainWindow):
                     if self.collection2.find_one({'단축코드': DATA['단축코드'], '시간': times}):
                         data_input = self.collection2.find_one({'단축코드': DATA['단축코드'], '시간': times}).copy()
                         DATA['_id'] = data_input['_id']
-                        self.collection2.replace_one(data_input, DATA, upsert=True)
+                        self.realTimeLogger.info(self.collection2.replace_one(data_input, DATA, upsert=True))
                         break
                     else:
-                        self.collection2.insert_one(DATA)
+                        self.realTimeLogger.info(self.collection2.insert_one(DATA))
                         break
             self.realTimeLogger.info("5분 간격 외국인 수급 데이터 저장  후")
     def ReceiveSysMsg(self, MsgID):

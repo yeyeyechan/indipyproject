@@ -1,6 +1,7 @@
 
-
-
+import datetime
+from datetime import timedelta
+from pytimekr import pytimekr
 class common_min_timeline():
     def __init__(self, standard):
         #standard 기준이 되는 int값
@@ -51,3 +52,17 @@ class common_min_shortTime():
                 input = next_input
         print(self.timeline)
         print(len(self.timeline))
+def get_endDay(db_name):
+    index = 1
+    end_date = datetime.datetime.strptime(db_name, '%Y%m%d') - timedelta(days=index)
+    if pytimekr.is_red_day(end_date):
+        while True:
+            index +=1
+            end_date = datetime.datetime.strptime(db_name, '%Y%m%d') - timedelta(days=index)
+            if pytimekr.is_red_day(end_date):
+                continue
+            else:
+                break
+    return end_date
+if __name__ == "__main__":
+    print(get_endDay("20200302"))

@@ -1,4 +1,10 @@
 import sys
+sys.path.append("C:\\dev\\indiPyProject\\log")
+sys.path.append("C:\\dev\\indiPyProject\\process")
+sys.path.append("C:\\dev\\indiPyProject\\data")
+sys.path.append("C:\\dev\\indiPyProject\\analysis")
+sys.path.append("C:\\dev\\indiPyProject")
+sys.path.append("C:\\dev\\indiPyProject\\pyflask")
 from PyQt5.QAxContainer import *
 from PyQt5.QtWidgets import QApplication
 from PyQt5.QtWidgets import QMainWindow
@@ -16,10 +22,12 @@ class SP(QMainWindow):
         self.indiReal.ReceiveRTData.connect(self.ReceiveRTData)
         self.timeline = common_min_shortTime(5).timeline
 
-        collection_name ="20200224" + "_pr_input"
-        #collection_name = "20200222" + "_pr_input"
+        #collection_name ="20200224" + "_pr_input"
+        collection_name = str(datetime.today().strftime("%Y%m%d")) + "_pr_input"
         client = MongoClient('127.0.0.1', 27017)
-        db = client["20200224"]
+        #db = client["20200224"]
+        db = client[str(datetime.today().strftime("%Y%m%d"))]
+        collection = db[collection_name]
 
         collection_title1 = "SP_" + str(datetime.today().strftime("%Y%m%d"))
         collection_title2 = "SP_5min_" + str(datetime.today().strftime("%Y%m%d"))

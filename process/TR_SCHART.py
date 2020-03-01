@@ -27,6 +27,13 @@ Field#	항 목 명	SIZE	항 목 내 용 설 명
 
 # -*- coding: utf-8 -*-
 import sys
+sys.path.append("C:\\dev\\indiPyProject\\log")
+sys.path.append("C:\\dev\\indiPyProject\\process")
+sys.path.append("C:\\dev\\indiPyProject\\data")
+sys.path.append("C:\\dev\\indiPyProject\\analysis")
+sys.path.append("C:\\dev\\indiPyProject")
+sys.path.append("C:\\dev\\indiPyProject\\pyflask")
+
 from PyQt5.QtCore import *
 from PyQt5.QAxContainer import *
 from PyQt5.QtWidgets import QApplication
@@ -106,22 +113,7 @@ class TR_SCHART(QMainWindow):
         # GetMultiRowCount()는 TR 결과값의 multi row 개수를 리턴합니다.
         nCnt = self.IndiTR.dynamicCall("GetMultiRowCount()")
         print(nCnt)
-        stock_data ={
-            'DATE': [],
-            'TIME': [],
-            'OPEN': [],
-            'HIGH': [],
-            'Low': [],
-            'Close': [],
-            'Price_ADJ': [],
-            'Vol_ADJ': [],
-            'Rock': [],
-            'Vol': [],
-            'Trading_Value': [],
-            'start_date': [],
-            'end_date': [],
-            'market': [],
-        }
+
         # 받을 열만큼 가거 데이터를 받도록 합니다.
         for i in range(0, nCnt):
             # 데이터 양식
@@ -147,22 +139,10 @@ class TR_SCHART(QMainWindow):
             #DATA['market'] = self.market # market
 
 
-            stock_data['DATE'].append(DATA['DATE'])
-            stock_data['TIME'].append(DATA['TIME'])
-            stock_data['OPEN'].append(DATA['OPEN'])
-            stock_data['HIGH'].append(DATA['HIGH'])
-            stock_data['Low'].append(DATA['Low'])
-            stock_data['Close'].append(DATA['Close'])
-            stock_data['Price_ADJ'].append(DATA['Price_ADJ'])
-            stock_data['Vol_ADJ'].append(DATA['Vol_ADJ'])
-            stock_data['Rock'].append(DATA['Rock'])
-            stock_data['Vol'].append(DATA['Vol'])
-            stock_data['Trading_Value'].append(DATA['Trading_Value'])
-            print(DATA)
+
 
             self.realTimeLogger.info(DATA)
             self.realTimeLogger.info("실시간 현재가 데이터 저장 전")
-            print(self.collection1.find_one({'stock_code':  self.stock_code, 'TIME':  DATA['TIME'] }))
             if self.collection1.find_one({'stock_code':  self.stock_code, 'TIME':  DATA['TIME'] }):
                 self.collection1.update(self.collection1.find_one({'stock_code':  self.stock_code, 'TIME':  DATA['TIME'] }), DATA, upsert=True)
             else:
@@ -177,11 +157,9 @@ class TR_SCHART(QMainWindow):
                 elif (int)(times) >= data_time:
                     DATA['TIME'] = times
                     if self.collection2.find_one({'stock_code': DATA['stock_code'], 'TIME': times}):
-                        print("test 1234")
                         self.collection2.update(self.collection2.find_one({'stock_code': DATA['stock_code'], 'TIME': times}), DATA,upsert=True)
                         break
                     else:
-                        print("test 12345")
                         self.collection2.insert(DATA)
                         break
             self.realTimeLogger.info("5분 간격현재가 데이터 저장  후")
@@ -191,8 +169,8 @@ class TR_SCHART(QMainWindow):
     def ReceiveSysMsg(self, MsgID):
         print("System Message Received = ", MsgID)
 def TR_SCHART_function():
+    realTimeLogger = logging_instance("TR_SCHART_function.py_").mylogger
     try:
-        realTimeLogger = logging_instance("TR_SCHART_function.py_").mylogger
         py_day = datetime.datetime.today().strftime("%Y%m%d")
         date = str(datetime.datetime.today().strftime("%Y%m%d"))
         #test
@@ -236,18 +214,14 @@ def TR_SCHART_function():
             TR_SCHART_vari = TR_SCHART(i['종목코드'], i['korName'].strip(), '1', '5', "00000000", "99999999",str(total_time),date)
             time.sleep(0.3)
             checkIndex +=1
-        if checkIndex != total_time-1:
+        if checkIndex != total_len+1:
             realTimePriceEvent.exec()
             print("ssibal")
+        realTimeLogger.info("지금은 현재가 데이터 저장 성공")
     except Exception:
         realTimeLogger.info("지금은 현재가 데이터 저장 실패")
-    realTimeLogger.info("지금은 현재가 데이터 저장 성공")
 if __name__ == "__main__":
-    #app = QApplication(sys.argv)
-
     sched = BlockingScheduler()
     sched.add_job(TR_SCHART_function, 'cron', hour ='9-15',minute= '*/5',second='1')
     sched.start()
 
-    #activate_Tr = TR_SCHART("005690", "대창", '1', '5', "00000000", "99999999",  "78")
-    #app.exec_()
