@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 import sys
-from pandas import Series, DataFrame
-import pandas as pd
-from time import sleep
-import threading
-import numpy as np
+sys.path.append("C:\\dev\\indiPyProject\\log")
+sys.path.append("C:\\dev\\indiPyProject\\process")
+sys.path.append("C:\\dev\\indiPyProject\\data")
+sys.path.append("C:\\dev\\indiPyProject\\analysis")
+sys.path.append("C:\\dev\\indiPyProject")
+sys.path.append("C:\\dev\\indiPyProject\\pyflask")
 from pymongo import MongoClient
 from data.common import  weekday_check
 from datetime import timedelta, datetime
