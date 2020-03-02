@@ -138,7 +138,7 @@ def SC_function():
         realTimeLogger.info("지금은 SC 데이터 저장 실패")
     realTimeLogger.info("지금은 현재가 SC 저장 성공")
 if __name__ == "__main__":
-    sched = BlockingScheduler()
-    sched.add_job(SC_function, 'cron', hour ='9-15',minute= '*/5',second='1')
-    sched.start()
+    sched_sc = BlockingScheduler()
+    sched_sc.add_job(SC_function, 'cron', hour ='9-15',minute= '*/5',second='5')
+    sched_sc.start()
 
