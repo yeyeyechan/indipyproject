@@ -57,10 +57,10 @@ class RealTimeAccount(QMainWindow):
         ret2 = self.indiReal.dynamicCall("RequestRTReg(QString, QString)", "AD", "*")
         if ret2 :
             self.realTimeLogger.info("RequestRTReg  AD완료")
-            self.realTimeLogger.info("RequestRTReg  return 값 : " + str(ret1))
+            self.realTimeLogger.info("RequestRTReg  return 값 : " + str(ret2))
         else :
             self.realTimeLogger.error("RequestRTReg AD 실패")
-            self.realTimeLogger.error("RequestRTReg  return 값 : " + str(ret1))
+            self.realTimeLogger.error("RequestRTReg  return 값 : " + str(ret2))
 
         self.realTimeLogger.info("RealTimeAccount  init() 완료")
 

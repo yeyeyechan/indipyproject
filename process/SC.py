@@ -63,6 +63,7 @@ class SC(QMainWindow):
         ret = self.IndiTR.dynamicCall("SetQueryName(QString)", "SC")
         ret = self.IndiTR.dynamicCall("SetSingleData(int, QString)", 0, self.stock_code) # 단축코드
         rqid = self.IndiTR.dynamicCall("RequestData()") # 데이터 요청
+        self.realTimeLogger.info("btn_Search")
     # 요청한 TR로 부터 데이터를 받는 함수입니다.
     def ReceiveData(self, rqid):
         # TR을 날릴때 ID를 통해 TR이름을 가져옵니다.
@@ -139,6 +140,6 @@ def SC_function():
     realTimeLogger.info("지금은 현재가 SC 저장 성공")
 if __name__ == "__main__":
     sched_sc = BlockingScheduler()
-    sched_sc.add_job(SC_function, 'cron', hour ='9-15',minute= '*/5',second='5')
+    sched_sc.add_job(SC_function, 'cron', hour ='23',minute= '*/1',second='1')
     sched_sc.start()
 

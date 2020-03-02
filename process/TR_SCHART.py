@@ -222,6 +222,6 @@ def TR_SCHART_function():
         realTimeLogger.info("지금은 현재가 데이터 저장 실패")
 if __name__ == "__main__":
     sched = BlockingScheduler()
-    sched.add_job(TR_SCHART_function, 'cron', hour ='9-15',minute= '*/5',second='1')
+    sched.add_job(TR_SCHART_function, 'cron', hour ='0',minute= '*/1',second='1')
     sched.start()
 

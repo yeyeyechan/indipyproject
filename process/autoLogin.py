@@ -1,5 +1,12 @@
 # -*- coding: utf-8 -*-
 import sys
+import sys
+sys.path.append("C:\\dev\\indiPyProject\\log")
+sys.path.append("C:\\dev\\indiPyProject\\process")
+sys.path.append("C:\\dev\\indiPyProject\\data")
+sys.path.append("C:\\dev\\indiPyProject\\analysis")
+sys.path.append("C:\\dev\\indiPyProject")
+sys.path.append("C:\\dev\\indiPyProject\\pyflask")
 from PyQt5.QtCore import *
 from PyQt5.QAxContainer import *
 from PyQt5.QtWidgets import QApplication

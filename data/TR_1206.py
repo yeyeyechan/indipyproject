@@ -339,7 +339,7 @@ class TR_1206(QMainWindow):
         print("System Message Received = ", MsgID)
 
 if __name__ == "__main__":
-    db_name = "20200302"
+    db_name = "20200303"
     client = MongoClient('127.0.0.1', 27017)
     db = client[db_name]
     collection_data = []
@@ -355,7 +355,7 @@ if __name__ == "__main__":
         collection_data.append(i)
     TR_1206Event = QApplication(sys.argv)
     checkindex = 0
-    end_date= get_endDay("20200302")
+    end_date= get_endDay("20200303")
     for i in collection_data:
         standard_length = 0
         index = 0

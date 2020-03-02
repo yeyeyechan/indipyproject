@@ -26,8 +26,7 @@ class monitoring_new():
         collection_name1 = db_name+"_pr_input"
         collection_name2 = "SP_5min_"+db_name
         collection_name3 = "SK_5min_"+db_name
-        collection_name4 = "TR_SCHART_5min_"+db_name
-        collection_name5 = "SC_"+db_name
+        collection_name4 = "SC_5min_"+db_name
 
         client = MongoClient('127.0.0.1', 27017)
         db = client[db_name]
@@ -35,11 +34,22 @@ class monitoring_new():
         collection2 = db[collection_name2] #프로그램 매수 매도 컬렉션
         collection3 = db[collection_name3] #외국인 매수 매도 컬렉션
         collection4 = db[collection_name4] #현재가  컬렉션
-        collection5 = db[collection_name5] # 누적거래량
         self.acc_stock_code = {
 
         }
-        for input_5 in collection5.find().sort("Trading_Value", pymongo.DESCENDING):
+
+        py_time = datetime.datetime.now()
+        hour = py_time.hour
+        min = py_time.minute
+        filter_time = ""
+        compare_time = hour*100 +min
+        for timeline_ele in self.timeline:
+            if compare_time <= (int)(timeline_ele):
+                filter_time = timeline_ele
+                break
+            else:
+                continue
+        for input_5 in collection_name4.find({"TIME": filter_time}).sort("Trading_Value", pymongo.DESCENDING):
             map_key = input_5['stock_code']
             self.acc_stock_code[map_key]=input_5['Trading_Value']
         map_name = ""
