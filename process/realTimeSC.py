@@ -76,6 +76,7 @@ class realTimeSC(QMainWindow):
                     continue
                 elif (int)(times) >= data_time:
                     DATA['TIME'] = times
+                    DATA['SortTime'] = (int)(times)
                     if self.collection1.find_one({'stock_code': DATA['stock_code'], 'TIME': times}):
                         data_input = self.collection1.find_one({'stock_code': DATA['stock_code'], 'TIME': times}).copy()
                         DATA['_id'] = data_input['_id']

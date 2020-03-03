@@ -18,7 +18,6 @@ class common_min_timeline():
                 min = (int)(min / 100)
             next_input = hour * 60 + min + self.standard
             next_input = (int)(next_input / 60) * 10000 + (int)(next_input % 60 * 100)
-            print(next_input)
             self.timeline.append((str)(next_input))
             if input >152500:
                 break

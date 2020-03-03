@@ -154,10 +154,11 @@ def monitoring_new_test2():
         final_data2= monitoring_new_var.final_data2
         final_data3= monitoring_new_var.final_data3
         acc_stock_code= monitoring_new_var.acc_stock_code
+
         common_min_timeline_var2 = common_min_shortTime(5).timeline[:total_time]
     except Exception:
         return redirect(url_for('index'))
-    return render_template('monitoring_test2.html'  , time_line = common_min_timeline_var2 ,  values= final_data, values2= final_data2, values3 = final_data3 ,acc_stock_code=acc_stock_code, length = total_time)
+    return render_template('monitoring_test2.html'  ,  key = final_data.keys() ,time_line = common_min_timeline_var2 ,  values= final_data, values2= final_data2, values3 = final_data3 ,acc_stock_code=acc_stock_code, length = total_time)
 
 @app.route('/monitoring_test/', methods= ['POST'])
 def monitoring_test():
@@ -763,11 +764,11 @@ def foreign_company():
     return render_template("success.html")
 
 
-@app.route('/get_stock_list/' , methods = ['POST'] )
+@app.route('/get_stock_list/' )
 def get_stock_list():
     try:
         db_name =request.form['date']
-        #db_name = "20200224"
+        db_name = "20200302"
         client = MongoClient('127.0.0.1', 27017)
         db = client[db_name]
         collection_data =[]
@@ -948,7 +949,7 @@ def getPriceBy5Min():
 
 
 if __name__ == '__main__':
-    host_addr = "1.232.245.14"
+    host_addr = "127.0.0.1"
     port_num = "2020"
 
     app.run(host = host_addr , port = port_num, debug=True)

@@ -8,7 +8,7 @@ sys.path.append("C:\\dev\\indiPyProject")
 sys.path.append("C:\\dev\\indiPyProject\\pyflask")
 from pymongo import MongoClient
 from data.common import  weekday_check
-from datetime import timedelta, datetime
+import  datetime
 from data.common import mongo_find
 from analysis.common_data import common_min_timeline
 from analysis.common_data import common_min_shortTime
@@ -39,20 +39,19 @@ class monitoring_new():
 
         }
 
-        py_time = datetime.datetime.now()
+        '''py_time = datetime.datetime.now()
         hour = py_time.hour
         min = py_time.minute
         filter_time = ""
         compare_time = hour*100 +min
-        for timeline_ele in self.timeline:
+        for timeline_ele in self.shortTimeline:
             if compare_time <= (int)(timeline_ele):
                 filter_time = timeline_ele
                 break
             else:
-                continue
-        for input_5 in collection_name4.find({"TIME": filter_time}).sort("Trading_Value", pymongo.DESCENDING):
-            map_key = input_5['stock_code']
-            self.acc_stock_code[map_key]=input_5['Trading_Value']
+                continue'''
+
+
         map_name = ""
         data_map ={
 
@@ -98,6 +97,12 @@ class monitoring_new():
                     "gubun": i["gubun"],
                     "종가":[]
                 }
+                if collection4.find_one({"stock_code": i['종목코드']}):
+                    for collection4_input in collection4.find({"stock_code": i['종목코드']}).sort([("SortTime", pymongo.DESCENDING)]):
+                        self.acc_stock_code[i['종목코드']] = collection4_input['Trading_Value']
+                        break
+                else:
+                    self.acc_stock_code[i['종목코드']] = 0
             else:
                 continue
 
@@ -168,8 +173,10 @@ class monitoring_new():
                         pass
                     index3 +=1
             self.realTimeLogger.info("sorted")
-
-            map_name = ""
+        self.acc_stock_code = sorted( self.acc_stock_code.items() , key = (lambda  x: x[1]), reverse = True )
+        print("self.acc_stock_code")
+        print(self.acc_stock_code)
+        map_name = ""
 
 if __name__ == "__main__":
     monitoring2_var = monitoring_new("20200221")

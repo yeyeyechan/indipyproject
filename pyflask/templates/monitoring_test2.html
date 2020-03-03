@@ -23,7 +23,7 @@
 <script>
 id_value = "myChart";
 var index = 0;
-{% for stock_code in acc_stock_code.keys() %}
+{% for stock_code in acc_stock_code %}
     id_value = id_value+index
     var ctx = document.getElementById(id_value).getContext('2d');
     index++;
@@ -37,7 +37,7 @@ var index = 0;
                 label : "Program",
                 yAxisID: 'first-y-axis',
                 data : [
-                {% for item in values[stock_code]['프로그램'][:length] %}
+                {% for item in values[stock_code[0]]['프로그램'][:length] %}
                    {{ item }},
                   {% endfor %}
                 ],
@@ -52,7 +52,7 @@ var index = 0;
                 label : "foreign",
                 yAxisID: 'first-y-axis',
                 data : [
-                {% for item in values2[stock_code]['외국계순매수수량'][:length] %}
+                {% for item in values2[stock_code[0]]['외국계순매수수량'][:length] %}
                    {{ item }},
                   {% endfor %}
                 ],
@@ -70,7 +70,7 @@ var index = 0;
                 label : "price",
                 yAxisID: 'second-y-axis',
               data : [
-                {% for item in values3[stock_code]['종가'][:length]  %}
+                {% for item in values3[stock_code[0]]['종가'][:length]  %}
                    {{ item }},
                   {% endfor %}
                 ],
@@ -87,7 +87,7 @@ var index = 0;
         options: {
             title:{
                 display:true,
-                text:'{{values2[stock_code]['korName']}}' +'{{values2[stock_code]['gubun']}}'
+                text:'{{values2[stock_code[0]]['korName']}}' +'{{values2[stock_code[0]]['gubun']}}'
             },
             responsive: true,
             scales: {
