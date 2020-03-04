@@ -41,10 +41,10 @@ class realTimeConclusion(QMainWindow):
 
         ret1 = self.indiReal.dynamicCall("RequestRTReg(QString, QString)", "AA", '*')
         if ret1 :
-            print("AA 등록성공")
+            self.realTimeLogger.info("AA 등록성공")
 
         if not ret1:
-            print("AA 등록실패")
+            self.realTimeLogger.info("AA 등록실패")
         self.realTimeLogger.info("realTimeConclusion  AA call 완료")
 
     # 요청한 TR로 부터 데이터를 받는 함수입니다.
