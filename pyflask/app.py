@@ -12,7 +12,6 @@ from process.buySellProcess import buySellProcess
 from pymongo import MongoClient
 from process.autoLogin import autoLogin
 from process.autoLogin import autoLoginCheck
-from process.realTimeForeign import  realTimeForeign
 from PyQt5.QtWidgets import QApplication
 from process.show_order_history import show_order_history
 from process.buySellModify import buySellModify
@@ -21,17 +20,15 @@ import os
 import datetime
 import time
 from analysis.common_data import common_min_shortTime
-from analysis.monitoring3 import  monitoring3
-from process.realTimeProgram import realTimeProgram
 from process.realTimePrice import realTimePrice
 from data.TR_1206 import TR_1206
 from data.TR_1314_3 import TR_1314_3
 from process.realTimeConclusion import realTimeConclusion
 import subprocess
 from analysis.monitoring_new import monitoring_new
+from analysis.monitoring_new2 import monitoring_new2
 from datetime import timedelta
-from process.TR_SCHART import TR_SCHART
-from process.SP import SP
+
 app = Flask(__name__)
 appLogger = logging_instance("app.py_").mylogger
 
@@ -75,7 +72,7 @@ def monitoring_new_test3():
         else:
             total_time +=2
         #total_time =3
-        monitoring_new_var = monitoring_new(date)
+        monitoring_new_var = monitoring_new2(date)
 
         final_data= monitoring_new_var.final_data
         final_data2= monitoring_new_var.final_data2
