@@ -7,6 +7,7 @@ sys.path.append("C:\\dev\\indiPyProject\\data")
 sys.path.append("C:\\dev\\indiPyProject\\analysis")
 sys.path.append("C:\\dev\\indiPyProject")
 sys.path.append("C:\\dev\\indiPyProject\\pyflask")
+import os
 from PyQt5.QtCore import *
 from PyQt5.QAxContainer import *
 from PyQt5.QtWidgets import QApplication
@@ -21,7 +22,9 @@ from log.logger_pyflask import logging_instance
 
 class autoLogin(QMainWindow):
     def __init__(self):
-        loginLogger = logging_instance("autoLogin.py").mylogger
+        loginLogger = logging_instance("autoLogin.py   PID   "+(str)(self.processID)).mylogger
+        self.processID = os.getpid()
+
         super().__init__()
         self.flag= False
         start = time.time()
