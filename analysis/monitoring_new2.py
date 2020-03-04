@@ -118,6 +118,7 @@ class monitoring_new2():
             for j in collection3.find({'단축코드': map_name}):
                 j['시간']= int(j['시간'])
                 j['외국계순매수수량']= int(j['외국계순매수수량'])
+                j['연속일자'] = i['연속일자']
                 data_list2[map_name].append(j)
 
             self.sorted_data_list2[map_name]=  sorted(data_list2[map_name], key = lambda  x: x['시간'])
@@ -156,10 +157,6 @@ class monitoring_new2():
         # check_list 안의 종목코드를 가지고 검색하여 외국인 순매수 >0 인 종목코드만 검색한다.
         self.realTimeLogger.info("check_list 안의 종목코드를 가지고 검색하여 외국인 순매수 >0 인 종목코드만 검색한다.")
         for check_input in self.check_list:
-            self.realTimeLogger.info("check_input   : "+check_input)
-            self.realTimeLogger.info("self.final_data2[check_input]['외국계순매수수량'] <=0")
-            self.realTimeLogger.info(self.final_data2[check_input]['외국계순매수수량'][-1] <=0)
-            self.realTimeLogger.info("self.final_data2[check_input]['외국계순매수수량'] <=0")
             if self.final_data2[check_input]['외국계순매수수량'][-1] <=0 :
                 self.realTimeLogger.info(" self.acc_stock_code['check_input'] 제거  ")
                 del self.acc_stock_code[check_input]
