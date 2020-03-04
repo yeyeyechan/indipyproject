@@ -129,6 +129,7 @@ class monitoring_new2():
                 while True:
                     if (int)(self.shortTimeline[index2] )== sorted_data['시간']:
                         self.final_data2[map_name]['외국계순매수수량'][index2] = (sorted_data['외국계순매수수량'])
+                        self.final_data2[map_name]['연속일자'][index2] = (sorted_data['연속일자'])
                         break
                     else:
                         pass
