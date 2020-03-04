@@ -22,11 +22,11 @@ class realTimeConclusion(QMainWindow):
 
     def __init__(self):
         super().__init__()
-        self.processID = os.getpgid()
+        self.processID = os.getpid()
 
         telgm_token = '1013576743:AAFkCdmafOY61N-I1FAEIEsOdFZwR47_ZQ8'
         self.bot = telegram.Bot(token=telgm_token)
-        self.realTimeLogger = logging_instance("realTimeConclusion.py 실시간 체결 확인 PID: "+self.processID).mylogger
+        self.realTimeLogger = logging_instance("realTimeConclusion.py 실시간 체결 확인 PID: "+(str)(self.processID)).mylogger
         self.realTimeLogger.info("realTimeConclusion  OCX call")
         self.indiReal = QAxWidget("GIEXPERTCONTROL.GiExpertControlCtrl.1")
         # Indi API event
@@ -50,7 +50,7 @@ class realTimeConclusion(QMainWindow):
     # 요청한 TR로 부터 데이터를 받는 함수입니다.
     def ReceiveRTData(self, realType):
         # TR을 날릴때 ID를 통해 TR이름을 가져옵니다.
-        self.realTimeLogger = logging_instance("AA ReceiveRTData 실시간 체결 확인 PID: "+self.processID).mylogger
+        self.realTimeLogger = logging_instance("AA ReceiveRTData 실시간 체결 확인 PID: "+(str)(self.processID)).mylogger
 
         DATA = {}
         # 데이터 받기

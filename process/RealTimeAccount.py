@@ -30,11 +30,11 @@ class RealTimeAccount(QMainWindow):
     def __init__(self):
         super().__init__()
         self.indiReal = QAxWidget("GIEXPERTCONTROL.GiExpertControlCtrl.1")
-        self.processID = os.getpgid()
+        self.processID = os.getpid()
 
         telgm_token = '1013576743:AAFkCdmafOY61N-I1FAEIEsOdFZwR47_ZQ8'
         self.bot = telegram.Bot(token=telgm_token)
-        self.realTimeLogger = logging_instance("RealTimeAccount.py 현물 실시간 주문 체결 PID: "+self.processID).mylogger
+        self.realTimeLogger = logging_instance("RealTimeAccount.py 현물 실시간 주문 체결 PID: "+(str)(self.processID)).mylogger
         self.timeline = common_min_shortTime(5).timeline
         self.indiReal.ReceiveRTData.connect(self.ReceiveRTData)
 
@@ -68,7 +68,7 @@ class RealTimeAccount(QMainWindow):
 
 
     def ReceiveRTData(self, rqid):
-        self.realTimeLogger = logging_instance("RealTimeAccount.py 현물 실시간 주문 체결 PID: "+self.processID).mylogger
+        self.realTimeLogger = logging_instance("RealTimeAccount.py 현물 실시간 주문 체결 PID: "+(str)(self.processID)).mylogger
         DATA ={
 
         }

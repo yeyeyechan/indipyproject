@@ -17,9 +17,9 @@ class SP(QMainWindow):
 
     def __init__(self):
         super().__init__()
-        self.processID = os.getpgid()
+        self.processID = os.getpid()
 
-        self.realTimeLogger = logging_instance("SP.py_ PID: "+self.processID).mylogger
+        self.realTimeLogger = logging_instance("SP.py_ PID: "+(str)(self.processID)).mylogger
         self.indiReal = QAxWidget("GIEXPERTCONTROL.GiExpertControlCtrl.1")
         # Indi API event
         self.indiReal.ReceiveRTData.connect(self.ReceiveRTData)
@@ -57,7 +57,7 @@ class SP(QMainWindow):
     # 요청한 TR로 부터 데이터를 받는 함수입니다.
     def ReceiveRTData(self, realType):
         # TR을 날릴때 ID를 통해 TR이름을 가져옵니다.
-        self.realTimeLogger = logging_instance("SP ReceiveRTData PID: "+self.processID).mylogger
+        self.realTimeLogger = logging_instance("SP ReceiveRTData PID: "+(str)(self.processID)).mylogger
 
         self.realTimeLogger.info(True)
         self.realTimeLogger.info(realType)
