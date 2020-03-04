@@ -14,7 +14,7 @@ from log.logger_pyflask import logging_instance
 from analysis.common_data import common_min_shortTime
 class realTimeSC(QMainWindow):
 
-    def __init__(self, date):
+    def __init__(self):
         super().__init__()
         self.realTimeLogger = logging_instance("realTimeSC.py_").mylogger
         self.realTimeLogger.info("SC 함수 실행")
@@ -22,7 +22,7 @@ class realTimeSC(QMainWindow):
         self.indiReal = QAxWidget("GIEXPERTCONTROL.GiExpertControlCtrl.1")
         self.realTimeLogger.info("QAxWidget Call 이후")
         self.timeline = common_min_shortTime(5).timeline
-        self.date = date
+        self.date = datetime.today().strftime("%Y%m%d")
         # Indi API event
         self.indiReal.ReceiveRTData.connect(self.ReceiveRTData)
 
@@ -90,5 +90,5 @@ class realTimeSC(QMainWindow):
         print("System Message Received = ", MsgID)
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    realTimeSCVar = realTimeSC("20200303")
+    realTimeSCVar = realTimeSC()
     app.exec_()
