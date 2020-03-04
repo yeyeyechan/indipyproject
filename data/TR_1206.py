@@ -302,7 +302,7 @@ class TR_1206(QMainWindow):
             print("프로그램 순매수 ")
             print(int(DATA[self.columnName['83'].strip()]))
             if DATA[self.columnName['11'].strip()] is not '' and DATA[self.columnName['17'].strip()] is not '' and DATA[self.columnName['23'].strip()] is not '' and DATA[self.columnName['83'].strip()] is not '' :
-                if int(DATA[self.columnName['11'].strip()])<0 and int(DATA[self.columnName['17'].strip()])>0 and int(DATA[self.columnName['23'].strip()] )>0 and int( DATA[self.columnName['83'].strip()] )>0:
+                if int(DATA[self.columnName['11'].strip()])<0 and int(DATA[self.columnName['17'].strip()])>0 and int( DATA[self.columnName['83'].strip()] )>0:
                     check +=1
                     print("통과")
                 else:
