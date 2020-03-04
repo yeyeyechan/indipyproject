@@ -51,81 +51,8 @@ def index():
     except Exception:
         appLogger.error("index function exception occur")
         return render_template('controller.html')
-
-@app.route('/base_monitor/', methods=['POST'])
-def base_monitor():
-    try:
-        date = request.form['date']
-        py_time = datetime.datetime.now()
-        hour = py_time.hour
-        min = py_time.minute
-        if (hour == 15 and min >= 30) or hour > 15:
-            hour = 15
-            min = 30
-        # hour = 15
-        # min = 35
-
-        total_time = (int)((hour * 60 + min - 9 * 60 - 5) / 5)
-        if total_time <= 0:
-            total_time = 78
-        else:
-            total_time += 1
-        monitoring3_var = monitoring3(date)
-        print("test1")
-        monitoring3_var.preprocessProgram()
-        time.sleep(2)
-        monitoring3_var.preprocessForeign()
-        monitoring3_var.preprocessPresent()
-        print("test2")
-        final_data = monitoring3_var.final_data
-        final_data2 = monitoring3_var.final_data2
-        final_data3 = monitoring3_var.final_data3
-        print("final_data3")
-        print(final_data3)
-        # total_time = 75
-        common_min_timeline_var2 = common_min_shortTime(5).timeline[:total_time]
-    except Exception:
-        return redirect(url_for('index'))
-    return render_template('base_monitor.html', key=final_data.keys(), time_line=common_min_timeline_var2,values=final_data, values2=final_data2, values3=final_data3, length=total_time)
-
-@app.route('/monitoring_new_test/', methods= ['POST'])
-def monitoring_new_test():
-    try:
-        py_day = datetime.datetime.today().strftime("%Y%m%d")
-        date = request.form['date']
-
-        py_time = datetime.datetime.now()
-        hour = py_time.hour
-        min = py_time.minute
-        if (hour == 15 and min >= 30) or  hour > 15:
-            hour = 15
-            min = 30
-        if py_day != date:
-            hour = 15
-            min = 30
-        #78개임(날) 905-1530
-        total_time = (int)((hour*60+min - 9*60 -5)/5)
-        if total_time <=0:
-            total_time =1
-        elif total_time == 77:
-            total_time += 1
-        else:
-            total_time +=2
-        #total_time =3
-        monitoring_new_var = monitoring_new(date)
-
-        final_data= monitoring_new_var.final_data
-        final_data2= monitoring_new_var.final_data2
-        final_data3= monitoring_new_var.final_data3
-        print("final_data3")
-        print(final_data3)
-        #total_time = 75
-        common_min_timeline_var2 = common_min_shortTime(5).timeline[:total_time]
-    except Exception:
-        return redirect(url_for('index'))
-    return render_template('monitoring_test.html' , key = final_data.keys() , time_line = common_min_timeline_var2 ,  values= final_data, values2= final_data2, values3 = final_data3 , length = total_time)
-@app.route('/monitoring_new_test2/', methods= ['POST'])
-def monitoring_new_test2():
+@app.route('/monitoring_new_test3/', methods= ['POST'])
+def monitoring_new_test3():
     try:
         py_day = datetime.datetime.today().strftime("%Y%m%d")
         date = request.form['date']
@@ -160,8 +87,8 @@ def monitoring_new_test2():
         return redirect(url_for('index'))
     return render_template('monitoring_test2.html'  ,  key = final_data.keys() ,time_line = common_min_timeline_var2 ,  values= final_data, values2= final_data2, values3 = final_data3 ,acc_stock_code=acc_stock_code, length = total_time)
 
-@app.route('/monitoring_test/', methods= ['POST'])
-def monitoring_test():
+@app.route('/monitoring_new_test2/', methods= ['POST'])
+def monitoring_new_test2():
     try:
         py_day = datetime.datetime.today().strftime("%Y%m%d")
         date = request.form['date']
@@ -184,107 +111,17 @@ def monitoring_test():
         else:
             total_time +=2
         #total_time =3
-        monitoring3_var = monitoring3(date)
-        print("test1")
-        monitoring3_var.preprocessProgram()
-        time.sleep(2)
-        monitoring3_var.preprocessForeign()
-        monitoring3_var.preprocessPresent()
-        print("test2")
-        final_data= monitoring3_var.final_data
-        final_data2= monitoring3_var.final_data2
-        final_data3= monitoring3_var.final_data3
-        print("final_data3")
-        print(final_data3)
-        #total_time = 75
+        monitoring_new_var = monitoring_new(date)
+        final_data= monitoring_new_var.final_data
+        final_data2= monitoring_new_var.final_data2
+        final_data3= monitoring_new_var.final_data3
+        acc_stock_code= monitoring_new_var.acc_stock_code
+
         common_min_timeline_var2 = common_min_shortTime(5).timeline[:total_time]
     except Exception:
         return redirect(url_for('index'))
-    return render_template('monitoring_test.html' , key = final_data.keys() , time_line = common_min_timeline_var2 ,  values= final_data, values2= final_data2, values3 = final_data3 , length = total_time)
-@app.route('/monitoring_real/', methods= ['POST'])
-def monitoring_real():
-    try:
-        py_day = datetime.datetime.today().strftime("%Y%m%d")
-        date = request.form['date']
+    return render_template('monitoring_test2.html'  ,  key = final_data.keys() ,time_line = common_min_timeline_var2 ,  values= final_data, values2= final_data2, values3 = final_data3 ,acc_stock_code=acc_stock_code, length = total_time)
 
-        py_time = datetime.datetime.now()
-        hour = py_time.hour
-        min = py_time.minute
-        if (hour == 15 and min >= 30) or  hour > 15:
-            hour = 15
-            min = 30
-        if py_day != date:
-            hour = 15
-            min = 30
-        #78개임(날) 905-1530
-        total_time = (int)((hour*60+min - 9*60 -5)/5)
-        if total_time <=0:
-            total_time =1
-        elif total_time == 77:
-            total_time += 1
-        else:
-            total_time +=2
-        #total_time =2
-        monitoring3_var = monitoring3(date)
-        print("test1")
-        monitoring3_var.preprocessProgram()
-        time.sleep(2)
-        monitoring3_var.preprocessForeign()
-        monitoring3_var.preprocessPresent()
-        print("test2")
-        final_data= monitoring3_var.final_data
-        final_data2= monitoring3_var.final_data2
-        final_data3= monitoring3_var.final_data3
-        #total_time = 75
-        common_min_timeline_var2 = common_min_shortTime(5).timeline[:total_time]
-        final_stock_list = []
-        highlight = {
-
-        }
-        print(total_time)
-        print("total")
-        for i in final_data.keys():
-            print("ssibal1")
-            program_vol = (int)(final_data[i]['프로그램'][total_time-1])
-            print("ssibal2")
-            print(final_data[i]['프로그램'])
-            foreign_vol = (int)(final_data2[i]['외국계순매수수량'][total_time-1])
-            print("ssibal20")
-            print(final_data2[i]['외국계순매수수량'])
-            print("ssibal3")
-            print(final_data3[i]['종가'])
-            current_value = (int)(final_data3[i]['종가'][total_time-1])
-            print("ssibal3")
-            print(final_data3[i]['종가'])
-
-            if ((int)(program_vol)>0 and  (int)(foreign_vol)>0 ) and ((int)(program_vol)*(int)(current_value)>20000000 or (int)(foreign_vol)*(int)(current_value)> 20000000):
-            #if ((int)(program_vol) > 0 and (int)(foreign_vol) > 0) and ((int)(program_vol) * (int)(current_value) > 2000000 or (int)(foreign_vol) * (int)(current_value) > 2000000):
-                final_stock_list.append(i)
-                print("sssibballll4")
-                if total_time >1 :
-                    highlight[i]={
-
-                    }
-                    print("check1")
-                    highlight[i]['하이라이트']=[]
-                    print("check2")
-                    for j in range(1, total_time):
-                        if (int)(final_data[i]['프로그램'][j-1]) !=0 and (int)(final_data2[i]['외국계순매수수량'][j-1]) !=0:
-                            if (int)(final_data[i]['프로그램'][j])/ (int)(final_data[i]['프로그램'][j-1]) >=2.0 and  (int)(final_data2[i]['외국계순매수수량'][j])/ (int)(final_data2[i]['외국계순매수수량'][j-1]) >=2.0:
-                                highlight[i]['하이라이트'].append(5000)
-                            else:
-                                highlight[i]['하이라이트'].append(0)
-                        else:
-                            highlight[i]['하이라이트'].append(0)
-                    print("len(highlight[i]['하이라이트'])")
-                    print(len(highlight[i]['하이라이트']))
-                    print("len(highlight[i]['하이라이트'])")
-                else:
-                    print("ssssaaaabbbb")
-
-    except Exception:
-        return redirect(url_for('index'))
-    return render_template('monitoring_real.html' , key = final_stock_list, time_line = common_min_timeline_var2 ,  values= final_data, values2= final_data2, values3 = final_data3 , length = total_time ,highlight=highlight)
 @app.route('/monitoring_new_real/', methods= ['POST'])
 def monitoring_new_real():
     try:
@@ -468,24 +305,6 @@ def TR_SCHART_call_start():
         appLogger.error("TR_SCHART_Call Exception occurs")
         return render_template('process_result.html', message="TR_SCHART 함수 실행 실패")
     return render_template('process_result.html', message="TR_SCHART 함수 실행 완료")
-@app.route('/realTimeProgram/')
-def realTimeProgram_start():
-    try:
-        realTimeProgramEvent = QApplication(sys.argv)
-        realTimeProgram_vari = realTimeProgram()
-        realTimeProgramEvent.exec_()
-    except Exception:
-        return redirect(url_for('index'))
-    return render_template('program_input.html')
-@app.route('/realTimeForeign/')
-def realTimeForeign_start():
-    try:
-        realTimeForeignEvent = QApplication(sys.argv)
-        realTimeForeign_vari = realTimeForeign()
-        realTimeForeignEvent.exec_()
-    except Exception:
-        return redirect(url_for('index'))
-    return render_template('program_input.html')
 
 @app.route('/realTimeProgram_input/' , methods = ['POST'])
 def realTimeProgram_input():
