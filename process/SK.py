@@ -13,12 +13,14 @@ from pymongo import MongoClient
 from datetime import datetime
 from log.logger_pyflask import logging_instance
 from analysis.common_data import common_min_shortTime
+import telegram
 class SK(QMainWindow):
 
     def __init__(self):
         super().__init__()
         self.processID = os.getpid()
-
+        telgm_token = '1013576743:AAFkCdmafOY61N-I1FAEIEsOdFZwR47_ZQ8'
+        self.bot = telegram.Bot(token=telgm_token)
         self.realTimeLogger = logging_instance("SK.py_ PID: "+(str)(self.processID)).mylogger
         self.realTimeLogger.info("SK 함수 실행")
         self.realTimeLogger.info("QAxWidget Call")
@@ -39,6 +41,14 @@ class SK(QMainWindow):
         collection_title1 = "SK_" + str(datetime.today().strftime("%Y%m%d"))
         collection_title2 = "SK_5min_" + str(datetime.today().strftime("%Y%m%d"))
 
+        collection_title3 = "SC_check_" + str(datetime.today().strftime("%Y%m%d"))
+        self.collection3 = db[collection_title3]
+
+        collection_title4 = "SK_check_" + str(datetime.today().strftime("%Y%m%d"))
+        self.collection4 = db[collection_title4]
+
+        collection_title5 = "TR_1206_new_2"
+        self.collection5 = db[collection_title5]
         #db = client[str(datetime.today().strftime("%Y%m%d"))]
         self.collection1 = db[collection_title1]
         self.collection2 = db[collection_title2]
@@ -84,6 +94,19 @@ class SK(QMainWindow):
                     continue
                 elif (int)(times) >= data_time:
                     DATA['시간'] = times
+                    if self.collection3.find_one({'stock_code': DATA['단축코드']}):
+                        vol =  self.collection3.find_one({'stock_code': DATA['단축코드']})['Vol']
+                        current_foreign_ratio = (int)(DATA['외국계순매수수량']/vol)
+                        DATA['current_foreign_ratio'] =current_foreign_ratio
+                        if 2*self.collection5.find_one({'stock_code': DATA['단축코드']})['after_foreign_ratio']<current_foreign_ratio:
+                            self.bot.sendMessage(chat_id='813531834', text="종목코드  "+  DATA['단축코드']+ "  외국인 순매수 수량 동시간 대비 2시간 이상 증가")
+                            if self.collection4.find_one({'stock_code': DATA['단축코드'], '시간': times}):
+                                data_input = self.collection4.find_one({'stock_code': DATA['단축코드']}).copy()
+                                DATA['_id'] = data_input['_id']
+                                self.realTimeLogger.info(self.collection4.replace_one(data_input, DATA, upsert=True))
+                            else:
+                                self.realTimeLogger.info(self.collection4.insert_one(DATA))
+
                     if self.collection2.find_one({'단축코드': DATA['단축코드'], '시간': times}):
                         data_input = self.collection2.find_one({'단축코드': DATA['단축코드'], '시간': times}).copy()
                         DATA['_id'] = data_input['_id']

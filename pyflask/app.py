@@ -323,9 +323,9 @@ def realTimeProgram_input2():
     collection_name = request.form['date']+"_pr_input"
     client = MongoClient('127.0.0.1', 27017)
     db = client[request.form['date']]
-    collection_input1 ="TR_1206_5"
-    collection_input2 ="TR_1206_2"
-    collection_input3 ="TR_1206_3"
+    collection_input1 ="TR_1206_new_5"
+    collection_input2 ="TR_1206_new_2"
+    collection_input3 ="TR_1206_new_3"
     collection  = db[collection_name]
     collection1 = db[collection_input1]
     collection2 = db[collection_input2]
