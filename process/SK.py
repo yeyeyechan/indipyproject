@@ -1,4 +1,5 @@
 import sys
+import os
 sys.path.append("C:\\dev\\indiPyProject\\log")
 sys.path.append("C:\\dev\\indiPyProject\\process")
 sys.path.append("C:\\dev\\indiPyProject\\data")
@@ -16,7 +17,9 @@ class SK(QMainWindow):
 
     def __init__(self):
         super().__init__()
-        self.realTimeLogger = logging_instance("SK.py_").mylogger
+        self.processID = os.getpgid()
+
+        self.realTimeLogger = logging_instance("SK.py_ PID: "+self.processID).mylogger
         self.realTimeLogger.info("SK 함수 실행")
         self.realTimeLogger.info("QAxWidget Call")
         self.indiReal = QAxWidget("GIEXPERTCONTROL.GiExpertControlCtrl.1")
@@ -58,7 +61,7 @@ class SK(QMainWindow):
     # 요청한 TR로 부터 데이터를 받는 함수입니다.
     def ReceiveRTData(self, realType):
         # TR을 날릴때 ID를 통해 TR이름을 가져옵니다.
-        self.realTimeLogger = logging_instance("SK ReceiveRTData").mylogger
+        self.realTimeLogger = logging_instance("SK ReceiveRTData PID: "+self.processID).mylogger
 
         print(True)
         print(realType)

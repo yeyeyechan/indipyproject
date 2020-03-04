@@ -17,6 +17,7 @@ from PyQt5.QtCore import *
 from PyQt5.QAxContainer import *
 from PyQt5.QtWidgets import QApplication
 from PyQt5.QtWidgets import QMainWindow
+import os
 import time
 from pymongo import MongoClient
 from log.logger_pyflask import logging_instance
@@ -29,10 +30,11 @@ class RealTimeAccount(QMainWindow):
     def __init__(self):
         super().__init__()
         self.indiReal = QAxWidget("GIEXPERTCONTROL.GiExpertControlCtrl.1")
+        self.processID = os.getpgid()
 
         telgm_token = '1013576743:AAFkCdmafOY61N-I1FAEIEsOdFZwR47_ZQ8'
         self.bot = telegram.Bot(token=telgm_token)
-        self.realTimeLogger = logging_instance("RealTimeAccount.py 현물 실시간 주문 체결").mylogger
+        self.realTimeLogger = logging_instance("RealTimeAccount.py 현물 실시간 주문 체결 PID: "+self.processID).mylogger
         self.timeline = common_min_shortTime(5).timeline
         self.indiReal.ReceiveRTData.connect(self.ReceiveRTData)
 
@@ -66,7 +68,7 @@ class RealTimeAccount(QMainWindow):
 
 
     def ReceiveRTData(self, rqid):
-        self.realTimeLogger = logging_instance("RealTimeAccount.py 현물 실시간 주문 체결").mylogger
+        self.realTimeLogger = logging_instance("RealTimeAccount.py 현물 실시간 주문 체결 PID: "+self.processID).mylogger
         DATA ={
 
         }
@@ -74,7 +76,7 @@ class RealTimeAccount(QMainWindow):
         if rqid == "AD":
             self.realTimeLogger.info("rqid is  AD")
             DATA['종목명'] = self.indiReal.dynamicCall("GetSingleData(int)", 4)
-            DATA['평가금액'] = self.indiReal.dynamicCall("GetSingleData(int)", 2)
+            DATA['평가금액'] = self.indiReal.dynamicCall("GetSingleData(int)", 10)
             DATA['평가손익'] = self.indiReal.dynamicCall("GetSingleData(int)", 11)
             DATA['총평가금액'] = self.indiReal.dynamicCall("GetSingleData(int)", 19)
             self.realTimeLogger.info("AD data received")

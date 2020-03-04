@@ -1,4 +1,5 @@
 import sys
+import os
 sys.path.append("C:\\dev\\indiPyProject\\log")
 sys.path.append("C:\\dev\\indiPyProject\\process")
 sys.path.append("C:\\dev\\indiPyProject\\data")
@@ -14,15 +15,19 @@ from PyQt5.QtWidgets import QMainWindow
 from pymongo import MongoClient
 from datetime import datetime
 import telegram
+from log.logger_pyflask import logging_instance
+
 #chat id 813531834
 class realTimeConclusion(QMainWindow):
 
     def __init__(self):
         super().__init__()
+        self.processID = os.getpgid()
 
         telgm_token = '1013576743:AAFkCdmafOY61N-I1FAEIEsOdFZwR47_ZQ8'
         self.bot = telegram.Bot(token=telgm_token)
-
+        self.realTimeLogger = logging_instance("realTimeConclusion.py 실시간 체결 확인 PID: "+self.processID).mylogger
+        self.realTimeLogger.info("realTimeConclusion  OCX call")
         self.indiReal = QAxWidget("GIEXPERTCONTROL.GiExpertControlCtrl.1")
         # Indi API event
         self.indiReal.ReceiveRTData.connect(self.ReceiveRTData)
@@ -32,16 +37,21 @@ class realTimeConclusion(QMainWindow):
         self.db = client[db_name]
         self.collection_name = "AA"+db_name
         self.collection = self.db[self.collection_name]
+        self.realTimeLogger.info("realTimeConclusion  AA call")
+
         ret1 = self.indiReal.dynamicCall("RequestRTReg(QString, QString)", "AA", '*')
         if ret1 :
             print("AA 등록성공")
 
         if not ret1:
             print("AA 등록실패")
+        self.realTimeLogger.info("realTimeConclusion  AA call 완료")
 
     # 요청한 TR로 부터 데이터를 받는 함수입니다.
     def ReceiveRTData(self, realType):
         # TR을 날릴때 ID를 통해 TR이름을 가져옵니다.
+        self.realTimeLogger = logging_instance("AA ReceiveRTData 실시간 체결 확인 PID: "+self.processID).mylogger
+
         DATA = {}
         # 데이터 받기
         DATA['처리구분'] = self.indiReal.dynamicCall("GetSingleData(int)", 0)
@@ -67,6 +77,7 @@ class realTimeConclusion(QMainWindow):
             DATA['상태메세지'] =  "종목명:  "+DATA['종목명'] +"  체결단가: "+DATA['체결단가']  +"  체결수량: "+  DATA['체결수량']  + gubun + "체결 됨" + "  미체결 수량 :   "+ DATA['미체결수량']
         else:
             DATA['상태메세지'] = "작업필요"
+        self.realTimeLogger.info(DATA['상태메세지'])
         self.bot.sendMessage(chat_id='813531834', text=DATA['상태메세지'])
         self.collection.insert(DATA)
 
