@@ -135,7 +135,7 @@ class monitoring_new2():
                     else:
                         pass
                     index2 +=1
-            self.final_data2[map_name]['연속일자'] = (self.sorted_data_list2[map_name][0]['연속일자'])
+            self.final_data2[map_name]['연속일자'] = (int)(self.sorted_data_list2[map_name][0]['연속일자']) +1
 
             data_list3[map_name]= []
             self.sorted_data_list3[map_name]= []
