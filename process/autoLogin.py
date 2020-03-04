@@ -22,8 +22,9 @@ from log.logger_pyflask import logging_instance
 
 class autoLogin(QMainWindow):
     def __init__(self):
-        loginLogger = logging_instance("autoLogin.py   PID   "+(str)(self.processID)).mylogger
         self.processID = os.getpid()
+
+        loginLogger = logging_instance("autoLogin.py   PID   "+(str)(self.processID)).mylogger
 
         super().__init__()
         self.flag= False
