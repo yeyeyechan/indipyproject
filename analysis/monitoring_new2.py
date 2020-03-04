@@ -162,7 +162,7 @@ class monitoring_new2():
             self.realTimeLogger.info("self.final_data2[check_input]['외국계순매수수량'] <=0")
             if self.final_data2[check_input]['외국계순매수수량'][-1] <=0 :
                 self.realTimeLogger.info(" self.acc_stock_code['check_input'] 제거  ")
-                del self.acc_stock_code['check_input']
+                del self.acc_stock_code[check_input]
         self.realTimeLogger.info("제거 작업후 acc_stock_code 딕셔너리 sort ")
         self.acc_stock_code = sorted( self.acc_stock_code.items() , key = (lambda  x: x[1]), reverse = True )
 
