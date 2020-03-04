@@ -82,7 +82,7 @@ def monitoring_new_test3():
         common_min_timeline_var2 = common_min_shortTime(5).timeline[:total_time]
     except Exception:
         return redirect(url_for('index'))
-    return render_template('monitoring_test2.html'  ,  key = final_data.keys() ,time_line = common_min_timeline_var2 ,  values= final_data, values2= final_data2, values3 = final_data3 ,acc_stock_code=acc_stock_code, length = total_time)
+    return render_template('monitoring_test3.html'  , time_line = common_min_timeline_var2 ,  values= final_data, values2= final_data2, values3 = final_data3 ,acc_stock_code=acc_stock_code, length = total_time)
 
 @app.route('/monitoring_new_test2/', methods= ['POST'])
 def monitoring_new_test2():
