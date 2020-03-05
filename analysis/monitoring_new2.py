@@ -16,7 +16,7 @@ import pymongo
 
 class monitoring_new2():
     def __init__(self, date):
-        self.realTimeLogger = logging_instance("monitoring_new.py_").mylogger
+        self.realTimeLogger = logging_instance("monitoring_new2.py_").mylogger
         self.timeline = common_min_timeline(5).timeline
         self.shortTimeline = common_min_shortTime(5).timeline
         self.date = date
@@ -26,13 +26,15 @@ class monitoring_new2():
         collection_name2 = "SP_5min_"+db_name
         collection_name3 = "SK_5min_"+db_name
         collection_name4 = "SC_5min_"+db_name
-
+        self.realTimeLogger.info("collection 생성 전")
         client = MongoClient('127.0.0.1', 27017)
         db = client[db_name]
         collection1 = db[collection_name1] #인풋 컬렉션
         collection2 = db[collection_name2] #프로그램 매수 매도 컬렉션
         collection3 = db[collection_name3] #외국인 매수 매도 컬렉션
         collection4 = db[collection_name4] #현재가  컬렉션
+        self.realTimeLogger.info("collection 생성 후")
+
         self.acc_stock_code = {
 
         }
@@ -64,7 +66,9 @@ class monitoring_new2():
 
         for i in collection1.find():
             if i['종목코드'] not in self.check_list:
+
                 self.check_list.append(i['종목코드'])
+                self.realTimeLogger.info("종목코드 추가    "+i['종목코드'])
                 map_name = i['종목코드']
                 self.final_data[map_name]={
                     "korName": i["korName"],
@@ -83,12 +87,19 @@ class monitoring_new2():
                     "gubun": i["gubun"],
                     "종가":[]
                 }
+                self.realTimeLogger.info("collection4 에서 확인해  Trading_Value 를 acc_stock_code 추가   전 ")
+
                 if collection4.find_one({"stock_code": i['종목코드']}):
+                    self.realTimeLogger.info("collection4 에 종목코드  "+i['종목코드'] +" 존재")
                     for collection4_input in collection4.find({"stock_code": i['종목코드']}).sort([("SortTime", pymongo.DESCENDING)]):
+                        self.realTimeLogger.info("collection4 Trading Value 로 sort 해서 acc_stock_code에 넣기 "+ i['종목코드'])
                         self.acc_stock_code[i['종목코드']] = collection4_input['Trading_Value']
                         break
+                    self.realTimeLogger.info("collection4 Trading Value 로 sort 해서 acc_stock_code에 넣기 완료 "+ i['종목코드'])
                 else:
                     self.acc_stock_code[i['종목코드']] = 0
+                self.realTimeLogger.info("collection4 에서 확인해  Trading_Value 를 acc_stock_code 추가   후 ")
+
             else:
                 continue
 
