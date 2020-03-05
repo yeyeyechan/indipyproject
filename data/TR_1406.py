@@ -24,6 +24,7 @@ class TR_1406(QMainWindow):
     def __init__(self, market, day, gubun):
         super().__init__()
         #logging
+        self.processID =os.getpid()
         self.realTimeLogger = logging_instance("TR_1406.py_ PID: "+(str)(self.processID)).mylogger
         #telegram
         telgm_token = '1013576743:AAFkCdmafOY61N-I1FAEIEsOdFZwR47_ZQ8'
@@ -35,9 +36,14 @@ class TR_1406(QMainWindow):
         client = MongoClient('127.0.0.1', 27017)
         db = client[db_name]
         self.collection = db[collection_name]
-        self.realTimeLogger("TR_1406 OCX call")
+
+        self.collection1 = db["TR_1314_3_3"] #상승
+        self.collection2 = db["TR_1314_3_2"] #보합
+        self.collection3 = db["TR_1314_3_5"] #하락
+
+        self.realTimeLogger.info("TR_1406 OCX call")
         self.IndiTR = QAxWidget("GIEXPERTCONTROL.GiExpertControlCtrl.1")
-        self.realTimeLogger("TR_1406 OCX call end")
+        self.realTimeLogger.info("TR_1406 OCX call end")
 
         self.IndiTR.ReceiveData.connect(self.ReceiveData)
         self.IndiTR.ReceiveSysMsg.connect(self.ReceiveSysMsg)
@@ -58,7 +64,7 @@ class TR_1406(QMainWindow):
 '외국인보유     '
 
 ]
-        self.realTimeLogger("TR_1406 input setup before")
+        self.realTimeLogger.info("TR_1406 input setup before")
 
         self.setup()
     def setup(self):
@@ -71,7 +77,7 @@ class TR_1406(QMainWindow):
         ret = self.IndiTR.dynamicCall("SetSingleData(int, QString)", 2, self.gubun)  # 인풋 : 날짜 YYYYMMDD
 
         rqid = self.IndiTR.dynamicCall("RequestData()")
-        self.realTimeLogger("TR_1406 input setup finished  RequestData")
+        self.realTimeLogger.info("TR_1406 input setup finished  RequestData")
 
     def ReceiveData(self, rqid):
 
@@ -82,16 +88,36 @@ class TR_1406(QMainWindow):
         nCnt = self.IndiTR.dynamicCall("GetMultiRowCount()")
         for i in range(0, nCnt):
             # 데이터 양식
-
             DATA = {}
-            DATA[self.column[0].strip()] = self.IndiTR.dynamicCall("GetMultiData(int , int)", i, 0) #단축코드
-            self.realTimeLogger.info(DATA)
-            self.realTimeLogger(self.collection1.insert_one(DATA))
-            sleep(0.5)
+            if self.IndiTR.dynamicCall("GetMultiData(int , int)", i, 4) == '5':
+                DATA[self.column[0].strip()] = self.IndiTR.dynamicCall("GetMultiData(int , int)", i, 0)
+                DATA[self.column[1].strip()] = self.IndiTR.dynamicCall("GetMultiData(int , int)", i, 1)
+                DATA["종목명"] = self.IndiTR.dynamicCall("GetMultiData(int , int)", i, 2)
+                DATA["구분"] = "전일 하락"
+                DATA["구분코드"] = "5"
+                print(self.collection3.insert(DATA))
+                sleep(0.05)
+            if self.IndiTR.dynamicCall("GetMultiData(int , int)", i, 4) == '2':
+                DATA[self.column[0].strip()] = self.IndiTR.dynamicCall("GetMultiData(int , int)", i, 0)
+                DATA[self.column[1].strip()] = self.IndiTR.dynamicCall("GetMultiData(int , int)", i, 1)
+                DATA["종목명"] = self.IndiTR.dynamicCall("GetMultiData(int , int)", i, 2)
+                DATA["구분"] = "전일 상승"
+                DATA["구분코드"] = "2"
+                print(self.collection2.insert(DATA))
+                sleep(0.05)
+            if self.IndiTR.dynamicCall("GetMultiData(int , int)", i, 4) == '3':
+                DATA[self.column[0].strip()] = self.IndiTR.dynamicCall("GetMultiData(int , int)", i, 0)
+                DATA[self.column[1].strip()] = self.IndiTR.dynamicCall("GetMultiData(int , int)", i, 1)
+                DATA["종목명"] = self.IndiTR.dynamicCall("GetMultiData(int , int)", i, 2)
+                DATA["구분"] = "전일 보합"
+                DATA["구분코드"] = "3"
+                print(self.collection1.insert(DATA))
+                sleep(0.05)
+        return
     def ReceiveSysMsg(self, MsgID):
         print("System Message Received = ", MsgID)
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    TR_1406_vari =TR_1406(2,2,1)
+    tr_1406_vari = TR_1406("2", "1","1")
     app.exec_()
