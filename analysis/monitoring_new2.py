@@ -185,12 +185,16 @@ class monitoring_new2():
             self.realTimeLogger.info("sorted_data_list3 에서 종가 데이터 확인하여 final_data3 넣기 완료")
         # check_list 안의 종목코드를 가지고 검색하여 외국인 순매수 >0 인 종목코드만 검색한다.
         self.realTimeLogger.info("check_list 안의 종목코드를 가지고 검색하여 외국인 순매수 >0 인 종목코드만 검색한다.")
+        self.realTimeLogger.info("self.check_list" )
+        self.realTimeLogger.info(self.check_list)
         for check_input in self.check_list:
             if self.final_data2[check_input]['외국계순매수수량'][-1] <=0 :
                 self.realTimeLogger.info(" self.acc_stock_code['check_input'] 제거  ")
                 del self.acc_stock_code[check_input]
         self.realTimeLogger.info("제거 작업후 acc_stock_code 딕셔너리 sort ")
         self.acc_stock_code = sorted( self.acc_stock_code.items() , key = (lambda  x: x[1]), reverse = True )
+        self.realTimeLogger.info("self.acc_stock_code" )
+        self.realTimeLogger.info(self.acc_stock_code)
 
 
 if __name__ == "__main__":
