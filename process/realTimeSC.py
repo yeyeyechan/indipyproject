@@ -85,7 +85,7 @@ class realTimeSC(QMainWindow):
                 elif (int)(times) >= data_time:
                     DATA['TIME'] = times
                     DATA['SortTime'] = (int)(times)
-                    if DATA['SortTime'] <=905:
+                    if DATA['SortTime'] <=1110:
                         if self.indiReal.dynamicCall("GetSingleData(int)", 4) == "2":
                             self.bot.sendMessage(chat_id='813531834', text="종목코드  "+  DATA['stock_code']+ "  장 시작 5분내  전일 종가 대비 상승")
                             if self.collection2.find_one({'stock_code': DATA['stock_code']}):

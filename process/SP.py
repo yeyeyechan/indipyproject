@@ -13,12 +13,14 @@ from pymongo import MongoClient
 from datetime import datetime
 from log.logger_pyflask import logging_instance
 from analysis.common_data import common_min_shortTime
+import telegram
 class SP(QMainWindow):
 
     def __init__(self):
         super().__init__()
         self.processID = os.getpid()
-
+        telgm_token = '1013576743:AAFkCdmafOY61N-I1FAEIEsOdFZwR47_ZQ8'
+        self.bot = telegram.Bot(token=telgm_token)
         self.realTimeLogger = logging_instance("SP.py_ PID: "+(str)(self.processID)).mylogger
         self.indiReal = QAxWidget("GIEXPERTCONTROL.GiExpertControlCtrl.1")
         # Indi API event
@@ -37,6 +39,16 @@ class SP(QMainWindow):
 
         self.collection1 = db[collection_title1]
         self.collection2 = db[collection_title2]
+
+        collection_title3 = "SC_check_" + str(datetime.today().strftime("%Y%m%d"))
+        self.collection3 = db[collection_title3]
+
+        collection_title4 = "SP_check_" + str(datetime.today().strftime("%Y%m%d"))
+        self.collection4 = db[collection_title4]
+
+        collection_title5 = "TR_1206_new_2"
+        self.collection5 = db[collection_title5]
+
         #db = client["20200222"]
         collection = db[collection_name]
         for i in collection.find():
@@ -95,6 +107,7 @@ class SP(QMainWindow):
                     continue
                 elif (int)(times) >= data_time:
                     DATA['시간'] = times
+
                     if self.collection2.find_one({'단축코드': DATA['단축코드'], '시간': times}):
                         print(type(self.collection2.find_one({'단축코드': DATA['단축코드'], '시간': times})))
                         data_input = self.collection2.find_one({'단축코드': DATA['단축코드'], '시간': times}).copy()

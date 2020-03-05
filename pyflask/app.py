@@ -50,6 +50,8 @@ def index():
         return render_template('controller.html')
 @app.route('/monitoring_new_test3/', methods= ['POST'])
 def monitoring_new_test3():
+    appLogger = logging_instance("monitoring_new_test3_").mylogger
+
     try:
         py_day = datetime.datetime.today().strftime("%Y%m%d")
         date = request.form['date']
@@ -72,7 +74,9 @@ def monitoring_new_test3():
         else:
             total_time +=2
         #total_time =3
+        appLogger.info("monitoring_new2 구동 전")
         monitoring_new_var = monitoring_new2(date)
+        appLogger.info("monitoring_new2 구동 후")
 
         final_data= monitoring_new_var.final_data
         final_data2= monitoring_new_var.final_data2
