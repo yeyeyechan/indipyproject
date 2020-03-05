@@ -105,33 +105,41 @@ class monitoring_new2():
 
             data_list1[map_name]= []
             self.sorted_data_list1[map_name]= []
-
+            self.realTimeLogger.info("collection2 에서 확인해  프로그램 매수 데이터 DATA_list1 에 넣기 전 ")
             for j in collection2.find({'단축코드': map_name}):
                 j['시간']= int(j['시간'])
                 data_list1[map_name].append(j)
-
+            self.realTimeLogger.info("collection2 에서 확인해  프로그램 매수 데이터 DATA_list1 에 넣기 완료 ")
+            self.realTimeLogger.info("data_list1 sort 해서 sorted_data_list1에 넣어 주기 전 ")
             self.sorted_data_list1[map_name]= sorted(data_list1[map_name], key = lambda  x: x['시간'])
+            self.realTimeLogger.info("data_list1 sort 해서 sorted_data_list1에 넣어 주기 완료 ")
+
             for j in range(78):
                 self.final_data[i['종목코드']]['프로그램'].append(0)
             index1 = 0
+            self.realTimeLogger.info("sorted_data_list1 에서 final_data 에 넣기 전 ")
             for sorted_data in self.sorted_data_list1[map_name]:
                 while True:
                     if (int)(self.shortTimeline[index1] )== sorted_data['시간']:
+                        self.realTimeLogger.info("프로그램 매수 계산하여 final_data에 직접넣기 전")
                         self.final_data[map_name]['프로그램'][index1] = (sorted_data['비차익매수위탁체결수량']-sorted_data['비차익매도위탁체결수량'])
+                        self.realTimeLogger.info("프로그램 매수 계산하여 final_data에 직접넣기 후")
                         break
                     else:
                         pass
                     index1 +=1
+            self.realTimeLogger.info("sorted_data_list1 에서 final_data 에 넣기 완료")
 
 
             data_list2[map_name]= []
             self.sorted_data_list2[map_name]= []
-
+            self.realTimeLogger.info("collection3 외국계 순매수 수량 데이터 data_list2로 저장 전")
             for j in collection3.find({'단축코드': map_name}):
                 j['시간']= int(j['시간'])
                 j['외국계순매수수량']= int(j['외국계순매수수량'])
                 j['연속일자'] = i['연속일자']
                 data_list2[map_name].append(j)
+            self.realTimeLogger.info("collection3 외국계 순매수 수량 데이터 data_list2로 저장 후")
 
             self.sorted_data_list2[map_name]=  sorted(data_list2[map_name], key = lambda  x: x['시간'])
             for j in range(78):
@@ -140,26 +148,32 @@ class monitoring_new2():
             for sorted_data in self.sorted_data_list2[map_name]:
                 while True:
                     if (int)(self.shortTimeline[index2] )== sorted_data['시간']:
+                        self.realTimeLogger.info("final_data2 에 외국계 순매수 수량 데이터 저장 전")
                         self.final_data2[map_name]['외국계순매수수량'][index2] = (sorted_data['외국계순매수수량'])
+                        self.realTimeLogger.info("final_data2 에 외국계 순매수 수량 데이터 저장 후")
+
                         print(sorted_data)
                         break
                     else:
                         pass
                     index2 +=1
+            self.realTimeLogger.info("final_data2 에 외국계 순매수 수량 데이터 저장 완료")
             self.final_data2[map_name]['연속일자'] = (int)(self.sorted_data_list2[map_name][0]['연속일자']) +1
 
             data_list3[map_name]= []
             self.sorted_data_list3[map_name]= []
-
+            self.realTimeLogger.info("collection4 에서 종가 데이터 확인하여 data_list3에 넣기")
             for j in collection4.find({'stock_code': map_name, 'DATE':db_name }):
                 j['시간']= int(j['TIME'])
                 j['종가']= int(j['Close'])
                 data_list3[map_name].append(j)
+            self.realTimeLogger.info("collection4 에서 종가 데이터 확인하여 data_list3에 넣기 완료")
 
             self.sorted_data_list3[map_name] = sorted(data_list3[map_name], key = lambda  x: x['시간'])
             for j in range(78):
                 self.final_data3[i['종목코드']]['종가'].append(0)
             index3 = 0
+            self.realTimeLogger.info("sorted_data_list3 에서 종가 데이터 확인하여 final_data3 넣기 전")
             for sorted_data in self.sorted_data_list3[map_name]:
                 while True:
                     if (int)(self.shortTimeline[index3] )== sorted_data['시간']:
@@ -168,6 +182,7 @@ class monitoring_new2():
                     else:
                         pass
                     index3 +=1
+            self.realTimeLogger.info("sorted_data_list3 에서 종가 데이터 확인하여 final_data3 넣기 완료")
         # check_list 안의 종목코드를 가지고 검색하여 외국인 순매수 >0 인 종목코드만 검색한다.
         self.realTimeLogger.info("check_list 안의 종목코드를 가지고 검색하여 외국인 순매수 >0 인 종목코드만 검색한다.")
         for check_input in self.check_list:
