@@ -98,7 +98,7 @@ class SK(QMainWindow):
                         vol =  self.collection3.find_one({'stock_code': DATA['단축코드']})['Vol']
                         current_foreign_ratio = (int)(DATA['외국계순매수수량']/vol)
                         DATA['current_foreign_ratio'] =current_foreign_ratio
-                        if 2*self.collection5.find_one({'stock_code': DATA['단축코드']})['after_foreign_ratio']<current_foreign_ratio:
+                        if self.collection5.find_one({'stock_code': DATA['단축코드']})['after_foreign_ratio']<current_foreign_ratio:
                             self.bot.sendMessage(chat_id='813531834', text="종목코드  "+  DATA['단축코드']+ "  외국인 순매수 수량 동시간 대비 2시간 이상 증가")
                         if self.collection4.find_one({'stock_code': DATA['단축코드'], '시간': times}):
                             data_input = self.collection4.find_one({'stock_code': DATA['단축코드']}).copy()
@@ -106,7 +106,9 @@ class SK(QMainWindow):
                             self.realTimeLogger.info(self.collection4.replace_one(data_input, DATA, upsert=True))
                         else:
                             self.realTimeLogger.info(self.collection4.insert_one(DATA))
-
+                    if '_id' in DATA.keys():
+                        print(DATA['_id'])
+                        del DATA['_id']
                     if self.collection2.find_one({'단축코드': DATA['단축코드'], '시간': times}):
                         data_input = self.collection2.find_one({'단축코드': DATA['단축코드'], '시간': times}).copy()
                         DATA['_id'] = data_input['_id']
