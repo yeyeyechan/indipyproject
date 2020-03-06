@@ -94,10 +94,22 @@ class SK(QMainWindow):
                     continue
                 elif (int)(times) >= data_time:
                     DATA['시간'] = times
+                    self.realTimeLogger.info("디버그용")
+                    self.realTimeLogger.info("self.collection3.find_one({'stock_code': DATA['단축코드']})")
+                    self.realTimeLogger.info(self.collection3.find_one({'stock_code': DATA['단축코드']}))
+                    self.realTimeLogger.info("디버그용")
                     if self.collection3.find_one({'stock_code': DATA['단축코드']}):
+                        self.realTimeLogger.info("디버그용")
+                        self.realTimeLogger.info("self.collection3.find_one({'stock_code': DATA['단축코드']})['Vol']")
+                        self.realTimeLogger.info(self.collection3.find_one({'stock_code': DATA['단축코드']})['Vol'])
+                        self.realTimeLogger.info("디버그용")
                         vol =  self.collection3.find_one({'stock_code': DATA['단축코드']})['Vol']
                         current_foreign_ratio = (int)(DATA['외국계순매수수량']/vol)
                         DATA['current_foreign_ratio'] =current_foreign_ratio
+                        self.realTimeLogger.info("디버그용")
+                        self.realTimeLogger.info("sself.collection5.find_one({'stock_code': DATA['단축코드']})['after_foreign_ratio']<current_foreign_ratio")
+                        self.realTimeLogger.info(self.collection5.find_one({'stock_code': DATA['단축코드']})['after_foreign_ratio']<current_foreign_ratio)
+                        self.realTimeLogger.info("디버그용")
                         if self.collection5.find_one({'stock_code': DATA['단축코드']})['after_foreign_ratio']<current_foreign_ratio:
                             self.bot.sendMessage(chat_id='813531834', text="종목코드  "+  DATA['단축코드']+ "  외국인 순매수 수량 동시간 대비 2시간 이상 증가")
                         if self.collection4.find_one({'stock_code': DATA['단축코드'], '시간': times}):
