@@ -174,6 +174,8 @@ class TR_1206_new(QMainWindow):
         before_foreign_vol = int(self.IndiTR.dynamicCall("GetMultiData(int, int)", 0, 16))
         before_program_vol = int(self.IndiTR.dynamicCall("GetMultiData(int, int)", 0, 82))
 
+        if before_total_vol ==0:
+            return
         before_personal_ratio = -1*(int)(before_personal_vol/before_total_vol *100)
         before_foreign_ratio = (int)(before_foreign_vol/before_total_vol *100)
         before_program_ratio = (int)(before_program_vol/before_total_vol *100)
@@ -182,14 +184,15 @@ class TR_1206_new(QMainWindow):
         after_personal_vol = int(self.IndiTR.dynamicCall("GetMultiData(int, int)", 1, 10))
         after_foreign_vol = int(self.IndiTR.dynamicCall("GetMultiData(int, int)", 1, 16))
         after_program_vol = int(self.IndiTR.dynamicCall("GetMultiData(int, int)", 1, 82))
-
+        if after_total_vol ==0:
+            return
         after_personal_ratio = -1*(int)(after_personal_vol/after_total_vol *100)
         after_foreign_ratio = (int)(after_foreign_vol/after_total_vol *100)
         after_program_ratio = (int)(after_program_vol/after_total_vol *100)
 
-        if after_personal_vol < 0 and -3*before_personal_vol < -1*after_personal_vol :
+        if after_personal_vol < 0 and -10*before_personal_vol < -1*after_personal_vol :
             if ( before_personal_vol<0 ):
-                if not( 2*before_personal_ratio < after_personal_ratio):
+                if not( 9*before_personal_ratio < after_personal_ratio):
                     return
             else:
                 pass
@@ -199,7 +202,7 @@ class TR_1206_new(QMainWindow):
             if (before_foreign_vol<=0 ):
                 pass
             else:
-                if( 2*before_foreign_ratio < after_foreign_ratio):
+                if( 9*before_foreign_ratio < after_foreign_ratio):
                     pass
                 return
         DATA['after_total_vol'] = after_total_vol #
@@ -225,7 +228,7 @@ class TR_1206_new(QMainWindow):
         print("System Message Received = ", MsgID)
 
 if __name__ == "__main__":
-    db_name = "20200306"
+    db_name = "20200309"
     client = MongoClient('127.0.0.1', 27017)
     db = client[db_name]
     collection_data = []
@@ -241,7 +244,7 @@ if __name__ == "__main__":
         collection_data.append(i)
     TR_1206Event = QApplication(sys.argv)
     checkindex = 0
-    end_date= get_endDay("20200306")
+    end_date= get_endDay(db_name)
 
     for i in collection_data:
         standard_length = 0

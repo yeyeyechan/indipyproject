@@ -9,6 +9,7 @@ sys.path.append("C:\\dev\\indiPyProject\\data")
 sys.path.append("C:\\dev\\indiPyProject\\analysis")
 sys.path.append("C:\\dev\\indiPyProject")
 sys.path.append("C:\\dev\\indiPyProject\\pyflask")
+
 from PyQt5.QAxContainer import *
 from PyQt5.QtWidgets import QApplication
 from PyQt5.QtWidgets import QMainWindow
@@ -16,7 +17,6 @@ from time import sleep
 from pymongo import MongoClient
 from datetime import datetime
 from log.logger_pyflask import logging_instance
-from analysis.common_data import common_min_shortTime
 import telegram
 
 
@@ -25,7 +25,7 @@ class TR_1406(QMainWindow):
         super().__init__()
         #logging
         self.processID =os.getpid()
-        self.realTimeLogger = logging_instance("TR_1406.py_ PID: "+(str)(self.processID)).mylogger
+        self.realTimeLogger = logging_instance("TR_1406 실행 합니다  Process ID 는 :  "+(str)(self.processID)).mylogger
         #telegram
         telgm_token = '1013576743:AAFkCdmafOY61N-I1FAEIEsOdFZwR47_ZQ8'
         self.bot = telegram.Bot(token=telgm_token)
