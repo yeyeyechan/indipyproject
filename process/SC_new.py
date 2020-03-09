@@ -17,7 +17,7 @@ import telegram
 
 class SC_new(QMainWindow):
 
-    def __init__(self, date):
+    def __init__(self):
         super().__init__()
 
         telgm_token = '1013576743:AAFkCdmafOY61N-I1FAEIEsOdFZwR47_ZQ8'
@@ -28,12 +28,10 @@ class SC_new(QMainWindow):
         self.realTimeLogger.info("QAxWidget Call")
         self.indiReal = QAxWidget("GIEXPERTCONTROL.GiExpertControlCtrl.1")
         self.realTimeLogger.info("QAxWidget Call 이후")
-        #db 날짜
-        self.db_date = date
         # 0905 시간 배열
         self.timeline = common_min_shortTime(5).timeline
         #오늘 날짜
-        self.date = datetime.today().strftime("%Y%m%d")
+        self.db_date = datetime.today().strftime("%Y%m%d")
         # Indi API event
         self.indiReal.ReceiveRTData.connect(self.ReceiveRTData)
 
