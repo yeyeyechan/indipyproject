@@ -7,6 +7,7 @@ sys.path.append("C:\\dev\\indiPyProject\\analysis")
 sys.path.append("C:\\dev\\indiPyProject")
 sys.path.append("C:\\dev\\indiPyProject\\pyflask")
 from pymongo import MongoClient
+import datetime
 
 from analysis.common_data import common_min_timeline
 from analysis.common_data import common_min_shortTime
@@ -20,6 +21,7 @@ class monitoring_new2():
         self.timeline = common_min_timeline(5).timeline
         self.shortTimeline = common_min_shortTime(5).timeline
         self.date = date
+        self.shortTimeRightNow =""
         db_name = self.date
 
         collection_name1 = db_name+"_pr_input"
@@ -194,8 +196,21 @@ class monitoring_new2():
         self.realTimeLogger.info("check_list 안의 종목코드를 가지고 검색하여 외국인 순매수 >0 인 종목코드만 검색한다.")
         self.realTimeLogger.info("self.check_list" )
         self.realTimeLogger.info(self.check_list)
+        self.shortTimeRightNow = datetime.datetime.now()
+        self.hour = self.shortTimeRightNow.hour
+        self.min = self.shortTimeRightNow.minute
+        self.shortTimeRightNow = self.hour*100 +self.min
+        index = 0
+        for timecheck in self.shortTimeline:
+            if (int)(timecheck) >= self.shortTimeRightNow:
+                break
+            index +=1
+
         for check_input in self.check_list:
-            if self.final_data2[check_input]['외국계순매수수량'][-1] <=0 :
+            if self.final_data2[check_input]['외국계순매수수량'][index] <=0 :
+                print(index)
+                print(self.final_data2[check_input]['외국계순매수수량'][index])
+                print(self.final_data2[check_input]['외국계순매수수량'])
                 self.realTimeLogger.info(" self.acc_stock_code['check_input'] 제거  ")
                 del self.acc_stock_code[check_input]
         self.realTimeLogger.info("제거 작업후 acc_stock_code 딕셔너리 sort ")
