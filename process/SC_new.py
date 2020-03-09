@@ -12,7 +12,7 @@ from PyQt5.QtWidgets import QMainWindow
 from pymongo import MongoClient
 from datetime import datetime
 from log.logger_pyflask import logging_instance
-from analysis.common_data import common_min_shortTime
+from analysis.common_data import common_min_shortTime, make_five_min
 import telegram
 
 class SC_new(QMainWindow):
@@ -24,7 +24,7 @@ class SC_new(QMainWindow):
         self.bot = telegram.Bot(token=telgm_token)
         self.processID = os.getpid()
         self.realTimeLogger = logging_instance("SC_new.py_ PID: "+(str)(self.processID)).mylogger
-        self.realTimeLogger.info("SC 함수 실행 PID: "+(str)(self.processID))
+        self.realTimeLogger.info("SC_new 함수 실행 PID: "+(str)(self.processID))
         self.realTimeLogger.info("QAxWidget Call")
         self.indiReal = QAxWidget("GIEXPERTCONTROL.GiExpertControlCtrl.1")
         self.realTimeLogger.info("QAxWidget Call 이후")
@@ -44,10 +44,10 @@ class SC_new(QMainWindow):
         monitoring_input_collection = db[collection_name]
         #모니터링 대상 종목 현재가 데이터 컬랙션
         collection_title1 = "SC_5min_" + self.db_date
-        self.collection1 = db[collection_title1]
+        self.SC_5min = db[collection_title1]
         #모니터링 중 선정된 종목 여부 컬렉션
         collection_title2 = "SC_check_" + self.db_date
-        self.collection2 = db[collection_title2]
+        self.SC_check = db[collection_title2]
 
         for i in monitoring_input_collection.find():
             ret1= self.indiReal.dynamicCall("UnRequestRTReg(QString, QString)", "SC", i['종목코드'].strip())
@@ -63,13 +63,10 @@ class SC_new(QMainWindow):
                 self.realTimeLogger.info("종목코드 "+i['종목코드']+ " 에 대한 SC 실시간 등록 실패!!!")
             else:
                 self.realTimeLogger.info("종목코드 "+i['종목코드']+ " 에 대한 SC 실시간 등록 성공!!!")
-
-
     # 요청한 TR로 부터 데이터를 받는 함수입니다.
     def ReceiveRTData(self, realType):
         # TR을 날릴때 ID를 통해 TR이름을 가져옵니다.
         self.realTimeLogger = logging_instance("SC_new.py 데이터 전송 받음 PID: "+(str)(self.processID)).mylogger
-
         if realType == "SC":
             DATA = {}
             # 데이터 받기
@@ -84,15 +81,32 @@ class SC_new(QMainWindow):
             DATA['stock_code'] = self.indiReal.dynamicCall("GetSingleData(int)", 1)
             self.realTimeLogger.info("SC_new 전송 받은 데이터 :")
             self.realTimeLogger.info(DATA)
+            DATA['sortTime'] = make_five_min(DATA['TIME'])
 
-            hour = datetime.now().hour
-            min  = datetime.now().minute
-
-            time = hour*100+min
-            data_time = (int)((int)(DATA['TIME'])/10000)
-
-
-            self.realTimeLogger.info("")
+            if (int)(DATA['sortTime']) <= 905:
+                SC_check_data= {}
+                SC_check_data['stock_code'] = DATA['stock_code']
+                SC_check_data['gubun'] = self.indiReal.dynamicCall("GetSingleData(int)", 4)
+                if self.SC_check.find_one({'stock_code': DATA['stock_code']}):
+                    data_input = self.SC_check.find_one({'stock_code': DATA['stock_code']}).copy()
+                    SC_check_data['_id'] = data_input['_id']
+                    self.SC_check.replace_one(data_input, SC_check_data, upsert=True)
+                    self.realTimeLogger.info("장 시작 후 5분 내 상승 종목 코드 :  " + DATA['stock_code'])
+                    if SC_check_data['gubun'] == "2":
+                        self.realTimeLogger.info("장 시작 후 5분 내 상승 종목 코드 :  " + DATA['stock_code'])
+                else:
+                    self.SC_check.insert_one(SC_check_data)
+                    if SC_check_data['gubun'] == "2":
+                        self.realTimeLogger.info("장 시작 후 5분 내 상승 종목 코드 :  " + DATA['stock_code'])
+            if  self.SC_5min.find_one({'stock_code': DATA['stock_code'], 'sortTime':  DATA['sortTime']}):
+                data_input = self.SC_5min.find_one({'stock_code': DATA['stock_code'] , 'sortTime':  DATA['sortTime']}).copy()
+                DATA['_id'] = data_input['_id']
+                self.realTimeLogger.info("SC_new 전송 받은 데이터 시간 "+DATA['sortTime'] +" 새 데이터로 교체")
+                self.realTimeLogger.info(self.SC_5min.replace_one(data_input, DATA, upsert=True))
+            else:
+                self.realTimeLogger.info("SC_new 전송 받은 데이터 시간 "+DATA['sortTime'] +" 새 데이터 입력")
+                self.realTimeLogger.info(self.SC_5min.insert_one(DATA))
+            self.realTimeLogger.info("SC_new 전송 받기 완료 종목코드 : "+ DATA['stock_code'] +" 데이터 시간 : "+DATA['sortTime'])
 
     def ReceiveSysMsg(self, MsgID):
         print("System Message Received = ", MsgID)

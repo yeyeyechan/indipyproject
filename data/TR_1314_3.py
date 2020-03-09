@@ -96,5 +96,6 @@ class TR_1314_3(QMainWindow):
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    TR_1314_3_vari =TR_1314_3(sys.argv[1])
+    #TR_1314_3_vari =TR_1314_3(sys.argv[1])
+    TR_1314_3_vari =TR_1314_3("20200310")
     app.exec_()

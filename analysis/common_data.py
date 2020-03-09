@@ -63,5 +63,46 @@ def get_endDay(db_name):
             else:
                 break
     return end_date
-if __name__ == "__main__":
-    print(get_endDay("20200302"))
+def make_five_min(time):
+    final_time = 0
+    final_hour = 0
+    final_min = 0
+    # time is HHMMSSSS
+    if len(time) ==8 or len(time) ==7 :
+        hour = (int)((int)(time)/ 1000000)
+        min_ss = (int)((int)(time)% 1000000)
+        min = (int)(min_ss/10000)
+        ss  = min_ss%10000
+
+        if min%5 ==0 and ss ==0:
+            final_min = min
+            final_hour = hour
+        else:
+            if min >=55:
+                final_hour = hour +1
+                final_min =0
+            else:
+                final_hour = hour
+                final_min = 5*(int)(min/5) +5
+    elif len(time) ==4 or len(time) ==3 :
+        hour = (int)((int)(time) / 100)
+        min  = (int)((int)(time) % 100)
+
+        if min % 5 == 0 :
+            final_min = min
+            final_hour = hour
+        else:
+            if min >= 55:
+                final_hour = hour + 1
+                final_min = 0
+            else:
+                final_hour = hour
+                final_min =  5*(int)(min/5) + 5
+
+    final_time = final_hour*100 +final_min
+    if final_hour <10:
+        final_time = "0"+str(final_time)
+    return str(final_time)
+
+if __name__ =="__main__":
+    print(make_five_min("759"))

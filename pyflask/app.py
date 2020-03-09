@@ -339,6 +339,7 @@ def realTimeProgram_input2():
             "종목코드": i['stock_code'],
             "korName"  : i["korName"],
             "gubun" :i["gubun"],
+            "gubun_code" :i["gubun_code"],
             "연속일자": i["연속일자"]
 
         }
@@ -354,6 +355,7 @@ def realTimeProgram_input2():
             "종목코드": i['stock_code'],
             "korName": i["korName"],
             "gubun": i["gubun"],
+            "gubun_code": i["gubun_code"],
             "연속일자": i["연속일자"]
 
         }
@@ -369,6 +371,7 @@ def realTimeProgram_input2():
             "종목코드": i['stock_code'],
             "korName"  : i["korName"],
             "gubun" :i["gubun"],
+            "gubun_code": i["gubun_code"],
             "연속일자": i["연속일자"]
 
         }

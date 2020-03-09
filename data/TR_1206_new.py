@@ -169,10 +169,10 @@ class TR_1206_new(QMainWindow):
         # TR을 날릴때 ID를 통해 TR이름을 가져옵니다.
 
         DATA = {}
-        before_total_vol = int(self.IndiTR.dynamicCall("GetMultiData(int, int)", 0, 7))
-        before_personal_vol = int(self.IndiTR.dynamicCall("GetMultiData(int, int)", 0, 10))
-        before_foreign_vol = int(self.IndiTR.dynamicCall("GetMultiData(int, int)", 0, 16))
-        before_program_vol = int(self.IndiTR.dynamicCall("GetMultiData(int, int)", 0, 82))
+        before_total_vol = (int)(self.IndiTR.dynamicCall("GetMultiData(int, int)", 0, 7))
+        before_personal_vol = (int)(self.IndiTR.dynamicCall("GetMultiData(int, int)", 0, 10))
+        before_foreign_vol = (int)(self.IndiTR.dynamicCall("GetMultiData(int, int)", 0, 16))
+        before_program_vol = (int)(self.IndiTR.dynamicCall("GetMultiData(int, int)", 0, 82))
 
         if before_total_vol ==0:
             return
@@ -180,10 +180,10 @@ class TR_1206_new(QMainWindow):
         before_foreign_ratio = (int)(before_foreign_vol/before_total_vol *100)
         before_program_ratio = (int)(before_program_vol/before_total_vol *100)
 
-        after_total_vol = int(self.IndiTR.dynamicCall("GetMultiData(int, int)", 1, 7))
-        after_personal_vol = int(self.IndiTR.dynamicCall("GetMultiData(int, int)", 1, 10))
-        after_foreign_vol = int(self.IndiTR.dynamicCall("GetMultiData(int, int)", 1, 16))
-        after_program_vol = int(self.IndiTR.dynamicCall("GetMultiData(int, int)", 1, 82))
+        after_total_vol = (int)(self.IndiTR.dynamicCall("GetMultiData(int, int)", 1, 7))
+        after_personal_vol = (int)(self.IndiTR.dynamicCall("GetMultiData(int, int)", 1, 10))
+        after_foreign_vol = (int)(self.IndiTR.dynamicCall("GetMultiData(int, int)", 1, 16))
+        after_program_vol = (int)(self.IndiTR.dynamicCall("GetMultiData(int, int)", 1, 82))
         if after_total_vol ==0:
             return
         after_personal_ratio = -1*(int)(after_personal_vol/after_total_vol *100)
@@ -228,7 +228,7 @@ class TR_1206_new(QMainWindow):
         print("System Message Received = ", MsgID)
 
 if __name__ == "__main__":
-    db_name = "20200309"
+    db_name = "20200310"
     client = MongoClient('127.0.0.1', 27017)
     db = client[db_name]
     collection_data = []
@@ -250,9 +250,10 @@ if __name__ == "__main__":
         standard_length = 0
         if checkindex == len(collection_data):
             TR_1206Event.exit(0)
-        start_date = end_date - timedelta(days=1)
-        start_date = str(start_date.strftime("%Y%m%d"))
         new_end_date = str(end_date.strftime("%Y%m%d"))
+        start_date = get_endDay(new_end_date)
+        start_date = str(start_date.strftime("%Y%m%d"))
+
         TR_1206Event_vari = TR_1206_new(i['단축코드'], start_date, new_end_date, '1', '0', i['종목명'], i['구분'], i['구분코드'],db_name, standard_length)
         time.sleep(0.3)
         checkindex += 1
