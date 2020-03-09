@@ -158,6 +158,13 @@ class monitoring_new2():
                         pass
                     index2 +=1
             self.realTimeLogger.info("final_data2 에 외국계 순매수 수량 데이터 저장 완료")
+            print(self.final_data2[map_name]['연속일자'])
+            print(self.sorted_data_list2[map_name])
+            if len(self.sorted_data_list2[map_name]) == 0 :
+                self.realTimeLogger.info("sorted_data_list2 비어있음 종목코드 : "+map_name)
+                self.realTimeLogger.info("처음으로 되돌아감")
+                continue
+            print((int)(self.sorted_data_list2[map_name][0]['연속일자']) +1)
             self.final_data2[map_name]['연속일자'] = (int)(self.sorted_data_list2[map_name][0]['연속일자']) +1
 
             data_list3[map_name]= []
