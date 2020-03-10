@@ -68,7 +68,7 @@ class SC_new(QMainWindow):
         if realType == "SC":
             DATA = {}
             # 데이터 받기
-            DATA['DATE'] = self.date
+            DATA['DATE'] = self.db_date
             DATA['TIME'] = self.indiReal.dynamicCall("GetSingleData(int)", 2) #1630 0000
             DATA['OPEN'] = (int)(self.indiReal.dynamicCall("GetSingleData(int)", 10))
             DATA['HIGH'] = (int)(self.indiReal.dynamicCall("GetSingleData(int)", 11))
@@ -81,7 +81,7 @@ class SC_new(QMainWindow):
             self.realTimeLogger.info(DATA)
             DATA['sortTime'] = make_five_min(DATA['TIME'])
 
-            if (int)(DATA['sortTime']) <= 905:
+            if (int)(DATA['sortTime']) <= 910:
                 SC_check_data= {}
                 SC_check_data['stock_code'] = DATA['stock_code']
                 SC_check_data['gubun'] = self.indiReal.dynamicCall("GetSingleData(int)", 4)
