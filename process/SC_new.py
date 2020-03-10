@@ -81,7 +81,7 @@ class SC_new(QMainWindow):
             self.realTimeLogger.info(DATA)
             DATA['sortTime'] = make_five_min(DATA['TIME'])
 
-            if (int)(DATA['sortTime']) <= 910:
+            if (int)(DATA['sortTime']) <= 1100:
                 SC_check_data= {}
                 SC_check_data['stock_code'] = DATA['stock_code']
                 SC_check_data['gubun'] = self.indiReal.dynamicCall("GetSingleData(int)", 4)

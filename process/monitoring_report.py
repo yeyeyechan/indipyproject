@@ -26,7 +26,7 @@ def monitoring_report_function():
     realTimeLogger.info("monitoring_report_function 함수 실행 PID: " + (str)(processID))
 
     client = MongoClient('127.0.0.1', 27017)
-    db_name = str(datetime.today().strftime("%Y%m%d"))
+    db_name = str(datetime.datetime.today().strftime("%Y%m%d"))
     db = client[db_name]
 
     monitoring_input = db[db_name+"_pr_input"]
@@ -44,14 +44,20 @@ def monitoring_report_function():
         if SC_check_data['gubun'] =='2':
             gubun_code = monitoring_input.find_one({"종목코드": SC_check_data['stock_code']})['gubun_code']
             TR_1206_collection_name = "TR_1206_new_"+ gubun_code
-            TR_1206_collection = db[TR_1206_collection_name]
-            if SK_5min.find_one({"단축코드": SC_check_data['stock_code'], "시간": TIME})!=None and SC_5min.find_one({'stock_code': SC_check_data['stock_code'] , 'TIME':  TIME}).count()!=None and SC_5min.find_one({'stock_code': SC_check_data['stock_code'] , 'TIME':  TIME})['Vol']>0 :
+            TR_1206_collection = db[TR_1206_collection_name][SC_check_data['stock_code']]
+            print(SC_check_data['stock_code'])
+            print(TIME)
+            print(SK_5min.find_one({"단축코드": SC_check_data['stock_code'], "시간": TIME}))
+            print(SC_5min.find_one({'stock_code': SC_check_data['stock_code'] , 'TIME':  TIME}))
+            print( SC_5min.find_one({'stock_code': SC_check_data['stock_code'] , 'sortTime':  TIME}))
+            print( SC_5min.find_one({'stock_code': SC_check_data['stock_code'] , 'sortTime':  TIME})['Vol'])
+            if SK_5min.find_one({"단축코드": SC_check_data['stock_code'], "시간": TIME})!=None and SC_5min.find_one({'stock_code': SC_check_data['stock_code'] , 'TIME':  TIME})!=None and SC_5min.find_one({'stock_code': SC_check_data['stock_code'] , 'sortTime':  TIME})['Vol']>0 :
                 if TR_1206_collection['after_foreign_ratio'] < SK_5min.find_one({"단축코드": SC_check_data['stock_code'], "시간": TIME})['외국계순매수수량'] / SC_5min.find_one({'stock_code': SC_check_data['stock_code'] , 'TIME':  TIME})['Vol']:
                     bot.sendMessage(chat_id='813531834', text="종목코드  " +SC_check_data['stock_code'] + "  외국인 순매수 수량 전일 동시간 대비 증가")
 
 
 if __name__ == "__main__":
     sched_sc = BlockingScheduler()
-    sched_sc.add_job(monitoring_report_function, 'cron', hour ='9-15',minute= '*/5',second='1')
+    sched_sc.add_job(monitoring_report_function, 'cron', hour ='9-15',minute= '*/1',second='1')
     sched_sc.start()
 
