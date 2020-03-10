@@ -78,9 +78,13 @@ class SK_new(QMainWindow):
             self.realTimeLogger.info("실시간 외국인 수급 데이터 저장 후 종목코드  "+DATA['단축코드'] )
 
             data_time = make_five_min(DATA['시간'])
+            DATA['sortTime'] = data_time
+            DATA['sortTimeInt'] = (int)(data_time)
             self.realTimeLogger.info("5분 간격 외국인 수급 데이터 저장 전")
-            if self.SK_5min.find_one({'단축코드': DATA['단축코드'], '시간':data_time}):
-                data_input = self.SK_5min.find_one({'단축코드': DATA['단축코드'], '시간':data_time}).copy()
+            print("data_time")
+            print(data_time)
+            if self.SK_5min.find_one({'단축코드': DATA['단축코드'], 'sortTime':data_time}) != None:
+                data_input = self.SK_5min.find_one({'단축코드': DATA['단축코드'], 'sortTime':data_time}).copy()
                 DATA['_id'] = data_input['_id']
                 self.SK_5min.replace_one(data_input, DATA, upsert=True)
                 self.realTimeLogger.info("SK_new 전송 받은 데이터 시간 "+data_time +" 새 데이터로 교체 종목코드  "+DATA['단축코드'] )

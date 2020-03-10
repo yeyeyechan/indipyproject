@@ -80,8 +80,9 @@ class SC_new(QMainWindow):
             self.realTimeLogger.info("SC_new 전송 받은 데이터 :")
             self.realTimeLogger.info(DATA)
             DATA['sortTime'] = make_five_min(DATA['TIME'])
+            DATA['sortTimeInt'] = (int)(make_five_min(DATA['TIME']))
 
-            if (int)(DATA['sortTime']) <= 1100:
+            if (int)(DATA['sortTime']) <= 905:
                 SC_check_data= {}
                 SC_check_data['stock_code'] = DATA['stock_code']
                 SC_check_data['gubun'] = self.indiReal.dynamicCall("GetSingleData(int)", 4)

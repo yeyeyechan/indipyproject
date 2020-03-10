@@ -192,7 +192,7 @@ class TR_1206_new(QMainWindow):
 
         if after_personal_vol < 0 and -10*before_personal_vol < -1*after_personal_vol :
             if ( before_personal_vol<0 ):
-                if not( 9*before_personal_ratio < after_personal_ratio):
+                if not( 10*before_personal_ratio < after_personal_ratio):
                     return
             else:
                 pass
@@ -202,7 +202,7 @@ class TR_1206_new(QMainWindow):
             if (before_foreign_vol<=0 ):
                 pass
             else:
-                if( 9*before_foreign_ratio < after_foreign_ratio):
+                if( 10*before_foreign_ratio < after_foreign_ratio):
                     pass
                 return
         DATA['after_total_vol'] = after_total_vol #
@@ -228,7 +228,7 @@ class TR_1206_new(QMainWindow):
         print("System Message Received = ", MsgID)
 
 if __name__ == "__main__":
-    db_name = "20200310"
+    db_name = "20200311"
     client = MongoClient('127.0.0.1', 27017)
     db = client[db_name]
     collection_data = []
