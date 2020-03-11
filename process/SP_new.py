@@ -29,7 +29,7 @@ class SP(QMainWindow):
         self.timeline = common_min_shortTime(5).timeline
 
         #collection_name ="20200224" + "_pr_input"
-        collection_name = str(datetime.today().strftime("%Y%m%d")) + "_pr_input"
+        collection_name = str(datetime.today().strftime("%Y%m%d")) + "_pr_input2"
         client = MongoClient('127.0.0.1', 27017)
         #db = client["20200224"]
         db = client[str(datetime.today().strftime("%Y%m%d"))]

@@ -45,7 +45,7 @@ class TR_1206_new(QMainWindow):
         client = MongoClient('127.0.0.1', 27017)
         db_name = date
         db = client[db_name]
-        collection_name = "TR_1206_new_"+self.gubun_code
+        collection_name = "TR_1206_new2_"+self.gubun_code
 
         self.collection1 = db[collection_name] #TR_1206_1
         self.columnName = {
@@ -193,7 +193,7 @@ class TR_1206_new(QMainWindow):
 
         if after_personal_vol >=0 or after_program_vol <=0 or after_foreign_vol<= 0:
             return
-        if after_foreign_ratio <= 0 or after_program_ratio <= 0 or after_personal_ratio >=0 :
+        if after_foreign_ratio <= 0 or after_program_ratio <= 0 :
             return
         if after_personal_vol < 0 and -10*before_personal_vol < -1*after_personal_vol :
             if ( before_personal_vol<0 ):

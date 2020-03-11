@@ -29,7 +29,7 @@ def monitoring_report_function():
     db_name = str(datetime.datetime.today().strftime("%Y%m%d"))
     db = client[db_name]
 
-    monitoring_input = db[db_name+"_pr_input"]
+    monitoring_input = db[db_name+"_pr_input2"]
     SC_check = db["SC_check_"+db_name]
     SK_5min = db["SK_5min_"+db_name]
     SC_5min = db["SC_5min_"+db_name]

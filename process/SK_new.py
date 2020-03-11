@@ -31,7 +31,7 @@ class SK_new(QMainWindow):
         # Indi API event
         self.indiReal.ReceiveRTData.connect(self.ReceiveRTData)
 
-        collection_name = str(datetime.today().strftime("%Y%m%d")) + "_pr_input"
+        collection_name = str(datetime.today().strftime("%Y%m%d")) + "_pr_input2"
         client = MongoClient('127.0.0.1', 27017)
         db = client[str(datetime.today().strftime("%Y%m%d"))]
         collection = db[collection_name]

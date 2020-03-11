@@ -35,7 +35,7 @@ class SC_new(QMainWindow):
         # Indi API event
         self.indiReal.ReceiveRTData.connect(self.ReceiveRTData)
 
-        collection_name = self.db_date+ "_pr_input"
+        collection_name = self.db_date+ "_pr_input2"
         client = MongoClient('127.0.0.1', 27017)
         db = client[self.db_date]
         #모니터링 대상 종목 컬렉션

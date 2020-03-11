@@ -18,7 +18,7 @@ from pymongo import MongoClient
 from datetime import datetime
 from log.logger_pyflask import logging_instance
 import telegram
-
+import time
 
 class TR_1406(QMainWindow):
     def __init__(self, market, day, gubun):
@@ -94,7 +94,7 @@ class TR_1406(QMainWindow):
             if DATA['구분코드'] == "3":
                 DATA['구분'] = "전일 보합"
             self.TR_1406.insert_one(DATA)
-            self.realTimeLogger('TR_1406 데이터 저장  '+DATA)
+            self.realTimeLogger.info('TR_1406 데이터 저장  '+str(DATA))
 
         return
     def ReceiveSysMsg(self, MsgID):

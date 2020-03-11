@@ -24,7 +24,7 @@ class monitoring_new2():
 
         db_name = self.date
 
-        collection_name1 = db_name+"_pr_input"
+        collection_name1 = db_name+"_pr_input2"
         collection_name2 = "SP_5min_"+db_name
         collection_name3 = "SK_5min_"+db_name
         collection_name4 = "SC_5min_"+db_name
