@@ -73,8 +73,10 @@ def make_five_min(time):
         min_ss = (int)((int)(time)% 10000)
         min = (int)(min_ss/100)
         ss  = min_ss%100
-
-        if min%5 ==0 and ss ==0:
+        if hour <9 :
+            final_min = 5
+            final_hour = 9
+        elif min%5 ==0 and ss ==0:
             final_min = min
             final_hour = hour
         else:
@@ -89,8 +91,10 @@ def make_five_min(time):
         min_ss = (int)((int)(time)% 1000000)
         min = (int)(min_ss/10000)
         ss  = min_ss%10000
-
-        if min%5 ==0 and ss ==0:
+        if hour <9 :
+            final_min = 5
+            final_hour = 9
+        elif min%5 ==0 and ss ==0:
             final_min = min
             final_hour = hour
         else:
@@ -103,8 +107,10 @@ def make_five_min(time):
     elif len(time) ==4 or len(time) ==3 :
         hour = (int)((int)(time) / 100)
         min  = (int)((int)(time) % 100)
-
-        if min % 5 == 0 :
+        if hour <9 :
+            final_min = 5
+            final_hour = 9
+        elif min % 5 == 0 :
             final_min = min
             final_hour = hour
         else:

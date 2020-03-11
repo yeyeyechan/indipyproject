@@ -16,7 +16,7 @@ import pymongo
 
 
 class monitoring_new2():
-    def __init__(self, date):
+    def __init__(self, date, time_right_now):
         self.realTimeLogger = logging_instance("monitoring_new2.py_ 종목 모니터링 class 시작").mylogger
 
         self.shortTimeline = common_min_shortTime(5).timeline
@@ -38,11 +38,38 @@ class monitoring_new2():
         SC_5min = db[collection_name4] #현재가  컬렉션
         self.realTimeLogger.info("collection 연결 완료")
 
+        self.monitoring_input = {}
+        self.SP_5min = {}
+        self.SK_5min = {}
+        self.SC_5min = {}
 
-
+        length = 0
+        for i in self.shortTimeline:
+            if int(i)<= int(time_right_now):
+                length +=1
+            else:
+                break
+        self.timeTimeLine = self.shortTimeline[:length]
+        index = 0
+        for stock_code_data in monitoring_input.find():
+            index +=1
+            self.realTimeLogger.info(stock_code_data['종목코드'])
+            self.realTimeLogger.info(index)
+            self.monitoring_input[stock_code_data['종목코드']] = {}
+            self.SP_5min[stock_code_data['종목코드']] = {}
+            self.SK_5min[stock_code_data['종목코드']] = {}
+            self.SC_5min[stock_code_data['종목코드']] = {}
+            self.monitoring_input[stock_code_data['종목코드']] = stock_code_data
+            for SP_data in SP_5min.find({'단축코드':stock_code_data['종목코드'] }):
+                self.SP_5min[stock_code_data['종목코드']][SP_data['sortTime']] = SP_data['비차익위탁프로그램순매수']
+            for SK_data in SK_5min.find({'단축코드':stock_code_data['종목코드'] }):
+                self.realTimeLogger.info(SK_data)
+                self.SK_5min[stock_code_data['종목코드']][SK_data['sortTime']] = SK_data['외국계순매수수량']
+            for SC_data in SC_5min.find({'stock_code':stock_code_data['종목코드'] }):
+                self.SC_5min[stock_code_data['종목코드']][SC_data['sortTime']] = SC_data['Close']
 
 if __name__ == "__main__":
-    monitoring2_var = monitoring_new2("20200303")
+    monitoring2_var = monitoring_new2("20200311", "1530")
 
 
 

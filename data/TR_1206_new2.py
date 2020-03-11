@@ -193,7 +193,7 @@ class TR_1206_new(QMainWindow):
 
         if after_personal_vol >=0 or after_program_vol <=0 or after_foreign_vol<= 0:
             return
-        if after_foreign_ratio <= 0 or after_program_ratio <= 0 :
+        if after_foreign_ratio <= 0 or after_program_ratio <= 0 or after_personal_ratio >=0 :
             return
         if after_personal_vol < 0 and -10*before_personal_vol < -1*after_personal_vol :
             if ( before_personal_vol<0 ):
@@ -237,15 +237,10 @@ if __name__ == "__main__":
     client = MongoClient('127.0.0.1', 27017)
     db = client[db_name]
     collection_data = []
-    collection1 = db["TR_1314_3_2"]
-    collection2 = db["TR_1314_3_3"]
-    collection3 = db["TR_1314_3_5"]
+    collection1 = db["TR_1406_"+db_name]
+
 
     for i in collection1.find():
-        collection_data.append(i)
-    for i in collection2.find():
-        collection_data.append(i)
-    for i in collection3.find():
         collection_data.append(i)
     TR_1206Event = QApplication(sys.argv)
     checkindex = 0

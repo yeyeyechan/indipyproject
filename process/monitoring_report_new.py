@@ -44,45 +44,41 @@ def monitoring_report_function():
     TIME = make_five_min(str(time_now))
 
     for SC_check_data in SC_check.find():
-        if SC_check_data['gubun'] =='2':
-            check_first_loop =False
-            gubun_code = monitoring_input.find_one({"종목코드": SC_check_data['stock_code']})['gubun_code']
-            TR_1206_collection_name = "TR_1206_new_"+ gubun_code
-            TR_1206_collection = db[TR_1206_collection_name].find_one({"stock_code" : SC_check_data['stock_code']})
-            SK_foreign_vol = ""
-            SC_vol         = ""
-
-
-
-
-            #없을시 전꺼루 검색하는 로직 필요
-            if SK_5min.find_one({"단축코드": SC_check_data['stock_code'], "sortTime": TIME})!=None and SC_5min.find_one({'stock_code': SC_check_data['stock_code'] , 'sortTime':  TIME})!=None and SC_5min.find_one({'stock_code': SC_check_data['stock_code'] , 'sortTime':  TIME})['Vol']>0 :
-                if TR_1206_collection['after_foreign_ratio'] < SK_5min.find_one({"단축코드": SC_check_data['stock_code'], "sortTime": TIME})['외국계순매수수량'] / SC_5min.find_one({'stock_code': SC_check_data['stock_code'] , 'sortTime':  TIME})['Vol']:
-                    bot.sendMessage(chat_id='813531834', text="종목코드  " +SC_check_data['stock_code'] + "  외국인 순매수 수량 전일 동시간 대비 증가")
-                    if SP_5min.find_one({"단축코드":SC_check_data['stock_code']}) != None:
-                        for SP_data in SP_5min.find({"단축코드":SC_check_data['stock_code']}).sort("sortTimeInt", pymongo.DESCENDING):
-                            if SP_data['추세'] == '3':
-                                bot.sendMessage(chat_id='813531834', text="종목코드  " + SC_check_data['stock_code'] + "  외국인  순매수 수량 전일 동시간 대비 증가 / 프로그램 순매수 증가 추세")
-                            break
-
-            else:
-                if SK_5min.find_one({"단축코드": SC_check_data['stock_code'], "sortTime": TIME}) == None:
-                    for SK_5min_data in SK_5min.find({"단축코드": SC_check_data['stock_code']}).sort("sortTimeInt", pymongo.DESCENDING):
-                        SK_foreign_vol = SK_5min_data['외국계순매수수량']
+        #if SC_check_data['gubun'] =='2':
+        check_first_loop =False
+        gubun_code = monitoring_input.find_one({"종목코드": SC_check_data['stock_code']})['gubun_code']
+        TR_1206_collection_name = "TR_1206_new_"+ gubun_code
+        TR_1206_collection = db[TR_1206_collection_name].find_one({"stock_code" : SC_check_data['stock_code']})
+        SK_foreign_vol = ""
+        SC_vol         = ""
+        #없을시 전꺼루 검색하는 로직 필요
+        if SK_5min.find_one({"단축코드": SC_check_data['stock_code'], "sortTime": TIME})!=None and SC_5min.find_one({'stock_code': SC_check_data['stock_code'] , 'sortTime':  TIME})!=None and SC_5min.find_one({'stock_code': SC_check_data['stock_code'] , 'sortTime':  TIME})['Vol']>0 :
+            if TR_1206_collection['after_foreign_ratio'] < SK_5min.find_one({"단축코드": SC_check_data['stock_code'], "sortTime": TIME})['외국계순매수수량'] / SC_5min.find_one({'stock_code': SC_check_data['stock_code'] , 'sortTime':  TIME})['Vol']:
+                bot.sendMessage(chat_id='813531834', text="종목코드  " +SC_check_data['stock_code'] + "  외국인 순매수 수량 전일 동시간 대비 증가")
+                if SP_5min.find_one({"단축코드":SC_check_data['stock_code']}) != None:
+                    for SP_data in SP_5min.find({"단축코드":SC_check_data['stock_code']}).sort("sortTimeInt", pymongo.DESCENDING):
+                        if SP_data['추세'] == '3':
+                            bot.sendMessage(chat_id='813531834', text="종목코드  " + SC_check_data['stock_code'] + "  외국인  순매수 수량 전일 동시간 대비 증가 / 프로그램 순매수 증가 추세")
                         break
-                if  SC_5min.find_one({'stock_code': SC_check_data['stock_code'], 'sortTime': TIME}) ==None:
-                    for SC_5min_data in SC_5min.find({"stock_code": SC_check_data['stock_code']}).sort("sortTimeInt",pymongo.DESCENDING):
-                        SC_vol = SC_5min_data['Vol']
-                        break
-                if SC_vol == 0 or SC_vol =="" or SK_foreign_vol =="":
+
+        else:
+            if SK_5min.find_one({"단축코드": SC_check_data['stock_code'], "sortTime": TIME}) == None:
+                for SK_5min_data in SK_5min.find({"단축코드": SC_check_data['stock_code']}).sort("sortTimeInt", pymongo.DESCENDING):
+                    SK_foreign_vol = SK_5min_data['외국계순매수수량']
                     break
-                if TR_1206_collection['after_foreign_ratio'] <SK_foreign_vol/SC_vol :
-                    bot.sendMessage(chat_id='813531834', text="종목코드  " +SC_check_data['stock_code'] + "  외국인 순매수 수량 전일 동시간 대비 증가")
-                    if SP_5min.find_one({"단축코드":SC_check_data['stock_code']}) != None:
-                        for SP_data in SP_5min.find({"단축코드":SC_check_data['stock_code']}).sort("sortTimeInt", pymongo.DESCENDING):
-                            if SP_data['추세'] == '3':
-                                bot.sendMessage(chat_id='813531834', text="종목코드  " + SC_check_data['stock_code'] + "  외국인  순매수 수량 전일 동시간 대비 증가 / 프로그램 순매수 증가 추세")
-                            break
+            if  SC_5min.find_one({'stock_code': SC_check_data['stock_code'], 'sortTime': TIME}) ==None:
+                for SC_5min_data in SC_5min.find({"stock_code": SC_check_data['stock_code']}).sort("sortTimeInt",pymongo.DESCENDING):
+                    SC_vol = SC_5min_data['Vol']
+                    break
+            if SC_vol == 0 or SC_vol =="" or SK_foreign_vol =="":
+                break
+            if TR_1206_collection['after_foreign_ratio'] <SK_foreign_vol/SC_vol :
+                bot.sendMessage(chat_id='813531834', text="종목코드  " +SC_check_data['stock_code'] + "  외국인 순매수 수량 전일 동시간 대비 증가")
+                if SP_5min.find_one({"단축코드":SC_check_data['stock_code']}) != None:
+                    for SP_data in SP_5min.find({"단축코드":SC_check_data['stock_code']}).sort("sortTimeInt", pymongo.DESCENDING):
+                        if SP_data['추세'] == '3':
+                            bot.sendMessage(chat_id='813531834', text="종목코드  " + SC_check_data['stock_code'] + "  외국인  순매수 수량 전일 동시간 대비 증가 / 프로그램 순매수 증가 추세")
+                        break
 
 
 if __name__ == "__main__":

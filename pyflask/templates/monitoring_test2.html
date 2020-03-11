@@ -10,8 +10,8 @@
 <p> program / foreign 따로 상승 가격 하락 시점</p>
 <script>
     var id_value = "myChart";
-    var key_length= {{key |length }}
-    for (var i =0 ; i < key_length ; i++){
+    var monitoring_input_length= {{monitoring_input |length }}
+    for (var i =0 ; i < monitoring_input_length ; i++){
         id_value = id_value+i
         var newForm = $('<div></div>');
         newForm.attr("style", "width:800px");
@@ -23,23 +23,23 @@
 <script>
 id_value = "myChart";
 var index = 0;
-{% for stock_code in acc_stock_code %}
+{% for monitoring_input_data in monitoring_input.keys() %}
     id_value = id_value+index
     var ctx = document.getElementById(id_value).getContext('2d');
     index++;
     var data =  {
             labels: [
-                {% for item in time_line %}
-                "{{item}}",
+                {% for timeTime in timeTimeLine %}
+                "{{timeTime}}",
                 {% endfor %}
             ],
             datasets: [{
                 label : "Program",
                 yAxisID: 'first-y-axis',
                 data : [
-                {% for item in values[stock_code[0]]['프로그램'][:length] %}
-                   {{ item }},
-                  {% endfor %}
+                {% for timeTime in timeTimeLine %}
+                   {{ SP_5min[monitoring_input_data][timeTime] }},
+                {% endfor %}
                 ],
                 backgroundColor:
                     'rgba(255, 99, 132, 0.2)'
@@ -52,9 +52,9 @@ var index = 0;
                 label : "foreign",
                 yAxisID: 'first-y-axis',
                 data : [
-                {% for item in values2[stock_code[0]]['외국계순매수수량'][:length] %}
-                   {{ item }},
-                  {% endfor %}
+                {% for timeTime in timeTimeLine %}
+                   {{ SK_5min[monitoring_input_data][timeTime] }},
+                {% endfor %}
                 ],
                 backgroundColor:
                 'rgba(75, 192, 192, 0.2)',
@@ -70,9 +70,9 @@ var index = 0;
                 label : "price",
                 yAxisID: 'second-y-axis',
               data : [
-                {% for item in values3[stock_code[0]]['종가'][:length]  %}
-                   {{ item }},
-                  {% endfor %}
+                {% for timeTime in timeTimeLine %}
+                   {{ SC_5min[monitoring_input_data][timeTime] }},
+                {% endfor %}
                 ],
                 backgroundColor:
                 'rgba(75, 192, 192, 0.2)',
@@ -87,7 +87,7 @@ var index = 0;
         options: {
             title:{
                 display:true,
-                text:'{{values2[stock_code[0]]['korName']}}' +'{{values2[stock_code[0]]['gubun']}}'
+                text:'{{monitoring_input[monitoring_input_data]['korName']}}' +'{{monitoring_input[monitoring_input_data]['gubun']}}'
             },
             responsive: true,
             scales: {

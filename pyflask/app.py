@@ -28,7 +28,7 @@ import subprocess
 from analysis.monitoring_new import monitoring_new
 from analysis.monitoring_new2 import monitoring_new2
 from datetime import timedelta
-
+from analysis.common_data import make_five_min
 app = Flask(__name__)
 appLogger = logging_instance("app.py_").mylogger
 
@@ -103,25 +103,18 @@ def monitoring_new_test2():
         if py_day != date:
             hour = 15
             min = 30
-        #78개임(날) 905-1530
-        total_time = (int)((hour*60+min - 9*60 -5)/5)
-        if total_time <=0:
-            total_time =1
-        elif total_time == 77:
-            total_time += 1
-        else:
-            total_time +=2
-        #total_time =3
-        monitoring_new_var = monitoring_new(date)
-        final_data= monitoring_new_var.final_data
-        final_data2= monitoring_new_var.final_data2
-        final_data3= monitoring_new_var.final_data3
-        acc_stock_code= monitoring_new_var.acc_stock_code
+        time_right_now = make_five_min(str(hour)+str(min))
+        monitoring_new_var = monitoring_new2(date, time_right_now)
 
-        common_min_timeline_var2 = common_min_shortTime(5).timeline[:total_time]
+        monitoring_input= monitoring_new_var.monitoring_input
+        SP_5min= monitoring_new_var.SP_5min
+        SK_5min= monitoring_new_var.SK_5min
+        SC_5min= monitoring_new_var.SC_5min
+        timeTimeLine= monitoring_new_var.timeTimeLine
+
     except Exception:
         return redirect(url_for('index'))
-    return render_template('monitoring_test2.html'  ,  key = final_data.keys() ,time_line = common_min_timeline_var2 ,  values= final_data, values2= final_data2, values3 = final_data3 ,acc_stock_code=acc_stock_code, length = total_time)
+    return render_template('monitoring_test2.html'  , timeTimeLine = timeTimeLine, monitoring_input = monitoring_input  , SP_5min = SP_5min , SK_5min = SK_5min , SC_5min = SC_5min)
 
 @app.route('/monitoring_new_real/', methods= ['POST'])
 def monitoring_new_real():
@@ -313,10 +306,18 @@ def realTimeProgram_input():
     client = MongoClient('127.0.0.1', 27017)
     db = client[ request.form['date']]
     collection  = db[collection_name]
+    if  request.form['gubun_code'] == "5":
+        gubun = "전일 하락"
+    if  request.form['gubun_code'] == "3":
+        gubun = "전일 보합"
+    if  request.form['gubun_code'] == "2":
+        gubun = "전일 상승"
     data = {
         "종목코드" : request.form['stock_code'],
         "korName": request.form['korName'],
-        "gubun": request.form['gubun']
+        "gubun_code": request.form['gubun_code'],
+        "gubun": gubun,
+        "연속일자": 0
 
     }
     collection.insert(data)
