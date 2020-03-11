@@ -35,11 +35,8 @@ class TR_1406(QMainWindow):
         collection_name = "TR_1406_"+db_name
         client = MongoClient('127.0.0.1', 27017)
         db = client[db_name]
-        self.collection = db[collection_name]
+        self.TR_1406 = db[collection_name]
 
-        self.collection1 = db["TR_1314_3_3"] #상승
-        self.collection2 = db["TR_1314_3_2"] #보합
-        self.collection3 = db["TR_1314_3_5"] #하락
 
         self.realTimeLogger.info("TR_1406 OCX call")
         self.IndiTR = QAxWidget("GIEXPERTCONTROL.GiExpertControlCtrl.1")
@@ -73,46 +70,32 @@ class TR_1406(QMainWindow):
         # 조회할 종목의 이름을 받아옵니다.
         ret = self.IndiTR.dynamicCall("SetQueryName(QString)", "TR_1406")
         ret = self.IndiTR.dynamicCall("SetSingleData(int, QString)", 0, self.market)  # 인풋 : 시장구분 0 코스피 1 코스닥 2 전체
-        ret = self.IndiTR.dynamicCall("SetSingleData(int, QString)", 1,self.day)  # 인풋 : 상하한구분 1 상한가 4 하한가
-        ret = self.IndiTR.dynamicCall("SetSingleData(int, QString)", 2, self.gubun)  # 인풋 : 날짜 YYYYMMDD
-
+        ret = self.IndiTR.dynamicCall("SetSingleData(int, QString)", 1,self.day)  #예 :“3”= 전영업일 기준 3일 연속 순매수/순매도( 최소값 : 1 )
+        ret = self.IndiTR.dynamicCall("SetSingleData(int, QString)", 2, self.gubun)  # 1 순매수 2 순매도
         rqid = self.IndiTR.dynamicCall("RequestData()")
         self.realTimeLogger.info("TR_1406 input setup finished  RequestData")
 
     def ReceiveData(self, rqid):
 
         self.realTimeLogger = logging_instance("TR_1406.py_   received DATA   PID: "+(str)(self.processID)).mylogger
-
         # TR을 날릴때 ID를 통해 TR이름을 가져옵니다.
         # GetMultiRowCount()는 TR 결과값의 multi row 개수를 리턴합니다.
         nCnt = self.IndiTR.dynamicCall("GetMultiRowCount()")
         for i in range(0, nCnt):
             # 데이터 양식
             DATA = {}
-            if self.IndiTR.dynamicCall("GetMultiData(int , int)", i, 4) == '5':
-                DATA[self.column[0].strip()] = self.IndiTR.dynamicCall("GetMultiData(int , int)", i, 0)
-                DATA[self.column[1].strip()] = self.IndiTR.dynamicCall("GetMultiData(int , int)", i, 1)
-                DATA["종목명"] = self.IndiTR.dynamicCall("GetMultiData(int , int)", i, 2)
-                DATA["구분"] = "전일 하락"
-                DATA["구분코드"] = "5"
-                print(self.collection3.insert(DATA))
-                sleep(0.05)
-            if self.IndiTR.dynamicCall("GetMultiData(int , int)", i, 4) == '2':
-                DATA[self.column[0].strip()] = self.IndiTR.dynamicCall("GetMultiData(int , int)", i, 0)
-                DATA[self.column[1].strip()] = self.IndiTR.dynamicCall("GetMultiData(int , int)", i, 1)
-                DATA["종목명"] = self.IndiTR.dynamicCall("GetMultiData(int , int)", i, 2)
-                DATA["구분"] = "전일 상승"
-                DATA["구분코드"] = "2"
-                print(self.collection2.insert(DATA))
-                sleep(0.05)
-            if self.IndiTR.dynamicCall("GetMultiData(int , int)", i, 4) == '3':
-                DATA[self.column[0].strip()] = self.IndiTR.dynamicCall("GetMultiData(int , int)", i, 0)
-                DATA[self.column[1].strip()] = self.IndiTR.dynamicCall("GetMultiData(int , int)", i, 1)
-                DATA["종목명"] = self.IndiTR.dynamicCall("GetMultiData(int , int)", i, 2)
-                DATA["구분"] = "전일 보합"
-                DATA["구분코드"] = "3"
-                print(self.collection1.insert(DATA))
-                sleep(0.05)
+            DATA['단축코드'] = self.IndiTR.dynamicCall("GetMultiData(int, int)", i, 0)
+            DATA['종목명'] = self.IndiTR.dynamicCall("GetMultiData(int, int)", i, 2)
+            DATA['구분코드'] = self.IndiTR.dynamicCall("GetMultiData(int, int)", i, 4)
+            if DATA['구분코드'] =="5":
+                DATA['구분'] ="전일 하락"
+            if DATA['구분코드'] == "2":
+                DATA['구분'] = "전일 상승"
+            if DATA['구분코드'] == "3":
+                DATA['구분'] = "전일 보합"
+            self.TR_1406.insert_one(DATA)
+            self.realTimeLogger('TR_1406 데이터 저장  '+DATA)
+
         return
     def ReceiveSysMsg(self, MsgID):
         print("System Message Received = ", MsgID)

@@ -35,7 +35,7 @@ def monitoring_report_function():
     SC_5min = db["SC_5min_"+db_name]
     SP_5min = db["SP_5min_"+db_name]
 
-    collection_title2 = "SP_5min_" + str(datetime.today().strftime("%Y%m%d"))
+    collection_title2 = "SP_5min_" + str(datetime.datetime.today().strftime("%Y%m%d"))
 
     time_hour = datetime.datetime.now().hour
     time_min = datetime.datetime.now().minute
@@ -74,7 +74,7 @@ def monitoring_report_function():
                     for SC_5min_data in SC_5min.find({"stock_code": SC_check_data['stock_code']}).sort("sortTimeInt",pymongo.DESCENDING):
                         SC_vol = SC_5min_data['Vol']
                         break
-                if SC_vol == 0:
+                if SC_vol == 0 or SC_vol =="" or SK_foreign_vol =="":
                     break
                 if TR_1206_collection['after_foreign_ratio'] <SK_foreign_vol/SC_vol :
                     bot.sendMessage(chat_id='813531834', text="종목코드  " +SC_check_data['stock_code'] + "  외국인 순매수 수량 전일 동시간 대비 증가")
