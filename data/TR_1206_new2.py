@@ -17,6 +17,12 @@ Field#	항 목 명	SIZE	항 목 내 용 설 명
 
 # -*- coding: utf-8 -*-
 import sys
+sys.path.append("C:\\dev\\indiPyProject\\log")
+sys.path.append("C:\\dev\\indiPyProject\\process")
+sys.path.append("C:\\dev\\indiPyProject\\data")
+sys.path.append("C:\\dev\\indiPyProject\\analysis")
+sys.path.append("C:\\dev\\indiPyProject")
+sys.path.append("C:\\dev\\indiPyProject\\pyflask")
 from datetime import timedelta
 from pytimekr import pytimekr
 from analysis.common_data import get_endDay
