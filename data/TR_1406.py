@@ -32,6 +32,7 @@ class TR_1406(QMainWindow):
 
         #db
         db_name = str(datetime.today().strftime("%Y%m%d"))
+        db_name = "20200311"
         collection_name = "TR_1406_"+db_name
         client = MongoClient('127.0.0.1', 27017)
         db = client[db_name]

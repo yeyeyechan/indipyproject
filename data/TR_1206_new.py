@@ -17,6 +17,12 @@ Field#	항 목 명	SIZE	항 목 내 용 설 명
 
 # -*- coding: utf-8 -*-
 import sys
+sys.path.append("C:\\dev\\indiPyProject\\log")
+sys.path.append("C:\\dev\\indiPyProject\\process")
+sys.path.append("C:\\dev\\indiPyProject\\data")
+sys.path.append("C:\\dev\\indiPyProject\\analysis")
+sys.path.append("C:\\dev\\indiPyProject")
+sys.path.append("C:\\dev\\indiPyProject\\pyflask")
 from datetime import timedelta
 from pytimekr import pytimekr
 from analysis.common_data import get_endDay
@@ -169,10 +175,10 @@ class TR_1206_new(QMainWindow):
         # TR을 날릴때 ID를 통해 TR이름을 가져옵니다.
 
         DATA = {}
-        before_total_vol = (int)(self.IndiTR.dynamicCall("GetMultiData(int, int)", 0, 7))
-        before_personal_vol = (int)(self.IndiTR.dynamicCall("GetMultiData(int, int)", 0, 10))
-        before_foreign_vol = (int)(self.IndiTR.dynamicCall("GetMultiData(int, int)", 0, 16))
-        before_program_vol = (int)(self.IndiTR.dynamicCall("GetMultiData(int, int)", 0, 82))
+        before_total_vol = (int)(self.IndiTR.dynamicCall("GetMultiData(int, int)", 1, 7))
+        before_personal_vol = (int)(self.IndiTR.dynamicCall("GetMultiData(int, int)", 1, 10))
+        before_foreign_vol = (int)(self.IndiTR.dynamicCall("GetMultiData(int, int)", 1, 16))
+        before_program_vol = (int)(self.IndiTR.dynamicCall("GetMultiData(int, int)", 1, 82))
 
         if before_total_vol ==0:
             return
@@ -180,17 +186,18 @@ class TR_1206_new(QMainWindow):
         before_foreign_ratio = (int)(before_foreign_vol/before_total_vol *100)
         before_program_ratio = (int)(before_program_vol/before_total_vol *100)
 
-        after_total_vol = (int)(self.IndiTR.dynamicCall("GetMultiData(int, int)", 1, 7))
-        after_personal_vol = (int)(self.IndiTR.dynamicCall("GetMultiData(int, int)", 1, 10))
-        after_foreign_vol = (int)(self.IndiTR.dynamicCall("GetMultiData(int, int)", 1, 16))
-        after_program_vol = (int)(self.IndiTR.dynamicCall("GetMultiData(int, int)", 1, 82))
+        after_total_vol = (int)(self.IndiTR.dynamicCall("GetMultiData(int, int)", 0, 7))
+        after_personal_vol = (int)(self.IndiTR.dynamicCall("GetMultiData(int, int)", 0, 10))
+        after_foreign_vol = (int)(self.IndiTR.dynamicCall("GetMultiData(int, int)", 0, 16))
+        after_program_vol = (int)(self.IndiTR.dynamicCall("GetMultiData(int, int)", 0, 82))
         if after_total_vol ==0:
             return
         after_personal_ratio = -1*(int)(after_personal_vol/after_total_vol *100)
         after_foreign_ratio = (int)(after_foreign_vol/after_total_vol *100)
         after_program_ratio = (int)(after_program_vol/after_total_vol *100)
 
-
+        if self.stock_code =="009460":
+            print("한창제지")
         if after_personal_vol >=0 or after_program_vol <=0 or after_foreign_vol<= 0:
             return
         if after_foreign_ratio <= 0 or after_program_ratio <= 0 :
@@ -258,10 +265,11 @@ if __name__ == "__main__":
         new_end_date = str(end_date.strftime("%Y%m%d"))
         start_date = get_endDay(new_end_date)
         start_date = str(start_date.strftime("%Y%m%d"))
-
         TR_1206Event_vari = TR_1206_new(i['단축코드'], start_date, new_end_date, '1', '0', i['종목명'], i['구분'], i['구분코드'],db_name, standard_length)
         time.sleep(0.3)
         checkindex += 1
     if checkindex != len(collection_data):
         TR_1206Event.exec_()
+
+
 

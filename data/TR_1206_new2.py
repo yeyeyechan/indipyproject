@@ -34,7 +34,7 @@ from pymongo import MongoClient
 import time
 from PyQt5.QtCore import *
 
-class TR_1206_new(QMainWindow):
+class TR_1206_new2(QMainWindow):
     def __init__(self, stock_code, start_date, end_date, counts, data_type, korName, gubun, gubun_code,date, standard_length):
         super().__init__()
         self.stock_code  = stock_code # 주식코드
@@ -175,10 +175,10 @@ class TR_1206_new(QMainWindow):
         # TR을 날릴때 ID를 통해 TR이름을 가져옵니다.
 
         DATA = {}
-        before_total_vol = (int)(self.IndiTR.dynamicCall("GetMultiData(int, int)", 0, 7))
-        before_personal_vol = (int)(self.IndiTR.dynamicCall("GetMultiData(int, int)", 0, 10))
-        before_foreign_vol = (int)(self.IndiTR.dynamicCall("GetMultiData(int, int)", 0, 16))
-        before_program_vol = (int)(self.IndiTR.dynamicCall("GetMultiData(int, int)", 0, 82))
+        before_total_vol = (int)(self.IndiTR.dynamicCall("GetMultiData(int, int)", 1, 7))
+        before_personal_vol = (int)(self.IndiTR.dynamicCall("GetMultiData(int, int)", 1, 10))
+        before_foreign_vol = (int)(self.IndiTR.dynamicCall("GetMultiData(int, int)", 1, 16))
+        before_program_vol = (int)(self.IndiTR.dynamicCall("GetMultiData(int, int)", 1, 82))
 
         if before_total_vol ==0:
             return
@@ -186,10 +186,10 @@ class TR_1206_new(QMainWindow):
         before_foreign_ratio = (int)(before_foreign_vol/before_total_vol *100)
         before_program_ratio = (int)(before_program_vol/before_total_vol *100)
 
-        after_total_vol = (int)(self.IndiTR.dynamicCall("GetMultiData(int, int)", 1, 7))
-        after_personal_vol = (int)(self.IndiTR.dynamicCall("GetMultiData(int, int)", 1, 10))
-        after_foreign_vol = (int)(self.IndiTR.dynamicCall("GetMultiData(int, int)", 1, 16))
-        after_program_vol = (int)(self.IndiTR.dynamicCall("GetMultiData(int, int)", 1, 82))
+        after_total_vol = (int)(self.IndiTR.dynamicCall("GetMultiData(int, int)", 0, 7))
+        after_personal_vol = (int)(self.IndiTR.dynamicCall("GetMultiData(int, int)", 0, 10))
+        after_foreign_vol = (int)(self.IndiTR.dynamicCall("GetMultiData(int, int)", 0, 16))
+        after_program_vol = (int)(self.IndiTR.dynamicCall("GetMultiData(int, int)", 0, 82))
         if after_total_vol ==0:
             return
         after_personal_ratio = -1*(int)(after_personal_vol/after_total_vol *100)
@@ -260,7 +260,7 @@ if __name__ == "__main__":
         start_date = get_endDay(new_end_date)
         start_date = str(start_date.strftime("%Y%m%d"))
 
-        TR_1206Event_vari = TR_1206_new(i['단축코드'], start_date, new_end_date, '1', '0', i['종목명'], i['구분'], i['구분코드'],db_name, standard_length)
+        TR_1206Event_vari = TR_1206_new2(i['단축코드'], start_date, new_end_date, '1', '0', i['종목명'], i['구분'], i['구분코드'],db_name, standard_length)
         time.sleep(0.3)
         checkindex += 1
     if checkindex != len(collection_data):
