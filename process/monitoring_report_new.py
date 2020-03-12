@@ -30,6 +30,7 @@ def monitoring_report_function():
     db = client[db_name]
 
     monitoring_input = db[db_name+"_pr_input2"]
+    TR_1206_new2 = db["TR_1206_new2_"+db_name]
     SC_check = db["SC_check_"+db_name]
     SK_5min = db["SK_5min_"+db_name]
     SC_5min = db["SC_5min_"+db_name]
@@ -43,7 +44,7 @@ def monitoring_report_function():
     time_now = time_hour*100 +time_min
     TIME = make_five_min(str(time_now))
 
-    for SC_check_data in SC_check.find():
+    for SC_check_data in TR_1206_new2.find():
         #if SC_check_data['gubun'] =='2':
         check_first_loop =False
         gubun_code = monitoring_input.find_one({"종목코드": SC_check_data['stock_code']})['gubun_code']

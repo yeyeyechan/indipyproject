@@ -35,12 +35,10 @@ import time
 from PyQt5.QtCore import *
 
 class TR_1206_new2(QMainWindow):
-    def __init__(self, stock_code, start_date, end_date, counts, data_type, korName, gubun, gubun_code,date, standard_length):
+    def __init__(self, stock_code, start_date, end_date, counts, data_type, korName,date, standard_length):
         super().__init__()
         self.stock_code  = stock_code # 주식코드
         self.korName  = korName # 한글 이름
-        self.gubun  = gubun # gubun
-        self.gubun_code  = gubun_code #  gubun_code
         self.start_date  = start_date # 시작일
         self.end_date  = end_date # 마지막일
         self.IndiTR = QAxWidget("GIEXPERTCONTROL.GiExpertControlCtrl.1")
@@ -51,7 +49,7 @@ class TR_1206_new2(QMainWindow):
         client = MongoClient('127.0.0.1', 27017)
         db_name = date
         db = client[db_name]
-        collection_name = "TR_1206_new2_"+self.gubun_code
+        collection_name = "TR_1206_new2_"+date
 
         self.collection1 = db[collection_name] #TR_1206_1
         self.columnName = {
@@ -211,11 +209,15 @@ class TR_1206_new2(QMainWindow):
             return
         if (before_foreign_vol < after_foreign_vol):
             if (before_foreign_vol<=0 ):
-                pass
+                if -10*before_foreign_ratio < after_foreign_ratio:
+                    pass
+                else:
+                    return
             else:
                 if( 10*before_foreign_ratio < after_foreign_ratio):
                     pass
-                return
+                else:
+                    return
         DATA['after_total_vol'] = after_total_vol #
         DATA['after_personal_vol'] = after_personal_vol #
         DATA['after_foreign_vol'] = after_foreign_vol#
@@ -225,9 +227,15 @@ class TR_1206_new2(QMainWindow):
         DATA['after_program_ratio'] =after_program_ratio #
 
         DATA['stock_code'] = self.stock_code # 주식코드
-        DATA['gubun'] = self.gubun # 주식코드
-        DATA['gubun_code'] = self.gubun_code # 주식코드
-        DATA['korName'] = self.korName # 주식코드
+        DATA['gubun_code'] = self.IndiTR.dynamicCall("GetMultiData(int, int)", 0, 5)
+
+        if DATA['gubun_code'] == "3":
+            DATA['gubun'] = "전일 보합"
+        elif DATA['gubun_code'] == "2":
+            DATA['gubun'] = "전일 상승"
+        elif DATA['gubun_code'] == "5":
+            DATA['gubun'] = "전일 하락"
+        DATA['korName'] = self.korName
         DATA['start_date'] = self.start_date # 시작일
         DATA['end_date'] = self.end_date  # 마지막일
         DATA['연속일자'] = self.standard_length
@@ -239,11 +247,11 @@ class TR_1206_new2(QMainWindow):
         print("System Message Received = ", MsgID)
 
 if __name__ == "__main__":
-    db_name = "20200312"
+    db_name = "20200313"
     client = MongoClient('127.0.0.1', 27017)
-    db = client[db_name]
+    db = client["stock_mst"]
     collection_data = []
-    collection1 = db["TR_1406_"+db_name]
+    collection1 = db["stock_mst_collection"]
 
 
     for i in collection1.find():
@@ -260,7 +268,7 @@ if __name__ == "__main__":
         start_date = get_endDay(new_end_date)
         start_date = str(start_date.strftime("%Y%m%d"))
 
-        TR_1206Event_vari = TR_1206_new2(i['단축코드'], start_date, new_end_date, '1', '0', i['종목명'], i['구분'], i['구분코드'],db_name, standard_length)
+        TR_1206Event_vari = TR_1206_new2(i['단축코드'], start_date, new_end_date, '1', '0', i['종목명'],db_name, standard_length)
         time.sleep(0.3)
         checkindex += 1
     if checkindex != len(collection_data):

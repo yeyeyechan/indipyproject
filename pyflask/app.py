@@ -302,7 +302,7 @@ def TR_SCHART_call_start():
 
 @app.route('/realTimeProgram_input/' , methods = ['POST'])
 def realTimeProgram_input():
-    collection_name =  request.form['date']+"_pr_input"
+    collection_name =  request.form['date']+"_pr_input2"
     client = MongoClient('127.0.0.1', 27017)
     db = client[ request.form['date']]
     collection  = db[collection_name]
@@ -325,16 +325,13 @@ def realTimeProgram_input():
 
 @app.route('/realTimeProgram_input2/' , methods = ['POST'])
 def realTimeProgram_input2():
-    collection_name = request.form['date']+"_pr_input"
+    collection_name = request.form['date']+"_pr_input2"
     client = MongoClient('127.0.0.1', 27017)
     db = client[request.form['date']]
-    collection_input1 ="TR_1206_new_5"
-    collection_input2 ="TR_1206_new_2"
-    collection_input3 ="TR_1206_new_3"
+    collection_input1 ="TR_1206_new2_"+request.form['date']
+
     collection  = db[collection_name]
     collection1 = db[collection_input1]
-    collection2 = db[collection_input2]
-    collection3 = db[collection_input3]
     for i in collection1.find():
         data = {
             "종목코드": i['stock_code'],
@@ -350,39 +347,6 @@ def realTimeProgram_input2():
             collection.replace_one(data_input, data, upsert=True)
         else:
             collection.insert_one(data)
-        time.sleep(0.3)
-    for i in collection2.find():
-        data = {
-            "종목코드": i['stock_code'],
-            "korName": i["korName"],
-            "gubun": i["gubun"],
-            "gubun_code": i["gubun_code"],
-            "연속일자": i["연속일자"]
-
-        }
-        if collection.find_one({'종목코드': data['종목코드']}):
-            data_input = collection.find_one({'종목코드': data['종목코드']}).copy()
-            data['_id'] = data_input['_id']
-            collection.replace_one(data_input, data, upsert=True)
-        else:
-            collection.insert_one(data)
-        time.sleep(0.3)
-    for i in collection3.find():
-        data = {
-            "종목코드": i['stock_code'],
-            "korName"  : i["korName"],
-            "gubun" :i["gubun"],
-            "gubun_code": i["gubun_code"],
-            "연속일자": i["연속일자"]
-
-        }
-        if collection.find_one({'종목코드': data['종목코드']}):
-            data_input =  collection.find_one({'종목코드': data['종목코드']}).copy()
-            data['_id'] = data_input['_id']
-            collection.replace_one(data_input, data, upsert=True)
-        else:
-            collection.insert_one(data)
-        time.sleep(0.3)
     return render_template('program_input.html')
 
 @app.route('/realTimeProgram_input_page/' , methods = ['POST'])
