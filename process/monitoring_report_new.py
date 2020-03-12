@@ -44,11 +44,11 @@ def monitoring_report_function():
     time_now = time_hour*100 +time_min
     TIME = make_five_min(str(time_now))
 
-    for SC_check_data in TR_1206_new2.find():
+    for SC_check_data in SC_check.find():
         #if SC_check_data['gubun'] =='2':
         check_first_loop =False
         gubun_code = monitoring_input.find_one({"종목코드": SC_check_data['stock_code']})['gubun_code']
-        TR_1206_collection_name = "TR_1206_new_"+ gubun_code
+        TR_1206_collection_name = "TR_1206_new2_"+ db_name
         TR_1206_collection = db[TR_1206_collection_name].find_one({"stock_code" : SC_check_data['stock_code']})
         SK_foreign_vol = ""
         SC_vol         = ""
