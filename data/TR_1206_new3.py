@@ -176,8 +176,16 @@ class TR_1206_new2(QMainWindow):
         # TR을 날릴때 ID를 통해 TR이름을 가져옵니다.
 
         DATA = {}
+        cum_old_personal_vol = (int)(self.IndiTR.dynamicCall("GetMultiData(int, int)", 2, 13))
+        cum_old_foreign_vol = (int)(self.IndiTR.dynamicCall("GetMultiData(int, int)", 2, 19))
+        old_gubun = self.IndiTR.dynamicCall("GetMultiData(int, int)", 2, 5)
+        old_foreign_vol = (int)(self.IndiTR.dynamicCall("GetMultiData(int, int)", 2, 16))
+        old_personal_vol = (int)(self.IndiTR.dynamicCall("GetMultiData(int, int)", 2, 10))
+
         before_total_vol = (int)(self.IndiTR.dynamicCall("GetMultiData(int, int)", 1, 7))
         before_personal_vol = (int)(self.IndiTR.dynamicCall("GetMultiData(int, int)", 1, 10))
+        cum_before_personal_vol = (int)(self.IndiTR.dynamicCall("GetMultiData(int, int)", 1, 13))
+        cum_before_foreign_vol = (int)(self.IndiTR.dynamicCall("GetMultiData(int, int)", 1, 19))
         before_foreign_vol = (int)(self.IndiTR.dynamicCall("GetMultiData(int, int)", 1, 16))
         before_program_vol = (int)(self.IndiTR.dynamicCall("GetMultiData(int, int)", 1, 82))
 
@@ -186,12 +194,14 @@ class TR_1206_new2(QMainWindow):
             print(self.flag)
             #QCoreApplication.instance().exit(0)
             return "ok"
-        before_personal_ratio = -1*(int)(before_personal_vol/before_total_vol *100)
-        before_foreign_ratio = (int)(before_foreign_vol/before_total_vol *100)
-        before_program_ratio = (int)(before_program_vol/before_total_vol *100)
+        before_personal_ratio = (int)(before_personal_vol/before_total_vol *100)
+        before_foreign_ratio = -1*(int)(before_foreign_vol/before_total_vol *100)
+        before_program_ratio = -1*(int)(before_program_vol/before_total_vol *100)
 
         after_total_vol = (int)(self.IndiTR.dynamicCall("GetMultiData(int, int)", 0, 7))
         after_personal_vol = (int)(self.IndiTR.dynamicCall("GetMultiData(int, int)", 0, 10))
+        cum_after_personal_vol = (int)(self.IndiTR.dynamicCall("GetMultiData(int, int)", 0, 13))
+        cum_after_foreign_vol = (int)(self.IndiTR.dynamicCall("GetMultiData(int, int)", 0, 19))
         after_foreign_vol = (int)(self.IndiTR.dynamicCall("GetMultiData(int, int)", 0, 16))
         after_program_vol = (int)(self.IndiTR.dynamicCall("GetMultiData(int, int)", 0, 82))
         if after_total_vol ==0:
@@ -204,17 +214,15 @@ class TR_1206_new2(QMainWindow):
         after_foreign_ratio = (int)(after_foreign_vol/after_total_vol *100)
         after_program_ratio = (int)(after_program_vol/after_total_vol *100)
 
-
-        if after_personal_vol <0 and  before_personal_vol <0 and after_program_vol >0 and after_foreign_vol >0and before_program_vol >0 and before_foreign_vol >0:
-            if -10*before_personal_vol < -1*after_personal_vol and 10*before_personal_ratio < after_personal_ratio and 10*before_foreign_ratio < after_foreign_ratio and 10*before_foreign_vol < after_foreign_vol:
-                if -0.9*after_personal_vol < after_foreign_vol and 0.9*after_program_vol < after_foreign_vol:
-                    DATA['after_total_vol'] = after_total_vol  #
-                    DATA['after_personal_vol'] = after_personal_vol  #
-                    DATA['after_foreign_vol'] = after_foreign_vol  #
-                    DATA['after_program_vol'] = after_program_vol  #
-                    DATA['after_personal_ratio'] = after_personal_ratio  #
-                    DATA['after_foreign_ratio'] = after_foreign_ratio  #
-                    DATA['after_program_ratio'] = after_program_ratio  #
+        if old_gubun =='5' and before_personal_vol >0 and before_foreign_vol <0 and before_program_vol <0 and 0.9*before_personal_vol< -1*before_foreign_vol and -0.9*before_program_vol < -1*before_foreign_vol:
+            if after_personal_vol <0 and after_foreign_vol >0 and after_program_vol >0 and after_foreign_ratio >2 and abs(after_personal_vol)*0.9 < after_foreign_vol :
+                    DATA['전일거래량'] = after_total_vol  #
+                    DATA['전일개인순매수거래량'] = after_personal_vol  #
+                    DATA['전일외국인순매수거래량'] = after_foreign_vol  #
+                    DATA['전일프로그램순매수거래량'] = after_program_vol  #
+                    DATA['전일개인순매수비율'] = after_personal_ratio  #
+                    DATA['전일외국인순매수비율'] = after_foreign_ratio  #
+                    DATA['전일프로그램순매수비율'] = after_program_ratio  #
 
                     DATA['stock_code'] = self.stock_code  # 주식코드
                     DATA['gubun_code'] = self.IndiTR.dynamicCall("GetMultiData(int, int)", 0, 5)
@@ -252,23 +260,10 @@ class TR_1206_new2(QMainWindow):
                         print("input2_collection 데이터 적재")
                     self.flag = True
                     # QCoreApplication.instance().exit(0)
-
-                    return "ok"
-                else:
-                    self.flag = True
-                    # QCoreApplication.instance().exit(0)
-
-                    return "ok"
             else:
-                self.flag = True
-                # QCoreApplication.instance().exit(0)
-
-                return "ok"
+                return
         else:
-            self.flag = True
-            #QCoreApplication.instance().exit(0)
-
-            return "ok"
+            return
 
 
     def ReceiveSysMsg(self, MsgID):
@@ -278,13 +273,11 @@ def check_next(function_vari):
         return True
 
 if __name__ == "__main__":
-    db_name = "20200316"
+    db_name = "20200317"
     client = MongoClient('127.0.0.1', 27017)
     db = client["stock_mst"]
     collection_data = []
     collection1 = db["stock_mst_collection"]
-    input2_collection_name = db_name + "_pr_input2"
-    input2_collection = db[input2_collection_name]
     for i in collection1.find():
         collection_data.append(i)
     TR_1206Event = QApplication(sys.argv)
@@ -295,11 +288,8 @@ if __name__ == "__main__":
         standard_length = 0
         if checkindex == len(collection_data):
             TR_1206Event.exit(0)
-        new_end_date = str(end_date.strftime("%Y%m%d"))
-        start_date = get_endDay(new_end_date)
-        start_date = str(start_date.strftime("%Y%m%d"))
         checkindex += 1
-        TR_1206_vari = TR_1206_new2(i['단축코드'], start_date, new_end_date, '1', '0', i['종목명'], db_name, standard_length)
+        TR_1206_vari = TR_1206_new2(i['단축코드'], "20200312", "20200316", '1', '0', i['종목명'], db_name, standard_length)
         time.sleep(0.3)
 
     if checkindex != len(collection_data):

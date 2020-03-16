@@ -110,11 +110,12 @@ def monitoring_new_test2():
         SP_5min= monitoring_new_var.SP_5min
         SK_5min= monitoring_new_var.SK_5min
         SC_5min= monitoring_new_var.SC_5min
+        TR_1206_new2= monitoring_new_var.TR_1206_new2
         timeTimeLine= monitoring_new_var.timeTimeLine
 
     except Exception:
         return redirect(url_for('index'))
-    return render_template('monitoring_test2.html'  , timeTimeLine = timeTimeLine, monitoring_input = monitoring_input  , SP_5min = SP_5min , SK_5min = SK_5min , SC_5min = SC_5min)
+    return render_template('monitoring_test2.html'  , timeTimeLine = timeTimeLine, monitoring_input = monitoring_input  , SP_5min = SP_5min , SK_5min = SK_5min , SC_5min = SC_5min, TR_1206_new2 = TR_1206_new2)
 
 @app.route('/monitoring_new_real/', methods= ['POST'])
 def monitoring_new_real():

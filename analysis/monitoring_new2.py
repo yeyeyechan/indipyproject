@@ -28,6 +28,7 @@ class monitoring_new2():
         collection_name2 = "SP_5min_"+db_name
         collection_name3 = "SK_5min_"+db_name
         collection_name4 = "SC_5min_"+db_name
+        collection_name5 = "TR_1206_new2_"+db_name
 
         client = MongoClient('127.0.0.1', 27017)
         db = client[db_name]
@@ -36,12 +37,14 @@ class monitoring_new2():
         SP_5min = db[collection_name2] #프로그램 매수 매도 컬렉션
         SK_5min = db[collection_name3] #외국인 매수 매도 컬렉션
         SC_5min = db[collection_name4] #현재가  컬렉션
+        TR_1206_new2= db[collection_name5] #현재가  컬렉션
         self.realTimeLogger.info("collection 연결 완료")
 
         self.monitoring_input = {}
         self.SP_5min = {}
         self.SK_5min = {}
         self.SC_5min = {}
+        self.TR_1206_new2 = {}
 
         length = 0
         for i in self.shortTimeline:
@@ -67,7 +70,8 @@ class monitoring_new2():
                 self.SK_5min[stock_code_data['종목코드']][SK_data['sortTime']] = SK_data['외국계순매수수량']
             for SC_data in SC_5min.find({'stock_code':stock_code_data['종목코드'] }):
                 self.SC_5min[stock_code_data['종목코드']][SC_data['sortTime']] = SC_data['Close']
-
+            for timeTimeLine_data in self.timeTimeLine:
+                self.TR_1206_new2[stock_code_data['종목코드']][timeTimeLine_data] = TR_1206_new2.find_one({"stock_code":stock_code_data['종목코드']})['전일외국인순매수거래량']
 if __name__ == "__main__":
     monitoring2_var = monitoring_new2("20200311", "1530")
 

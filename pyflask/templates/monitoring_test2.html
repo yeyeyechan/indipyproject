@@ -64,7 +64,23 @@ var index = 0;
 
                 borderWidth: 1
             },
+            {
 
+                label : "old_foreign",
+                yAxisID: 'first-y-axis',
+                data : [
+                {% for timeTime in timeTimeLine %}
+                   {{ TR_1206_new2[monitoring_input_data][timeTime] }},
+                {% endfor %}
+                ],
+                backgroundColor:
+                'rgba(153, 102, 255, 0.2)',
+
+                borderColor:
+                'rgba(153, 102, 255, 0.2)',
+
+                borderWidth: 1
+            },
             {
                 type: 'line',
                 label : "price",
