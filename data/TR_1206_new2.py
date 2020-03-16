@@ -17,6 +17,8 @@ Field#	항 목 명	SIZE	항 목 내 용 설 명
 
 # -*- coding: utf-8 -*-
 import sys
+from asyncio import Event
+from threading import Condition
 sys.path.append("C:\\dev\\indiPyProject\\log")
 sys.path.append("C:\\dev\\indiPyProject\\process")
 sys.path.append("C:\\dev\\indiPyProject\\data")
@@ -45,12 +47,13 @@ class TR_1206_new2(QMainWindow):
         self.IndiTR.ReceiveData.connect(self.ReceiveData)
         self.IndiTR.ReceiveSysMsg.connect(self.ReceiveSysMsg)
         self.standard_length = standard_length
-
+        self.flag = False
         client = MongoClient('127.0.0.1', 27017)
         db_name = date
         db = client[db_name]
         collection_name = "TR_1206_new2_"+date
-
+        input2_collection_name = date + "_pr_input2"
+        self.input2_collection = db[input2_collection_name]
         self.collection1 = db[collection_name] #TR_1206_1
         self.columnName = {
             '1': "일자                           ",
@@ -179,7 +182,10 @@ class TR_1206_new2(QMainWindow):
         before_program_vol = (int)(self.IndiTR.dynamicCall("GetMultiData(int, int)", 1, 82))
 
         if before_total_vol ==0:
-            return
+            self.flag = True
+            print(self.flag)
+            #QCoreApplication.instance().exit(0)
+            return "ok"
         before_personal_ratio = -1*(int)(before_personal_vol/before_total_vol *100)
         before_foreign_ratio = (int)(before_foreign_vol/before_total_vol *100)
         before_program_ratio = (int)(before_program_vol/before_total_vol *100)
@@ -189,71 +195,108 @@ class TR_1206_new2(QMainWindow):
         after_foreign_vol = (int)(self.IndiTR.dynamicCall("GetMultiData(int, int)", 0, 16))
         after_program_vol = (int)(self.IndiTR.dynamicCall("GetMultiData(int, int)", 0, 82))
         if after_total_vol ==0:
-            return
+            self.flag = True
+            print(self.flag)
+            #QCoreApplication.instance().exit(0)
+
+            return "ok"
         after_personal_ratio = -1*(int)(after_personal_vol/after_total_vol *100)
         after_foreign_ratio = (int)(after_foreign_vol/after_total_vol *100)
         after_program_ratio = (int)(after_program_vol/after_total_vol *100)
 
 
-        if after_personal_vol >=0 or after_program_vol <=0 or after_foreign_vol<= 0:
-            return
-        if after_foreign_ratio <= 0 or after_program_ratio <= 0 :
-            return
-        if after_personal_vol < 0 and -10*before_personal_vol < -1*after_personal_vol :
-            if ( before_personal_vol<0 ):
-                if not( 10*before_personal_ratio < after_personal_ratio):
-                    return
-            else:
-                pass
-        if not((int)(-1*after_personal_vol*0.9)< after_foreign_vol and (int)(after_program_vol*0.9)< after_foreign_vol and after_foreign_vol>0 and after_program_vol>0 ):
-            return
-        if (before_foreign_vol < after_foreign_vol):
-            if (before_foreign_vol<=0 ):
-                if -10*before_foreign_ratio < after_foreign_ratio:
-                    pass
+        if after_personal_vol <0 and  before_personal_vol <0 and after_program_vol >0 and after_foreign_vol >0and before_program_vol >0 and before_foreign_vol >0:
+            if -10*before_personal_vol < -1*after_personal_vol and 10*before_personal_ratio < after_personal_ratio and 10*before_foreign_ratio < after_foreign_ratio and 10*before_foreign_vol < after_foreign_vol:
+                if -0.9*after_personal_vol < after_foreign_vol and 0.9*after_program_vol < after_foreign_vol:
+                    DATA['after_total_vol'] = after_total_vol  #
+                    DATA['after_personal_vol'] = after_personal_vol  #
+                    DATA['after_foreign_vol'] = after_foreign_vol  #
+                    DATA['after_program_vol'] = after_program_vol  #
+                    DATA['after_personal_ratio'] = after_personal_ratio  #
+                    DATA['after_foreign_ratio'] = after_foreign_ratio  #
+                    DATA['after_program_ratio'] = after_program_ratio  #
+
+                    DATA['stock_code'] = self.stock_code  # 주식코드
+                    DATA['gubun_code'] = self.IndiTR.dynamicCall("GetMultiData(int, int)", 0, 5)
+
+                    if DATA['gubun_code'] == "3":
+                        DATA['gubun'] = "전일 보합"
+                    elif DATA['gubun_code'] == "2":
+                        DATA['gubun'] = "전일 상승"
+                    elif DATA['gubun_code'] == "5":
+                        DATA['gubun'] = "전일 하락"
+                    DATA['korName'] = self.korName
+                    DATA['start_date'] = self.start_date  # 시작일
+                    DATA['end_date'] = self.end_date  # 마지막일
+                    DATA['연속일자'] = self.standard_length
+                    print("TR_1206 데이터 적재")
+                    print(self.collection1.insert_one(DATA))
+                    print("TR_1206 데이터 적재")
+
+                    data = {
+                        "종목코드": self.stock_code,
+                        "korName": self.korName,
+                        "gubun":DATA['gubun'] ,
+                        "gubun_code": DATA['gubun_code'],
+                        "연속일자":self.standard_length
+                    }
+                    if self.input2_collection.find_one({'종목코드': data['종목코드']}):
+                        data_input = self.input2_collection.find_one({'종목코드': data['종목코드']}).copy()
+                        data['_id'] = data_input['_id']
+                        print("input2_collection 데이터 적재")
+                        self.input2_collection.replace_one(data_input, data, upsert=True)
+                        print("input2_collection 데이터 적재")
+                    else:
+                        print("input2_collection 데이터 적재")
+                        self.input2_collection.insert_one(data)
+                        print("input2_collection 데이터 적재")
+                    self.flag = True
+                    print("self.flag")
+                    print(self.flag)
+                    print("self.flag")
+                    # QCoreApplication.instance().exit(0)
+
+                    return "ok"
                 else:
-                    return
+                    self.flag = True
+                    print("self.flag")
+                    print(self.flag)
+                    print("self.flag")
+                    # QCoreApplication.instance().exit(0)
+
+                    return "ok"
             else:
-                if( 10*before_foreign_ratio < after_foreign_ratio):
-                    pass
-                else:
-                    return
-        DATA['after_total_vol'] = after_total_vol #
-        DATA['after_personal_vol'] = after_personal_vol #
-        DATA['after_foreign_vol'] = after_foreign_vol#
-        DATA['after_program_vol'] = after_program_vol #
-        DATA['after_personal_ratio'] = after_personal_ratio #
-        DATA['after_foreign_ratio'] =after_foreign_ratio #
-        DATA['after_program_ratio'] =after_program_ratio #
+                self.flag = True
+                print("self.flag")
+                print(self.flag)
+                print("self.flag")
+                # QCoreApplication.instance().exit(0)
 
-        DATA['stock_code'] = self.stock_code # 주식코드
-        DATA['gubun_code'] = self.IndiTR.dynamicCall("GetMultiData(int, int)", 0, 5)
+                return "ok"
+        else:
+            self.flag = True
+            print("self.flag")
+            print(self.flag)
+            print("self.flag")
+            #QCoreApplication.instance().exit(0)
 
-        if DATA['gubun_code'] == "3":
-            DATA['gubun'] = "전일 보합"
-        elif DATA['gubun_code'] == "2":
-            DATA['gubun'] = "전일 상승"
-        elif DATA['gubun_code'] == "5":
-            DATA['gubun'] = "전일 하락"
-        DATA['korName'] = self.korName
-        DATA['start_date'] = self.start_date # 시작일
-        DATA['end_date'] = self.end_date  # 마지막일
-        DATA['연속일자'] = self.standard_length
+            return "ok"
 
-        self.collection1.insert_one(DATA)
-        return
 
     def ReceiveSysMsg(self, MsgID):
         print("System Message Received = ", MsgID)
+def check_next(function_vari):
+    if function_vari =="ok":
+        return True
 
 if __name__ == "__main__":
-    db_name = "20200313"
+    db_name = "20200316"
     client = MongoClient('127.0.0.1', 27017)
     db = client["stock_mst"]
     collection_data = []
     collection1 = db["stock_mst_collection"]
-
-
+    input2_collection_name = db_name + "_pr_input2"
+    input2_collection = db[input2_collection_name]
     for i in collection1.find():
         collection_data.append(i)
     TR_1206Event = QApplication(sys.argv)
@@ -267,10 +310,12 @@ if __name__ == "__main__":
         new_end_date = str(end_date.strftime("%Y%m%d"))
         start_date = get_endDay(new_end_date)
         start_date = str(start_date.strftime("%Y%m%d"))
-
-        TR_1206Event_vari = TR_1206_new2(i['단축코드'], start_date, new_end_date, '1', '0', i['종목명'],db_name, standard_length)
-        time.sleep(0.3)
         checkindex += 1
+        TR_1206_vari = TR_1206_new2(i['단축코드'], start_date, new_end_date, '1', '0', i['종목명'], db_name, standard_length)
+        time.sleep(0.3)
+
     if checkindex != len(collection_data):
         TR_1206Event.exec_()
+
+
 
