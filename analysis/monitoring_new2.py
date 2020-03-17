@@ -51,11 +51,15 @@ class monitoring_new2():
         for i in self.shortTimeline:
             if int(i)>int(time_right_now):
                 length +=1
+                break
             elif int(i)<=int(time_right_now):
                 length +=1
             else:
                 break
-        self.timeTimeLine = self.shortTimeline[:length-1]
+        if length ==1 :
+            self.timeTimeLine = self.shortTimeline[:length]
+        else:
+            self.timeTimeLine = self.shortTimeline[:length-1]
 
         index = 0
         Time = self.shortTimeline[length-1]
