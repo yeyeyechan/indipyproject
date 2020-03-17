@@ -103,7 +103,12 @@ class monitoring_new2():
                 DATA_before_sorted['korName'] = stock_code_data['korName']
                 DATA_before_sorted['gubun'] = stock_code_data['gubun']
                 before_sorted_list.append(DATA_before_sorted)
-        before_sorted_list  = sorted(before_sorted_list, key = lambda k : k['외국계순매수수량'])
+        before_sorted_list  = sorted(before_sorted_list, key = lambda k : k['외국계순매수수량'], reverse= True)
+        for i in before_sorted_list:
+            self.sorted_monitoring_input[i['단축코드']] = {
+
+            }
+            self.sorted_monitoring_input[i['단축코드']] = i
         print(before_sorted_list)
 
 if __name__ == "__main__":
