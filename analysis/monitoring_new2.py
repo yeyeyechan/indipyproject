@@ -79,8 +79,18 @@ class monitoring_new2():
                 self.realTimeLogger.info(timeTimeLine_data)
                 self.TR_1206_new2[stock_code_data['종목코드']][timeTimeLine_data] = TR_1206_new2.find_one({"stock_code":stock_code_data['종목코드']})['전일외국인순매수거래량']
                 self.realTimeLogger.info(self.TR_1206_new2[stock_code_data['종목코드']][timeTimeLine_data])
-        for SK_data in SK_5min.find().sort({'외국계순매수수량': -1}):
-            self.sorted_monitoring_input[SK_data['단축코드']]= monitoring_input.find_one({'종목코드':SK_data['단축코드']})
+        print(self.monitoring_input)
+        key_list= []
+        for keys in self.monitoring_input.keys():
+            key_list.append(keys)
+        for SK_data in SK_5min.find().sort(['sortTimeInt', pymongo.DESCENDING]):
+            if SK_data['단축코드'] in key_list:
+                del
+            self.sorted_monitoring_input[SK_data['단축코드']] = {}
+            self.sorted_monitoring_input[SK_data['단축코드']]= self.monitoring_input[SK_data['단축코드']]
+            self.sorted_monitoring_input[SK_data['단축코드']]['외국계순매수수량'] = SK_data['외국계순매수수량']
+            self.sorted_monitoring_input[SK_data['단축코드']]['기준시간'] = SK_data['sortTimeInt']
+        print(self.sorted_monitoring_input)
 if __name__ == "__main__":
     monitoring2_var = monitoring_new2("20200311", "1530")
 
