@@ -176,6 +176,10 @@ class TR_1206_new2(QMainWindow):
         # TR을 날릴때 ID를 통해 TR이름을 가져옵니다.
 
         DATA = {}
+        old_total_vol = (int)(self.IndiTR.dynamicCall("GetMultiData(int, int)", 2, 7))
+        old_val = (int)(self.IndiTR.dynamicCall("GetMultiData(int, int)", 2, 1))
+        old_trans_ammount = old_total_vol*old_val
+
         cum_old_personal_vol = (int)(self.IndiTR.dynamicCall("GetMultiData(int, int)", 2, 13))
         cum_old_foreign_vol = (int)(self.IndiTR.dynamicCall("GetMultiData(int, int)", 2, 19))
         old_gubun = self.IndiTR.dynamicCall("GetMultiData(int, int)", 2, 5)
@@ -183,11 +187,15 @@ class TR_1206_new2(QMainWindow):
         old_personal_vol = (int)(self.IndiTR.dynamicCall("GetMultiData(int, int)", 2, 10))
 
         before_total_vol = (int)(self.IndiTR.dynamicCall("GetMultiData(int, int)", 1, 7))
+        before_val = (int)(self.IndiTR.dynamicCall("GetMultiData(int, int)", 1, 1))
+        before_trans_ammount = before_total_vol*before_val
+        before_total_vol = (int)(self.IndiTR.dynamicCall("GetMultiData(int, int)", 1, 7))
         before_personal_vol = (int)(self.IndiTR.dynamicCall("GetMultiData(int, int)", 1, 10))
         cum_before_personal_vol = (int)(self.IndiTR.dynamicCall("GetMultiData(int, int)", 1, 13))
         cum_before_foreign_vol = (int)(self.IndiTR.dynamicCall("GetMultiData(int, int)", 1, 19))
         before_foreign_vol = (int)(self.IndiTR.dynamicCall("GetMultiData(int, int)", 1, 16))
         before_program_vol = (int)(self.IndiTR.dynamicCall("GetMultiData(int, int)", 1, 82))
+        before_gubun = self.IndiTR.dynamicCall("GetMultiData(int, int)", 1, 5)
 
         if before_total_vol ==0:
             self.flag = True
@@ -198,12 +206,18 @@ class TR_1206_new2(QMainWindow):
         before_foreign_ratio = -1*(int)(before_foreign_vol/before_total_vol *100)
         before_program_ratio = -1*(int)(before_program_vol/before_total_vol *100)
 
+
+        after_total_vol = (int)(self.IndiTR.dynamicCall("GetMultiData(int, int)", 0, 7))
+        after_val = (int)(self.IndiTR.dynamicCall("GetMultiData(int, int)", 0, 1))
+        after_trans_ammount = after_total_vol*after_val
         after_total_vol = (int)(self.IndiTR.dynamicCall("GetMultiData(int, int)", 0, 7))
         after_personal_vol = (int)(self.IndiTR.dynamicCall("GetMultiData(int, int)", 0, 10))
         cum_after_personal_vol = (int)(self.IndiTR.dynamicCall("GetMultiData(int, int)", 0, 13))
         cum_after_foreign_vol = (int)(self.IndiTR.dynamicCall("GetMultiData(int, int)", 0, 19))
         after_foreign_vol = (int)(self.IndiTR.dynamicCall("GetMultiData(int, int)", 0, 16))
         after_program_vol = (int)(self.IndiTR.dynamicCall("GetMultiData(int, int)", 0, 82))
+        after_gubun = self.IndiTR.dynamicCall("GetMultiData(int, int)", 0, 5)
+
         if after_total_vol ==0:
             self.flag = True
             print(self.flag)
@@ -213,53 +227,54 @@ class TR_1206_new2(QMainWindow):
         after_personal_ratio = -1*(int)(after_personal_vol/after_total_vol *100)
         after_foreign_ratio = (int)(after_foreign_vol/after_total_vol *100)
         after_program_ratio = (int)(after_program_vol/after_total_vol *100)
-
-        if old_gubun =='5' and before_personal_vol >0 and before_foreign_vol <0 and before_program_vol <0 and 0.9*before_personal_vol< -1*before_foreign_vol and -0.9*before_program_vol < -1*before_foreign_vol:
+        #if after_trans_ammount> 900000000 and old_trans_ammount > 900000000and before_trans_ammount> 900000000 and old_gubun =='5'and after_gubun=='5' and before_gubun =='5' and before_personal_vol >0 and before_foreign_vol <0 and before_program_vol <0 and 0.9*before_personal_vol< -1*before_foreign_vol and -0.9*before_program_vol < -1*before_foreign_vol:
+        if old_gubun == '5' and after_gubun == '5' and before_gubun == '5' and before_personal_vol > 0 and before_foreign_vol < 0 and before_program_vol < 0 and 0.9 * before_personal_vol < -1 * before_foreign_vol and -0.9 * before_program_vol < -1 * before_foreign_vol:
             if after_personal_vol <0 and after_foreign_vol >0 and after_program_vol >0 and after_foreign_ratio >2 and abs(after_personal_vol)*0.9 < after_foreign_vol :
-                    DATA['전일거래량'] = after_total_vol  #
-                    DATA['전일개인순매수거래량'] = after_personal_vol  #
-                    DATA['전일외국인순매수거래량'] = after_foreign_vol  #
-                    DATA['전일프로그램순매수거래량'] = after_program_vol  #
-                    DATA['전일개인순매수비율'] = after_personal_ratio  #
-                    DATA['전일외국인순매수비율'] = after_foreign_ratio  #
-                    DATA['전일프로그램순매수비율'] = after_program_ratio  #
+                DATA['전일거래량'] = after_total_vol  #
+                DATA['전일개인순매수거래량'] = after_personal_vol  #
+                DATA['전일외국인순매수거래량'] = after_foreign_vol  #
+                DATA['전일프로그램순매수거래량'] = after_program_vol  #
+                DATA['전일개인순매수비율'] = after_personal_ratio  #
+                DATA['전일외국인순매수비율'] = after_foreign_ratio  #
+                DATA['전일프로그램순매수비율'] = after_program_ratio  #
+                DATA['전일추정거래대금'] = after_trans_ammount  #
 
-                    DATA['stock_code'] = self.stock_code  # 주식코드
-                    DATA['gubun_code'] = self.IndiTR.dynamicCall("GetMultiData(int, int)", 0, 5)
+                DATA['stock_code'] = self.stock_code  # 주식코드
+                DATA['gubun_code'] = self.IndiTR.dynamicCall("GetMultiData(int, int)", 0, 5)
 
-                    if DATA['gubun_code'] == "3":
-                        DATA['gubun'] = "전일 보합"
-                    elif DATA['gubun_code'] == "2":
-                        DATA['gubun'] = "전일 상승"
-                    elif DATA['gubun_code'] == "5":
-                        DATA['gubun'] = "전일 하락"
-                    DATA['korName'] = self.korName
-                    DATA['start_date'] = self.start_date  # 시작일
-                    DATA['end_date'] = self.end_date  # 마지막일
-                    DATA['연속일자'] = self.standard_length
-                    print("TR_1206 데이터 적재")
-                    print(self.collection1.insert_one(DATA))
-                    print("TR_1206 데이터 적재")
+                if DATA['gubun_code'] == "3":
+                    DATA['gubun'] = "전일 보합"
+                elif DATA['gubun_code'] == "2":
+                    DATA['gubun'] = "전일 상승"
+                elif DATA['gubun_code'] == "5":
+                    DATA['gubun'] = "전일 하락"
+                DATA['korName'] = self.korName
+                DATA['start_date'] = self.start_date  # 시작일
+                DATA['end_date'] = self.end_date  # 마지막일
+                DATA['연속일자'] = self.standard_length
+                print("TR_1206 데이터 적재")
+                print(self.collection1.insert_one(DATA))
+                print("TR_1206 데이터 적재")
 
-                    data = {
-                        "종목코드": self.stock_code,
-                        "korName": self.korName,
-                        "gubun":DATA['gubun'] ,
-                        "gubun_code": DATA['gubun_code'],
-                        "연속일자":self.standard_length
-                    }
-                    if self.input2_collection.find_one({'종목코드': data['종목코드']}):
-                        data_input = self.input2_collection.find_one({'종목코드': data['종목코드']}).copy()
-                        data['_id'] = data_input['_id']
-                        print("input2_collection 데이터 적재")
-                        self.input2_collection.replace_one(data_input, data, upsert=True)
-                        print("input2_collection 데이터 적재")
-                    else:
-                        print("input2_collection 데이터 적재")
-                        self.input2_collection.insert_one(data)
-                        print("input2_collection 데이터 적재")
-                    self.flag = True
-                    # QCoreApplication.instance().exit(0)
+                data = {
+                    "종목코드": self.stock_code,
+                    "korName": self.korName,
+                    "gubun":DATA['gubun'] ,
+                    "gubun_code": DATA['gubun_code'],
+                    "연속일자":self.standard_length
+                }
+                if self.input2_collection.find_one({'종목코드': data['종목코드']}):
+                    data_input = self.input2_collection.find_one({'종목코드': data['종목코드']}).copy()
+                    data['_id'] = data_input['_id']
+                    print("input2_collection 데이터 적재")
+                    self.input2_collection.replace_one(data_input, data, upsert=True)
+                    print("input2_collection 데이터 적재")
+                else:
+                    print("input2_collection 데이터 적재")
+                    self.input2_collection.insert_one(data)
+                    print("input2_collection 데이터 적재")
+                self.flag = True
+                # QCoreApplication.instance().exit(0)
             else:
                 return
         else:

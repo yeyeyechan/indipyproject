@@ -103,10 +103,15 @@ def monitoring_new_test2():
         if py_day != date:
             hour = 15
             min = 30
+        if min <10:
+            min = "0"+str(min)
         time_right_now = make_five_min(str(hour)+str(min))
+        print("time_right_now")
+        print(time_right_now)
         monitoring_new_var = monitoring_new2(date, time_right_now)
 
         monitoring_input= monitoring_new_var.monitoring_input
+        sorted_monitoring_input= monitoring_new_var.sorted_monitoring_input
         SP_5min= monitoring_new_var.SP_5min
         SK_5min= monitoring_new_var.SK_5min
         SC_5min= monitoring_new_var.SC_5min
@@ -115,7 +120,7 @@ def monitoring_new_test2():
 
     except Exception:
         return redirect(url_for('index'))
-    return render_template('monitoring_test2.html'  , timeTimeLine = timeTimeLine, monitoring_input = monitoring_input  , SP_5min = SP_5min , SK_5min = SK_5min , SC_5min = SC_5min, TR_1206_new2 = TR_1206_new2)
+    return render_template('monitoring_test2.html'  , timeTimeLine = timeTimeLine, monitoring_input = sorted_monitoring_input  , SP_5min = SP_5min , SK_5min = SK_5min , SC_5min = SC_5min, TR_1206_new2 = TR_1206_new2)
 
 @app.route('/monitoring_new_real/', methods= ['POST'])
 def monitoring_new_real():
@@ -738,7 +743,7 @@ def getPriceBy5Min():
 
 
 if __name__ == '__main__':
-    host_addr = "1.232.245.14"
+    host_addr = "127.0.0.1"
     port_num = "2020"
     app.run(host = host_addr , port = port_num, debug=True)
     print(10)

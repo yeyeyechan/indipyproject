@@ -82,7 +82,7 @@ class SC_new(QMainWindow):
             DATA['sortTime'] = make_five_min(DATA['TIME'])
             DATA['sortTimeInt'] = (int)(make_five_min(DATA['TIME']))
 
-            if (int)(DATA['sortTime']) <= 905:
+            if (int)(DATA['sortTime']) <= 1000:
                 SC_check_data= {}
                 SC_check_data['stock_code'] = DATA['stock_code']
                 SC_check_data['gubun'] = self.indiReal.dynamicCall("GetSingleData(int)", 4)
@@ -90,9 +90,9 @@ class SC_new(QMainWindow):
                     data_input = self.SC_check.find_one({'stock_code': DATA['stock_code']}).copy()
                     SC_check_data['_id'] = data_input['_id']
                     self.SC_check.replace_one(data_input, SC_check_data, upsert=True)
-                    self.realTimeLogger.info("장 시작 후 5분 내 상승 종목 코드 :  " + DATA['stock_code'])
+                    self.realTimeLogger.info("장 시작 후 60분 내 상승 종목 코드 :  " + DATA['stock_code'])
                     if SC_check_data['gubun'] == "2":
-                        self.realTimeLogger.info("장 시작 후 5분 내 상승 종목 코드 :  " + DATA['stock_code'])
+                        self.realTimeLogger.info("장 시작 후 60분 내 상승 종목 코드 :  " + DATA['stock_code'])
                 else:
                     self.SC_check.insert_one(SC_check_data)
                     if SC_check_data['gubun'] == "2":

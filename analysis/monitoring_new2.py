@@ -45,6 +45,7 @@ class monitoring_new2():
         self.SK_5min = {}
         self.SC_5min = {}
         self.TR_1206_new2 = {}
+        self.sorted_monitoring_input = {}
 
         length = 0
         for i in self.shortTimeline:
@@ -52,7 +53,10 @@ class monitoring_new2():
                 length +=1
             else:
                 break
+        print("ssibal")
+        print(length)
         self.timeTimeLine = self.shortTimeline[:length]
+
         index = 0
         for stock_code_data in monitoring_input.find():
             index +=1
@@ -62,6 +66,7 @@ class monitoring_new2():
             self.SP_5min[stock_code_data['종목코드']] = {}
             self.SK_5min[stock_code_data['종목코드']] = {}
             self.SC_5min[stock_code_data['종목코드']] = {}
+            self.TR_1206_new2[stock_code_data['종목코드']] = {}
             self.monitoring_input[stock_code_data['종목코드']] = stock_code_data
             for SP_data in SP_5min.find({'단축코드':stock_code_data['종목코드'] }):
                 self.SP_5min[stock_code_data['종목코드']][SP_data['sortTime']] = SP_data['비차익위탁프로그램순매수']
@@ -71,7 +76,11 @@ class monitoring_new2():
             for SC_data in SC_5min.find({'stock_code':stock_code_data['종목코드'] }):
                 self.SC_5min[stock_code_data['종목코드']][SC_data['sortTime']] = SC_data['Close']
             for timeTimeLine_data in self.timeTimeLine:
+                self.realTimeLogger.info(timeTimeLine_data)
                 self.TR_1206_new2[stock_code_data['종목코드']][timeTimeLine_data] = TR_1206_new2.find_one({"stock_code":stock_code_data['종목코드']})['전일외국인순매수거래량']
+                self.realTimeLogger.info(self.TR_1206_new2[stock_code_data['종목코드']][timeTimeLine_data])
+        for SK_data in SK_5min.find().sort({'외국계순매수수량': -1}):
+            self.sorted_monitoring_input[SK_data['단축코드']]= monitoring_input.find_one({'종목코드':SK_data['단축코드']})
 if __name__ == "__main__":
     monitoring2_var = monitoring_new2("20200311", "1530")
 
