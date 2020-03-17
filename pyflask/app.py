@@ -743,7 +743,7 @@ def getPriceBy5Min():
 
 
 if __name__ == '__main__':
-    host_addr = "127.0.0.1"
+    host_addr = "1.232.245.14"
     port_num = "2020"
     app.run(host = host_addr , port = port_num, debug=True)
     print(10)

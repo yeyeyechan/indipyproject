@@ -227,8 +227,7 @@ class TR_1206_new2(QMainWindow):
         after_personal_ratio = -1*(int)(after_personal_vol/after_total_vol *100)
         after_foreign_ratio = (int)(after_foreign_vol/after_total_vol *100)
         after_program_ratio = (int)(after_program_vol/after_total_vol *100)
-        #if after_trans_ammount> 900000000 and old_trans_ammount > 900000000and before_trans_ammount> 900000000 and old_gubun =='5'and after_gubun=='5' and before_gubun =='5' and before_personal_vol >0 and before_foreign_vol <0 and before_program_vol <0 and 0.9*before_personal_vol< -1*before_foreign_vol and -0.9*before_program_vol < -1*before_foreign_vol:
-        if old_gubun == '5' and after_gubun == '5' and before_gubun == '5' and before_personal_vol > 0 and before_foreign_vol < 0 and before_program_vol < 0 and 0.9 * before_personal_vol < -1 * before_foreign_vol and -0.9 * before_program_vol < -1 * before_foreign_vol:
+        if after_trans_ammount> 900000000 and old_trans_ammount > 900000000and before_trans_ammount> 900000000 and old_gubun =='5'and after_gubun=='5' and before_gubun =='5' and before_personal_vol >0 and before_foreign_vol <0 and before_program_vol <0 and 0.9*before_personal_vol< -1*before_foreign_vol and -0.9*before_program_vol < -1*before_foreign_vol:
             if after_personal_vol <0 and after_foreign_vol >0 and after_program_vol >0 and after_foreign_ratio >2 and abs(after_personal_vol)*0.9 < after_foreign_vol :
                 DATA['전일거래량'] = after_total_vol  #
                 DATA['전일개인순매수거래량'] = after_personal_vol  #
@@ -288,7 +287,7 @@ def check_next(function_vari):
         return True
 
 if __name__ == "__main__":
-    db_name = "20200317"
+    db_name = "20200318"
     client = MongoClient('127.0.0.1', 27017)
     db = client["stock_mst"]
     collection_data = []
@@ -304,7 +303,7 @@ if __name__ == "__main__":
         if checkindex == len(collection_data):
             TR_1206Event.exit(0)
         checkindex += 1
-        TR_1206_vari = TR_1206_new2(i['단축코드'], "20200312", "20200316", '1', '0', i['종목명'], db_name, standard_length)
+        TR_1206_vari = TR_1206_new2(i['단축코드'], "20200313", "20200317", '1', '0', i['종목명'], db_name, standard_length)
         time.sleep(0.3)
 
     if checkindex != len(collection_data):

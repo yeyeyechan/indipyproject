@@ -13,7 +13,7 @@ from analysis.common_data import common_min_timeline
 from analysis.common_data import common_min_shortTime
 from log.logger_pyflask import logging_instance
 import pymongo
-
+from datetime import timedelta
 
 class monitoring_new2():
     def __init__(self, date, time_right_now):
@@ -49,15 +49,24 @@ class monitoring_new2():
 
         length = 0
         for i in self.shortTimeline:
-            if int(i)<= int(time_right_now):
+            if int(i)>int(time_right_now):
+                length +=1
+            elif int(i)<=int(time_right_now):
                 length +=1
             else:
                 break
-        print("ssibal")
-        print(length)
-        self.timeTimeLine = self.shortTimeline[:length]
+        self.timeTimeLine = self.shortTimeline[:length-1]
 
         index = 0
+        Time = self.shortTimeline[length-1]
+        before_Time = (int)((int)(Time)/100)*60 + (int)(Time)%100 -5
+        if (int)(before_Time/60) <10:
+            before_Time ="0"+  str((int)(before_Time /60)) + str(before_Time %60)
+        else:
+            before_Time = str((int)(before_Time /60)) + str(before_Time %60)
+
+        before_sorted_list = []
+        SK_foreign_vol = ''
         for stock_code_data in monitoring_input.find():
             index +=1
             self.realTimeLogger.info(stock_code_data['종목코드'])
@@ -79,18 +88,20 @@ class monitoring_new2():
                 self.realTimeLogger.info(timeTimeLine_data)
                 self.TR_1206_new2[stock_code_data['종목코드']][timeTimeLine_data] = TR_1206_new2.find_one({"stock_code":stock_code_data['종목코드']})['전일외국인순매수거래량']
                 self.realTimeLogger.info(self.TR_1206_new2[stock_code_data['종목코드']][timeTimeLine_data])
-        print(self.monitoring_input)
-        key_list= []
-        for keys in self.monitoring_input.keys():
-            key_list.append(keys)
-        for SK_data in SK_5min.find().sort(['sortTimeInt', pymongo.DESCENDING]):
-            if SK_data['단축코드'] in key_list:
-                del
-            self.sorted_monitoring_input[SK_data['단축코드']] = {}
-            self.sorted_monitoring_input[SK_data['단축코드']]= self.monitoring_input[SK_data['단축코드']]
-            self.sorted_monitoring_input[SK_data['단축코드']]['외국계순매수수량'] = SK_data['외국계순매수수량']
-            self.sorted_monitoring_input[SK_data['단축코드']]['기준시간'] = SK_data['sortTimeInt']
-        print(self.sorted_monitoring_input)
+            if SK_5min.find_one({'단축코드': stock_code_data['종목코드'], 'sortTime': Time}) != None:
+                SK_foreign_vol =  SK_5min.find_one({'단축코드': stock_code_data['종목코드'], 'sortTime': Time})['외국계순매수수량']
+            if SK_5min.find_one({'단축코드': stock_code_data['종목코드'], 'sortTime': Time}) == None and SK_5min.find_one({'단축코드': stock_code_data['종목코드'], 'sortTime': before_Time}) != None :
+                SK_foreign_vol =  SK_5min.find_one({'단축코드': stock_code_data['종목코드'], 'sortTime': Time})['외국계순매수수량']
+            if SK_foreign_vol !=None and SK_foreign_vol != '':
+                DATA_before_sorted = {}
+                DATA_before_sorted['단축코드'] = stock_code_data['종목코드']
+                DATA_before_sorted['외국계순매수수량'] = SK_foreign_vol
+                DATA_before_sorted['korName'] = stock_code_data['korName']
+                DATA_before_sorted['gubun'] = stock_code_data['gubun']
+                before_sorted_list.append(DATA_before_sorted)
+        before_sorted_list  = sorted(before_sorted_list, key = lambda k : k['외국계순매수수량'])
+        print(before_sorted_list)
+
 if __name__ == "__main__":
     monitoring2_var = monitoring_new2("20200311", "1530")
 
