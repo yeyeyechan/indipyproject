@@ -130,7 +130,7 @@ def monitoring_report_function():
                 check_foreign_ratio = True
                 # 전일 프로그램 순매수 비율 돌파
                 if program_ratio <current_program_ratio:
-                    #bot.sendMessage(chat_id='813531834', text="종목코드  " + TR_1206_new2_data['stock_code'] + " 전일  프로그램 순매수 비율 돌파 ")
+                    bot.sendMessage(chat_id='813531834', text="종목코드  " + TR_1206_new2_data['stock_code'] + " 전일  프로그램 /외국인 순매수 비율 돌파 ")
                     check_program_ratio = True
         if (check_foreign_vol and check_program_vol and check_foreign_ratio and check_program_ratio):
             if mesu_check.find_one({"종목코드":TR_1206_new2_data['stock_code'] })== None:

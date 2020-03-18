@@ -25,22 +25,31 @@ class SK_new(QMainWindow):
         self.realTimeLogger.info("SK_new 클래스 실행")
         self.realTimeLogger.info("QAxWidget Call")
         self.indiReal = QAxWidget("GIEXPERTCONTROL.GiExpertControlCtrl.1")
+        self.indiReal.ReceiveRTData.connect(self.ReceiveRTData)
+
+        self.indiReal_candidate = QAxWidget("GIEXPERTCONTROL.GiExpertControlCtrl.1")
+        self.indiReal.ReceiveRTData.connect(self.ReceiveRTData)
+
         self.realTimeLogger.info("QAxWidget Call 이후")
         self.timeline = common_min_shortTime(5).timeline
 
         # Indi API event
-        self.indiReal.ReceiveRTData.connect(self.ReceiveRTData)
 
         collection_name = str(datetime.today().strftime("%Y%m%d")) + "_pr_input2"
+        collection_name2 = str(datetime.today().strftime("%Y%m%d")) + "_pr_input_candidate"
+
         client = MongoClient('127.0.0.1', 27017)
         db = client[str(datetime.today().strftime("%Y%m%d"))]
         collection = db[collection_name]
+        collection2 = db[collection_name]
 
         collection_title1 = "SK_" + str(datetime.today().strftime("%Y%m%d"))
         collection_title2 = "SK_5min_" + str(datetime.today().strftime("%Y%m%d"))
+        collection_title3 = "SK_5min_candidate" + str(datetime.today().strftime("%Y%m%d"))
 
         self.SK = db[collection_title1]
         self.SK_5min = db[collection_title2]
+        self.SK_5min_candidate = db[collection_title3]
 
         for i in collection.find():
             ret1= self.indiReal.dynamicCall("UnRequestRTReg(QString, QString)", "SK", i['종목코드'].strip())
@@ -49,7 +58,7 @@ class SK_new(QMainWindow):
                 self.realTimeLogger.info("종목코드 "+i['종목코드']+ " 에 대한 SK 실시간 등록 해제 실패!!!")
             else:
                 self.realTimeLogger.info("종목코드 "+i['종목코드']+ " 에 대한 SK 실시간 등록 해제 성공!!!")
-        for i in collection.find():
+        for i in collection2.find():
             ret1 = self.indiReal.dynamicCall("RequestRTReg(QString, QString)", "SK", i['종목코드'].strip())
             self.realTimeLogger.info("ret1 " + str(ret1))
             if not ret1:

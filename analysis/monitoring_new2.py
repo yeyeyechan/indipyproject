@@ -12,6 +12,7 @@ import datetime
 from analysis.common_data import common_min_timeline
 from analysis.common_data import common_min_shortTime
 from log.logger_pyflask import logging_instance
+from analysis.common_data import make_five_min
 import pymongo
 from datetime import timedelta
 
@@ -48,26 +49,24 @@ class monitoring_new2():
         self.sorted_monitoring_input = {}
 
         length = 0
-        for i in self.shortTimeline:
-            if int(i)>int(time_right_now):
-                length +=1
-                break
-            elif int(i)<=int(time_right_now):
-                length +=1
-            else:
-                break
-        if length ==1 :
-            self.timeTimeLine = self.shortTimeline[:length]
-        else:
-            self.timeTimeLine = self.shortTimeline[:length-1]
-
-        index = 0
-        Time = self.shortTimeline[length-1]
+        Time = make_five_min(time_right_now)
         before_Time = (int)((int)(Time)/100)*60 + (int)(Time)%100 -5
         if (int)(before_Time/60) <10:
             before_Time ="0"+  str((int)(before_Time /60)) + str(before_Time %60)
         else:
             before_Time = str((int)(before_Time /60)) + str(before_Time %60)
+
+        for i in self.shortTimeline:
+            if int(i) == int(Time):
+                break
+            else:
+                length +=1
+                continue
+
+        self.timeTimeLine = self.shortTimeline[:length+1]
+
+        index = 0
+
 
         before_sorted_list = []
         SK_foreign_vol = ''
@@ -95,7 +94,7 @@ class monitoring_new2():
             if SK_5min.find_one({'단축코드': stock_code_data['종목코드'], 'sortTime': Time}) != None:
                 SK_foreign_vol =  SK_5min.find_one({'단축코드': stock_code_data['종목코드'], 'sortTime': Time})['외국계순매수수량']
             if SK_5min.find_one({'단축코드': stock_code_data['종목코드'], 'sortTime': Time}) == None and SK_5min.find_one({'단축코드': stock_code_data['종목코드'], 'sortTime': before_Time}) != None :
-                SK_foreign_vol =  SK_5min.find_one({'단축코드': stock_code_data['종목코드'], 'sortTime': Time})['외국계순매수수량']
+                SK_foreign_vol =  SK_5min.find_one({'단축코드': stock_code_data['종목코드'], 'sortTime': before_Time})['외국계순매수수량']
             if SK_foreign_vol !=None and SK_foreign_vol != '':
                 DATA_before_sorted = {}
                 DATA_before_sorted['단축코드'] = stock_code_data['종목코드']
@@ -104,6 +103,7 @@ class monitoring_new2():
                 DATA_before_sorted['gubun'] = stock_code_data['gubun']
                 before_sorted_list.append(DATA_before_sorted)
         before_sorted_list  = sorted(before_sorted_list, key = lambda k : k['외국계순매수수량'], reverse= True)
+        print(before_sorted_list)
         for i in before_sorted_list:
             self.sorted_monitoring_input[i['단축코드']] = {
 
