@@ -35,36 +35,32 @@ class SK_new(QMainWindow):
 
         # Indi API event
 
-        collection_name = str(datetime.today().strftime("%Y%m%d")) + "_pr_input2"
-        collection_name2 = str(datetime.today().strftime("%Y%m%d")) + "_pr_input_candidate"
+        collection_name = str(datetime.today().strftime("%Y%m%d")) + "_pr_input"
 
         client = MongoClient('127.0.0.1', 27017)
         db = client[str(datetime.today().strftime("%Y%m%d"))]
-        collection = db[collection_name]
-        collection2 = db[collection_name]
+        self.collection = db[collection_name]
 
         collection_title1 = "SK_" + str(datetime.today().strftime("%Y%m%d"))
         collection_title2 = "SK_5min_" + str(datetime.today().strftime("%Y%m%d"))
-        collection_title3 = "SK_5min_candidate" + str(datetime.today().strftime("%Y%m%d"))
 
         self.SK = db[collection_title1]
         self.SK_5min = db[collection_title2]
-        self.SK_5min_candidate = db[collection_title3]
 
-        for i in collection.find():
-            ret1= self.indiReal.dynamicCall("UnRequestRTReg(QString, QString)", "SK", i['종목코드'].strip())
+        for i in self.collection.find():
+            ret1= self.indiReal.dynamicCall("UnRequestRTReg(QString, QString)", "SK", i['단축코드'].strip())
             self.realTimeLogger.info("ret1 " + str(ret1))
             if not ret1:
-                self.realTimeLogger.info("종목코드 "+i['종목코드']+ " 에 대한 SK 실시간 등록 해제 실패!!!")
+                self.realTimeLogger.info("단축코드 "+i['단축코드']+ " 에 대한 SK 실시간 등록 해제 실패!!!")
             else:
-                self.realTimeLogger.info("종목코드 "+i['종목코드']+ " 에 대한 SK 실시간 등록 해제 성공!!!")
-        for i in collection2.find():
+                self.realTimeLogger.info("단축코드 "+i['단축코드']+ " 에 대한 SK 실시간 등록 해제 성공!!!")
+        for i in self.collection.find():
             ret1 = self.indiReal.dynamicCall("RequestRTReg(QString, QString)", "SK", i['종목코드'].strip())
             self.realTimeLogger.info("ret1 " + str(ret1))
             if not ret1:
-                self.realTimeLogger.info("종목코드 "+i['종목코드']+ " 에 대한 SK 실시간 등록 실패!!!")
+                self.realTimeLogger.info("단축코드 "+i['단축코드']+ " 에 대한 SK 실시간 등록 실패!!!")
             else:
-                self.realTimeLogger.info("종목코드 "+i['종목코드']+ " 에 대한 SK 실시간 등록 성공!!!")
+                self.realTimeLogger.info("단축코드 "+i['단축코드']+ " 에 대한 SK 실시간 등록 성공!!!")
 
 
     # 요청한 TR로 부터 데이터를 받는 함수입니다.
@@ -78,7 +74,13 @@ class SK_new(QMainWindow):
             DATA['단축코드'] = self.indiReal.dynamicCall("GetSingleData(int)", 1)
             DATA['시간'] = self.indiReal.dynamicCall("GetSingleData(int)", 2)
             DATA['외국계순매수수량'] = (int)(self.indiReal.dynamicCall("GetSingleData(int)", 47))
-
+            if self.collection.find_one({"단축코드":  DATA['단축코드']}) != None:
+                if self.collection.find_one({"단축코드":  DATA['단축코드']})['로직구분']  != "":
+                    DATA['로직구분'] =  self.collection.find_one({"단축코드":  DATA['단축코드']})['로직구분']
+                else:
+                    DATA['로직구분'] = "없음"
+            else:
+                DATA['로직구분'] = "없음"
 
             self.realTimeLogger.info("실시간 외국인 수급 데이터 종목코드  "+DATA['단축코드'] )
             self.realTimeLogger.info(DATA)

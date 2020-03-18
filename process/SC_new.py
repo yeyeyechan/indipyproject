@@ -35,11 +35,11 @@ class SC_new(QMainWindow):
         # Indi API event
         self.indiReal.ReceiveRTData.connect(self.ReceiveRTData)
 
-        collection_name = self.db_date+ "_pr_input2"
+        collection_name = self.db_date+ "_pr_input"
         client = MongoClient('127.0.0.1', 27017)
         db = client[self.db_date]
         #모니터링 대상 종목 컬렉션
-        monitoring_input_collection = db[collection_name]
+        self.monitoring_input_collection = db[collection_name]
         #모니터링 대상 종목 현재가 데이터 컬랙션
         collection_title1 = "SC_5min_" + self.db_date
         self.SC_5min = db[collection_title1]
@@ -47,20 +47,20 @@ class SC_new(QMainWindow):
         collection_title2 = "SC_check_" + self.db_date
         self.SC_check = db[collection_title2]
 
-        for i in monitoring_input_collection.find():
-            ret1= self.indiReal.dynamicCall("UnRequestRTReg(QString, QString)", "SC", i['종목코드'].strip())
+        for i in self.monitoring_input_collection.find():
+            ret1= self.indiReal.dynamicCall("UnRequestRTReg(QString, QString)", "SC", i['단축코드'].strip())
             self.realTimeLogger.info("ret1 " + str(ret1))
             if not ret1:
-                self.realTimeLogger.info("종목코드 "+i['종목코드']+ " 에 대한 SC 실시간 등록 해제 실패!!!")
+                self.realTimeLogger.info("단축코드 "+i['단축코드']+ " 에 대한 SC 실시간 등록 해제 실패!!!")
             else:
-                self.realTimeLogger.info("종목코드 "+i['종목코드']+ " 에 대한 SC 실시간 등록 해제 성공!!!")
-        for i in monitoring_input_collection.find():
-            ret2 = self.indiReal.dynamicCall("RequestRTReg(QString, QString)", "SC", i['종목코드'].strip())
+                self.realTimeLogger.info("단축코드 "+i['단축코드']+ " 에 대한 SC 실시간 등록 해제 성공!!!")
+        for i in self.monitoring_input_collection.find():
+            ret2 = self.indiReal.dynamicCall("RequestRTReg(QString, QString)", "SC", i['단축코드'].strip())
             self.realTimeLogger.info("ret2 " + str(ret2))
             if not ret2:
-                self.realTimeLogger.info("종목코드 "+i['종목코드']+ " 에 대한 SC 실시간 등록 실패!!!")
+                self.realTimeLogger.info("단축코드 "+i['단축코드']+ " 에 대한 SC 실시간 등록 실패!!!")
             else:
-                self.realTimeLogger.info("종목코드 "+i['종목코드']+ " 에 대한 SC 실시간 등록 성공!!!")
+                self.realTimeLogger.info("단축코드 "+i['단축코드']+ " 에 대한 SC 실시간 등록 성공!!!")
     # 요청한 TR로 부터 데이터를 받는 함수입니다.
     def ReceiveRTData(self, realType):
         # TR을 날릴때 ID를 통해 TR이름을 가져옵니다.
@@ -77,15 +77,24 @@ class SC_new(QMainWindow):
             DATA['Vol'] = (int)(self.indiReal.dynamicCall("GetSingleData(int)", 7))
             DATA['Trading_Value'] = (int)(self.indiReal.dynamicCall("GetSingleData(int)", 8))
             DATA['stock_code'] = self.indiReal.dynamicCall("GetSingleData(int)", 1)
+            DATA['단축코드'] = self.indiReal.dynamicCall("GetSingleData(int)", 1)
             self.realTimeLogger.info("SC_new 전송 받은 데이터 :")
             self.realTimeLogger.info(DATA)
             DATA['sortTime'] = make_five_min(DATA['TIME'])
             DATA['sortTimeInt'] = (int)(make_five_min(DATA['TIME']))
-
+            if self.monitoring_input_collection.find_one({"단축코드":  DATA['단축코드']}) != None:
+                if self.monitoring_input_collection.find_one({"단축코드":  DATA['단축코드']})['로직구분']  != "":
+                    DATA['로직구분'] =  self.monitoring_input_collection.find_one({"단축코드":  DATA['단축코드']})['로직구분']
+                else:
+                    DATA['로직구분'] = "없음"
+            else:
+                DATA['로직구분'] = "없음"
             if (int)(DATA['sortTime']) <= 1000:
                 SC_check_data= {}
                 SC_check_data['stock_code'] = DATA['stock_code']
+                SC_check_data['단축코드'] = DATA['stock_code']
                 SC_check_data['gubun'] = self.indiReal.dynamicCall("GetSingleData(int)", 4)
+                SC_check_data['당일구분'] = self.indiReal.dynamicCall("GetSingleData(int)", 4)
                 if self.SC_check.find_one({'stock_code': DATA['stock_code']}):
                     data_input = self.SC_check.find_one({'stock_code': DATA['stock_code']}).copy()
                     SC_check_data['_id'] = data_input['_id']

@@ -28,12 +28,10 @@ class SP(QMainWindow):
         self.indiReal.ReceiveRTData.connect(self.ReceiveRTData)
         self.timeline = common_min_shortTime(5).timeline
 
-        #collection_name ="20200224" + "_pr_input"
-        collection_name = str(datetime.today().strftime("%Y%m%d")) + "_pr_input2"
+        collection_name = str(datetime.today().strftime("%Y%m%d")) + "_pr_input"
         client = MongoClient('127.0.0.1', 27017)
-        #db = client["20200224"]
         db = client[str(datetime.today().strftime("%Y%m%d"))]
-        collection = db[collection_name]
+        self.collection = db[collection_name]
 
         collection_title1 = "SP_" + str(datetime.today().strftime("%Y%m%d"))
         collection_title2 = "SP_5min_" + str(datetime.today().strftime("%Y%m%d"))
@@ -43,21 +41,20 @@ class SP(QMainWindow):
 
 
         #db = client["20200222"]
-        collection = db[collection_name]
-        for i in collection.find():
-            ret1= self.indiReal.dynamicCall("UnRequestRTReg(QString, QString)", "SP", i['종목코드'].strip())
+        for i in self.collection.find():
+            ret1= self.indiReal.dynamicCall("UnRequestRTReg(QString, QString)", "SP", i['단축코드'].strip())
             self.realTimeLogger.info("ret1 " + str(ret1))
             if not ret1:
-                self.realTimeLogger.info("종목코드 "+i['종목코드']+ " 에 대한 SP 실시간 등록 해제 실패!!!")
+                self.realTimeLogger.info("단축코드 "+i['단축코드']+ " 에 대한 SP 실시간 등록 해제 실패!!!")
             else:
-                self.realTimeLogger.info("종목코드 "+i['종목코드']+ " 에 대한 SP 실시간 등록 해제 성공!!!")
-        for i in collection.find():
-            ret1 = self.indiReal.dynamicCall("RequestRTReg(QString, QString)", "SP", i['종목코드'].strip())
+                self.realTimeLogger.info("단축코드 "+i['단축코드']+ " 에 대한 SP 실시간 등록 해제 성공!!!")
+        for i in self.collection.find():
+            ret1 = self.indiReal.dynamicCall("RequestRTReg(QString, QString)", "SP", i['단축코드'].strip())
             self.realTimeLogger.info("ret1 " + str(ret1))
             if not ret1:
-                self.realTimeLogger.info("종목코드 "+i['종목코드']+ " 에 대한 SP 실시간 등록 실패!!!")
+                self.realTimeLogger.info("단축코드 "+i['단축코드']+ " 에 대한 SP 실시간 등록 실패!!!")
             else:
-                self.realTimeLogger.info("종목코드 "+i['종목코드']+ " 에 대한 SP 실시간 등록 성공!!!")
+                self.realTimeLogger.info("단축코드 "+i['단축코드']+ " 에 대한 SP 실시간 등록 성공!!!")
 
     # 요청한 TR로 부터 데이터를 받는 함수입니다.
     def ReceiveRTData(self, realType):
@@ -88,6 +85,14 @@ class SP(QMainWindow):
             DATA['비차익매수위탁체결수량'] = int(self.indiReal.dynamicCall("GetSingleData(int)", 32))
             DATA['비차익위탁프로그램순매수'] = DATA['비차익매수위탁체결수량'] - DATA['비차익매도위탁체결수량']
             DATA['차익위탁프로그램순매수'] = DATA['차익매수위탁체결수량'] - DATA['차익매도위탁체결수량']
+            if self.collection.find_one({"단축코드":  DATA['단축코드']}) != None:
+                if self.collection.find_one({"단축코드":  DATA['단축코드']})['로직구분']  != "":
+                    DATA['로직구분'] =  self.collection.find_one({"단축코드":  DATA['단축코드']})['로직구분']
+                else:
+                    DATA['로직구분'] = "없음"
+            else:
+                DATA['로직구분'] = "없음"
+
             self.realTimeLogger.info("실시간 프로그램 수급 데이터 저장 전")
             self.realTimeLogger.info(self.SP.insert_one(DATA))
             self.realTimeLogger.info("실시간 프로그램 수급 데이터 저장 후")
