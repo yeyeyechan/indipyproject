@@ -28,9 +28,9 @@ def monitoring_report_function():
     client = MongoClient('127.0.0.1', 27017)
     db_name = str(datetime.datetime.today().strftime("%Y%m%d"))
     db = client[db_name]
-    TR_1206_collection_name = "TR_1206_new2_" + db_name
+    TR_1206_collection_name = "TR_1206_" + db_name
 
-    TR_1206_new2 = db["TR_1206_new2_"+db_name]
+    TR_1206_new2 = db["TR_1206_"+db_name]
     SC_check = db["SC_check_"+db_name]
     SK_5min = db["SK_5min_"+db_name]
     SC_5min = db["SC_5min_"+db_name]
@@ -62,19 +62,19 @@ def monitoring_report_function():
         # 전일 개인 순매수 비율
         personal_ratio = TR_1206_new2_data['전일개인순매수비율']
         #현재가
-        if SC_5min.find_one({'stock_code':TR_1206_new2_data['stock_code']}, sort = [('sortTimeInt', pymongo.DESCENDING)]) !=None:
-            current_value = SC_5min.find_one({'stock_code': TR_1206_new2_data['stock_code']},sort=[('sortTimeInt', pymongo.DESCENDING)])['Close']
+        if SC_5min.find_one({'단축코드':TR_1206_new2_data['단축코드']}, sort = [('sortTimeInt', pymongo.DESCENDING)]) !=None:
+            current_value = SC_5min.find_one({'단축코드': TR_1206_new2_data['단축코드']},sort=[('sortTimeInt', pymongo.DESCENDING)])['Close']
         else:
             current_value = 0
 
         #현재 외국인 순매수 거래량
-        if SK_5min.find_one({'단축코드':TR_1206_new2_data['stock_code']}, sort = [('sortTimeInt', pymongo.DESCENDING)]) !=None:
-            current_foreign_vol =  SK_5min.find_one({'단축코드':TR_1206_new2_data['stock_code']}, sort = [('sortTimeInt', pymongo.DESCENDING)])['외국계순매수수량']
+        if SK_5min.find_one({'단축코드':TR_1206_new2_data['단축코드']}, sort = [('sortTimeInt', pymongo.DESCENDING)]) !=None:
+            current_foreign_vol =  SK_5min.find_one({'단축코드':TR_1206_new2_data['단축코드']}, sort = [('sortTimeInt', pymongo.DESCENDING)])['외국계순매수수량']
         else:
             current_foreign_vol = 0
         #현재 프로그램 순매수 거래량
-        if SP_5min.find_one({'단축코드':TR_1206_new2_data['stock_code']}, sort = [('sortTimeInt', pymongo.DESCENDING)]) !=None:
-            current_program_vol =  SP_5min.find_one({'단축코드': TR_1206_new2_data['stock_code']}, sort=[('sortTimeInt', pymongo.DESCENDING)])[
+        if SP_5min.find_one({'단축코드':TR_1206_new2_data['단축코드']}, sort = [('sortTimeInt', pymongo.DESCENDING)]) !=None:
+            current_program_vol =  SP_5min.find_one({'단축코드': TR_1206_new2_data['단축코드']}, sort=[('sortTimeInt', pymongo.DESCENDING)])[
                 '비차익위탁프로그램순매수']
         else:
             current_program_vol = 0
@@ -82,20 +82,20 @@ def monitoring_report_function():
         #current_personal_vol =  SC_5min.find_one({'stock_code':TR_1206_new2_data['stock_code']}, sort = [('sortTimeInt', pymongo.DESCENDING)])
 
         #현재 누적 거래량
-        if SP_5min.find_one({'단축코드':TR_1206_new2_data['stock_code']}, sort = [('sortTimeInt', pymongo.DESCENDING)]) !=None:
-            current_program_vol =  SP_5min.find_one({'단축코드': TR_1206_new2_data['stock_code']}, sort=[('sortTimeInt', pymongo.DESCENDING)])[
+        if SP_5min.find_one({'단축코드':TR_1206_new2_data['단축코드']}, sort = [('sortTimeInt', pymongo.DESCENDING)]) !=None:
+            current_program_vol =  SP_5min.find_one({'단축코드': TR_1206_new2_data['단축코드']}, sort=[('sortTimeInt', pymongo.DESCENDING)])[
                 '비차익위탁프로그램순매수']
         else:
             current_program_vol = 0
 
-        if SC_5min.find_one({'stock_code':TR_1206_new2_data['stock_code']}, sort = [('sortTimeInt', pymongo.DESCENDING)]) !=None:
-            current_vol = SC_5min.find_one({'stock_code': TR_1206_new2_data['stock_code']},sort=[('sortTimeInt', pymongo.DESCENDING)])['Vol']
+        if SC_5min.find_one({'단축코드':TR_1206_new2_data['단축코드']}, sort = [('sortTimeInt', pymongo.DESCENDING)]) !=None:
+            current_vol = SC_5min.find_one({'단축코드': TR_1206_new2_data['단축코드']},sort=[('sortTimeInt', pymongo.DESCENDING)])['Vol']
         else:
             current_vol = 0
 
         # 현재 누적 거래대금
-        if  SC_5min.find_one({'stock_code': TR_1206_new2_data['stock_code']}, sort=[('sortTimeInt', pymongo.DESCENDING)]) !=None:
-            current_trading_value = SC_5min.find_one({'stock_code': TR_1206_new2_data['stock_code']},
+        if  SC_5min.find_one({'단축코드': TR_1206_new2_data['단축코드']}, sort=[('sortTimeInt', pymongo.DESCENDING)]) !=None:
+            current_trading_value = SC_5min.find_one({'단축코드': TR_1206_new2_data['단축코드']},
                                                      sort=[('sortTimeInt', pymongo.DESCENDING)])['Trading_Value']
         else:
             current_trading_value = 0
@@ -130,12 +130,12 @@ def monitoring_report_function():
                 check_foreign_ratio = True
                 # 전일 프로그램 순매수 비율 돌파
                 if program_ratio <current_program_ratio:
-                    bot.sendMessage(chat_id='813531834', text="종목코드  " + TR_1206_new2_data['stock_code'] + " 전일  프로그램 /외국인 순매수 비율 돌파 ")
+                    bot.sendMessage(chat_id='813531834', text="단축코드  " + TR_1206_new2_data['단축코드'] + " 전일  프로그램 /외국인 순매수 비율 돌파 ")
                     check_program_ratio = True
         if (check_foreign_vol and check_program_vol and check_foreign_ratio and check_program_ratio):
-            if mesu_check.find_one({"종목코드":TR_1206_new2_data['stock_code'] })== None:
+            if mesu_check.find_one({"단축코드":TR_1206_new2_data['단축코드'] })== None:
                 DATA ={}
-                DATA['종목코드'] = TR_1206_new2_data['stock_code']
+                DATA['단축코드'] = TR_1206_new2_data['단축코드']
                 DATA['시간']     = TIME
                 DATA['최초돌파외국인순매수수량'] = current_foreign_vol
                 DATA['최초돌파비차익프로그램순매수수량'] = current_program_vol
@@ -149,17 +149,17 @@ def monitoring_report_function():
                 DATA['비차익프로그램순매수비율'] = current_program_ratio
                 DATA['가격']              =    current_value
                 mesu_check.insert_one(DATA)
-                bot.sendMessage(chat_id='813531834', text="종목코드  " + TR_1206_new2_data['stock_code'] + " 매수 추천 지점")
+                bot.sendMessage(chat_id='813531834', text="단축코드  " + TR_1206_new2_data['단축코드'] + " 매수 추천 지점")
             else:
-                if mesu_check.find_one({"종목코드":TR_1206_new2_data['stock_code'] })['최초돌파가격'] > current_value and mesu_check.find_one({"종목코드":TR_1206_new2_data['stock_code'] })['가격'] > current_value and mesu_check.find_one({"종목코드":TR_1206_new2_data['stock_code'] })['외국인순매수수량'] < current_foreign_vol and mesu_check.find_one({"종목코드":TR_1206_new2_data['stock_code'] })['비차익프로그램순매수수량'] < current_program_vol and mesu_check.find_one({"종목코드":TR_1206_new2_data['stock_code'] })['최초돌파외국인순매수수량']  < current_foreign_vol and mesu_check.find_one({"종목코드":TR_1206_new2_data['stock_code'] })['최초돌파비차익프로그램순매수수량'] < current_program_vol :
-                    bot.sendMessage(chat_id='813531834',text="종목코드  " + TR_1206_new2_data['stock_code'] + "돌파 시점 보다 가격하락 프로그램 외국인 지속적인 매수 지지 매수 추천  추천가격 : " +str(current_value)+" ~ " + str(mesu_check.find_one({"종목코드":TR_1206_new2_data['stock_code'] })['가격']  ))
-                    copied_DATA = mesu_check.find_one({"종목코드":TR_1206_new2_data['stock_code'] }).copy()
+                if mesu_check.find_one({"단축코드":TR_1206_new2_data['단축코드'] })['최초돌파가격'] > current_value and mesu_check.find_one({"단축코드":TR_1206_new2_data['단축코드'] })['가격'] > current_value and mesu_check.find_one({"단축코드":TR_1206_new2_data['단축코드'] })['외국인순매수수량'] < current_foreign_vol and mesu_check.find_one({"단축코드":TR_1206_new2_data['단축코드'] })['비차익프로그램순매수수량'] < current_program_vol and mesu_check.find_one({"단축코드":TR_1206_new2_data['단축코드'] })['최초돌파외국인순매수수량']  < current_foreign_vol and mesu_check.find_one({"단축코드":TR_1206_new2_data['단축코드'] })['최초돌파비차익프로그램순매수수량'] < current_program_vol :
+                    bot.sendMessage(chat_id='813531834',text="단축코드  " + TR_1206_new2_data['단축코드'] + "돌파 시점 보다 가격하락 프로그램 외국인 지속적인 매수 지지 매수 추천  추천가격 : " +str(current_value)+" ~ " + str(mesu_check.find_one({"단축코드":TR_1206_new2_data['단축코드'] })['가격']  ))
+                    copied_DATA = mesu_check.find_one({"단축코드":TR_1206_new2_data['단축코드'] }).copy()
                     copied_DATA['외국인순매수수량'] = current_foreign_vol
                     copied_DATA['비차익프로그램순매수수량'] = current_program_vol
                     copied_DATA['외국인순매수비율'] = current_foreign_ratio
                     copied_DATA['비차익프로그램순매수비율'] = current_program_ratio
                     copied_DATA['가격'] = current_value
-                    mesu_check.replace_one({'종목코드': TR_1206_new2_data['stock_code']}, copied_DATA)
+                    mesu_check.replace_one({'단축코드': TR_1206_new2_data['단축코드']}, copied_DATA)
                     print("Copied_DATA")
                     print(copied_DATA)
                     print("업데이트")
